@@ -1,0 +1,49 @@
+@CHARSET "ISO-8859-1";
+/* --------------------------------------------------------------------- */
+/* 								Tela de Login							 */
+/* --------------------------------------------------------------------- */
+body {
+  margin-top: 5%;  /*margem interna do inicio da pagina*/
+  background-color: #eee; /*cor de fundo da tela*/
+}
+
+.form-signin {
+  max-width: 330px; /* tamanho maximo do form */
+  padding: 15px; /* margem interna */
+  margin: auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox { /* margem externa abaixo da borda */
+  margin-bottom: 10px;
+}
+.form-signin .checkbox { /* estilização do check box, fonte normal*/
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+img{
+	height: 160px;
+	width: 350px;
+}
+
+/* --------------------------------------------------------------------- */

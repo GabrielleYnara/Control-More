@@ -1,0 +1,19 @@
+@CHARSET "ISO-8859-1";
+/* menu de navegação */
+li{
+	list-style: none;
+}
+.menunav{
+	position: absolute;
+
+}
+.menu-nav ul li{
+	display: inline;
+	text-decoration: underline;
+	right: 10px;
+}
+.menu-nav a:link, a:visited{
+	text-decoration: none;
+	color: black;
+}
+/*-------------------------------*/

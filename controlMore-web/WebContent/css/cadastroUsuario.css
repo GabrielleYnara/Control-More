@@ -1,0 +1,14 @@
+@CHARSET "ISO-8859-1";
+/* --------------------------------------------------------------------- */
+/* 						Tela de Cadastro de Usuário						 */
+/* --------------------------------------------------------------------- */
+body {
+  margin-top: 5%; /* margem interna do inicio da pagina*/
+  background-color: #eee; /*cor de fundo da tela*/
+}
+.form-cadastro{
+  position: relative;
+  height: auto;
+  margin-left: 15%;
+  margin-right: 15%;
+}

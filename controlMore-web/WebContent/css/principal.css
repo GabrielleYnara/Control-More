@@ -1,0 +1,20 @@
+@CHARSET "ISO-8859-1";
+/*--------------------------------------------- */
+/* Estilização do menu de navegação do cabeçalho */
+/* --------------------------------------------- */
+
+#anterior{
+	border-left-color: #aaff80; /*verde*/
+	border-left-style: solid;
+	padding-left: 4px;
+}
+#atual{
+	border-left-color: #ff4d4d; /*vermelho*/
+	border-left-style: solid;
+	padding-left: 4px;
+}
+
+saldo{
+	font-size: 20px;
+	font-weight: bold;
+}
