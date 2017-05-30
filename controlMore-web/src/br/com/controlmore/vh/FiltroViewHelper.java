@@ -23,13 +23,13 @@ public class FiltroViewHelper implements IViewHelper {
 		Filtro filtro = new Filtro();
 		LocalDate data = LocalDate.now();
 
-		if(request.getParameter("txtDtInicial")!= null){
-			data = LocalDate.parse(request.getParameter("txtData"));
+		if(request.getParameter("txtDataInicial")!= null){
+			data = LocalDate.parse(request.getParameter("txtDataInicial"));
 			Instant instant = data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
 			filtro.setDtInicio(Date.from(instant));
 		}
 		if(request.getParameter("txtDataFinal")!= null){
-			data = LocalDate.parse(request.getParameter("txtData"));
+			data = LocalDate.parse(request.getParameter("txtDataFinal"));
 			Instant instant = data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
 			filtro.setDtFinal(Date.from(instant));
 		}

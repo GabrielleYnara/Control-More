@@ -25,12 +25,12 @@ public class RelCatViewHelper implements IViewHelper {
 		LocalDate data = LocalDate.now();
 
 		if(request.getParameter("txtDataInicial")!= null){
-			data = LocalDate.parse(request.getParameter("txtData"));
+			data = LocalDate.parse(request.getParameter("txtDataInicial"));
 			Instant instant = data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
 			relCat.setInicio(Date.from(instant));
 		}
 		if(request.getParameter("txtDataFinal")!= null){
-			data = LocalDate.parse(request.getParameter("txtData"));
+			data = LocalDate.parse(request.getParameter("txtDataFinal"));
 			Instant instant = data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
 			relCat.setFim(Date.from(instant));
 		}

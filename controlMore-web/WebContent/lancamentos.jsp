@@ -22,7 +22,6 @@
 <title>Lançamentos</title>
 </head>
 <body>
-<div class="container-fluid">
 <%@include file="menu.jsp"%>
 
 <script type="text/javascript">
@@ -77,7 +76,7 @@ function listarS(){
 
 <script type="text/javascript">
 function grafico() {
-    Highcharts.chart('container', {
+    Highcharts.chart('container', 
         chart: {
             type: 'line'
         },
@@ -136,6 +135,26 @@ function grafico() {
 </script>
 <div id="container" ></div>
 <br><br>
+<div align="center" >
+	<form action="Filtro?acao=consultar&txtConsulta=EntradaSaida" method="post">
+		<div class="col-md-1">
+			Data Inicial
+		</div>
+		<div class="col-md-2">
+			<input type="date" name="txtDataInicial" class="form-control" data-toggle="tooltip" title="Início" required autofocus><br>
+		</div>
+		<div class="col-md-1">
+			Data Final
+		</div>
+		<div class="col-md-2">
+			<input type="date" name="txtDataFinal" class="form-control" data-toggle="tooltip" title="Início" required autofocus><br>
+		</div>
+		<div class="col-md-1">
+			  <button class="btn btn-info btn-block" type="submit" name="acao" value="filtrar" placeholder="Filtrar">Filtrar</button>
+		</div>
+	</form>
+</div>
+<br>
 <div class="col-md-6" align="center">
 	<form action="Entrada?acao=consultar" method="POST">
 		<button type="submit" class="btn btn-success">Listagem de contas a receber</button>
@@ -217,7 +236,6 @@ function grafico() {
  </tbody><!-- end corpo -->
 </table><!-- end table -->
 
-</div><!-- end container -->
 <script type="text/javascript">
 window.load = grafico();
 

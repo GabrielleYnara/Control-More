@@ -21,7 +21,6 @@ import br.com.controlmore.dominio.Frequencia;
 import br.com.controlmore.dominio.Juros;
 import br.com.controlmore.dominio.Parcela;
 import br.com.controlmore.dominio.Saida;
-import oracle.net.aso.e;
 
 public class SaidaViewHelper implements IViewHelper {
 

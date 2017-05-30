@@ -38,7 +38,12 @@ public class FiltroDAO extends AbstractDAO{
 		List<EntidadeDominio> entradasSaidas = new ArrayList<EntidadeDominio>(); //cria uma lista de entradas e saidas
 		if(filtro.getConsulta().equals("EntradaSaida")){
 			if(filtro.getDtInicio()!=null && filtro.getDtFinal()!=null){
-				
+				sql.append("SELECT SUM(Valor) AS Total, ");
+				sql.append("TO_CHAR(DataEntrada, 'mm') as Mes ");
+				sql.append("FROM Entrada ");
+				sql.append("WHERE DataEntrada BETWEEN ? AND ? ");
+				sql.append("GROUP BY TO_CHAR(DataEntrada, 'mm') ");
+				sql.append("ORDER BY TO_CHAR(DataEntrada, 'mm') ");
 			}else{
 				sql.append("SELECT SUM(Valor) AS Total, ");
 				sql.append("TO_CHAR(DataEntrada, 'mm') as Mes ");
@@ -48,20 +53,33 @@ public class FiltroDAO extends AbstractDAO{
 				sql.append("FROM dual)) ");
 				sql.append("GROUP BY TO_CHAR(DataEntrada, 'mm') ");
 				sql.append("ORDER BY TO_CHAR(DataEntrada, 'mm') ");
-				try(PreparedStatement preparador = conexao.prepareStatement(sql.toString())){
-					ResultSet result = preparador.executeQuery(); //passa o resultado da execução da Query para a variável result
-					
-					while(result.next()){
-						Entrada entrada = new Entrada();
-						entrada.setValor(result.getFloat("Total"));
-						entrada.setDescricao(result.getString("Mes"));
-						
-						entradasSaidas.add(entrada);
-					}
-				}catch (SQLException e) {
-					e.printStackTrace();
+			}
+			try(PreparedStatement preparador = conexao.prepareStatement(sql.toString())){
+				if(filtro.getDtInicio()!=null && filtro.getDtFinal()!=null){
+					preparador.setDate(1, new java.sql.Date(filtro.getDtInicio().getTime()));
+					preparador.setDate(2, new java.sql.Date(filtro.getDtFinal().getTime()));
 				}
-				sql.delete(0, sql.length());
+				ResultSet result = preparador.executeQuery(); //passa o resultado da execução da Query para a variável result
+				
+				while(result.next()){
+					Entrada entrada = new Entrada();
+					entrada.setValor(result.getFloat("Total"));
+					entrada.setDescricao(result.getString("Mes"));
+					
+					entradasSaidas.add(entrada);
+				}
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+			sql.delete(0, sql.length());
+			if(filtro.getDtInicio()!=null && filtro.getDtFinal()!=null){
+				sql.append("SELECT SUM(Valor) AS Total, ");
+				sql.append("TO_CHAR(DataSaida, 'mm') as Mes ");
+				sql.append("FROM Saida ");
+				sql.append("WHERE DataSaida BETWEEN ? AND ? ");
+				sql.append("GROUP BY TO_CHAR(DataSaida, 'mm')");
+				sql.append("ORDER BY TO_CHAR(DataSaida, 'mm') ");
+			}else{
 				sql.append("SELECT SUM(Valor) AS Total, ");
 				sql.append("TO_CHAR(DataSaida, 'mm') as Mes ");
 				sql.append("FROM Saida ");
@@ -70,24 +88,28 @@ public class FiltroDAO extends AbstractDAO{
 				sql.append("FROM dual)) ");
 				sql.append("GROUP BY TO_CHAR(DataSaida, 'mm')");
 				sql.append("ORDER BY TO_CHAR(DataSaida, 'mm') ");
-
-				try(PreparedStatement preparador = conexao.prepareStatement(sql.toString())){
-					ResultSet result = preparador.executeQuery(); //passa o resultado da execução da Query para a variável result
-					
-					while(result.next()){
-						Saida saida = new Saida();
-						saida.setValor(result.getFloat("Total"));
-						saida.setDescricao(result.getString("Mes"));
-						
-						entradasSaidas.add(saida);
-					}
-				}catch (SQLException e) {
-					e.printStackTrace();
-				}
-				return entradasSaidas;
 			}
-			
+			try(PreparedStatement preparador = conexao.prepareStatement(sql.toString())){
+				if(filtro.getDtInicio()!=null && filtro.getDtFinal()!=null){
+					preparador.setDate(1, new java.sql.Date(filtro.getDtInicio().getTime()));
+					preparador.setDate(2, new java.sql.Date(filtro.getDtFinal().getTime()));
+				}
+					
+				ResultSet result = preparador.executeQuery(); //passa o resultado da execução da Query para a variável result
+				
+				while(result.next()){
+					Saida saida = new Saida();
+					saida.setValor(result.getFloat("Total"));
+					saida.setDescricao(result.getString("Mes"));
+						
+					entradasSaidas.add(saida);
+				}
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return entradasSaidas;
 		}
+		
 		return null;
 	}
 		

@@ -36,11 +36,20 @@ public class RelatorioCategoriaDAO extends AbstractDAO{
 		RelatorioCategoria relatorio = (RelatorioCategoria) entidade;
 		StringBuilder sql = new StringBuilder();
 
-		if(relatorio.getInicio()==null && relatorio.getFim()==null){
-			sql.append("SELECT * FROM Resumo_Por_Categoria_Mes_Atual");
+		if(relatorio.getInicio()!=null && relatorio.getFim()!=null){
+			sql.append("SELECT SUM(valor) as valorTotal, ");
+			sql.append("c.DESCRICAO ");
+			sql.append("FROM Saida ");
+			sql.append("JOIN Categoria c ON Saida.CATEGORIA = c.id ");
+			sql.append("WHERE DataSaida BETWEEN ? AND ? ");
+			sql.append("GROUP BY c.DESCRICAO ");
+			sql.append("Order by c.DESCRICAO");
 		}
 		
 		try(PreparedStatement preparador = conexao.prepareStatement(sql.toString())){
+			preparador.setDate(1, new java.sql.Date(relatorio.getInicio().getTime()));
+			preparador.setDate(2, new java.sql.Date(relatorio.getFim().getTime()));
+			
 			ResultSet result = preparador.executeQuery(); //passa o resultado da execução da Query para a variável result
 			List<EntidadeDominio> categorias = new ArrayList<EntidadeDominio>(); //cria uma lista de saidas
 			
