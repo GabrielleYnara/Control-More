@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -28,9 +29,17 @@ public class RelCatViewHelper implements IViewHelper {
 			data = LocalDate.parse(request.getParameter("txtDataInicial"));
 			Instant instant = data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
 			relCat.setInicio(Date.from(instant));
+		}else{// atribui primeiro dia do mês
+			data = LocalDate.now().with(TemporalAdjusters.firstDayOfMonth());
+			Instant instant = data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+			relCat.setInicio(Date.from(instant));
 		}
 		if(request.getParameter("txtDataFinal")!= null){
 			data = LocalDate.parse(request.getParameter("txtDataFinal"));
+			Instant instant = data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+			relCat.setFim(Date.from(instant));
+		}else{// atribui ultimo dia do mês
+			data = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
 			Instant instant = data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
 			relCat.setFim(Date.from(instant));
 		}

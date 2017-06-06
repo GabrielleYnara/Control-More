@@ -17,5 +17,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/controlMore-dominio"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/controlMore-core"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Program Files/Eclipse/jars/gson-2.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Eclipse/jars/jstl-1.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

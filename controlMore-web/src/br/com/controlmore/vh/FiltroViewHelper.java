@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -27,9 +28,17 @@ public class FiltroViewHelper implements IViewHelper {
 			data = LocalDate.parse(request.getParameter("txtDataInicial"));
 			Instant instant = data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
 			filtro.setDtInicio(Date.from(instant));
+		}else{//atribui o primeiro dia do ano
+			data = LocalDate.now().with(TemporalAdjusters.firstDayOfYear());
+			Instant instant = data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+			filtro.setDtInicio(Date.from(instant));
 		}
 		if(request.getParameter("txtDataFinal")!= null){
 			data = LocalDate.parse(request.getParameter("txtDataFinal"));
+			Instant instant = data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+			filtro.setDtFinal(Date.from(instant));
+		}else{//atribui ultimo dia do ano
+			data = LocalDate.now().with(TemporalAdjusters.lastDayOfYear());
 			Instant instant = data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
 			filtro.setDtFinal(Date.from(instant));
 		}
