@@ -12,6 +12,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
+<!-- Import da taglib pra uso de jstl -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!-- Bootstrap 3.3.6 -->
 <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/menu.css">
@@ -23,12 +26,13 @@
 </head>
 
 <body>
-<%@include file="WEB-INF/util/mensagem.jsp" %>
+<c:import url="WEB-INF/util/mensagem.jsp" />
 <%
 	Resultado resultado = (Resultado) request.getSession().getAttribute("pessoa");
 	Pessoa pessoa = new Pessoa();
 	pessoa = (Pessoa) resultado.getEntidades().get(0);
 %>
+<c:set value="${pessoa_new}" var="usuario" scope="session" />
 <script type="text/javascript">
 function consultarUsuario(id){
 	
@@ -80,15 +84,12 @@ function filtro(){
 				  			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Relatório <span class="caret"></span></a>
 				       		<ul class="dropdown-menu">
 				           		<li><a href="projecaoEconomia.jsp">Projeção de Economia</a></li>
-				           		<li><a href="javascript:consultarEntrada()">Geral</a></li>
 				           		<li><a href="analisarAtraso.jsp">Análise de Atrasos</a></li>
 				           		<li><a href="javascript:location.href='Filtro?acao=consultar&txtConsulta=EntradaSaida';">Lançamentos</a></li>
 				           		<li><a href="javascript:consultarRelCat();">Resumo por Categoria</a></li>
 				       		</ul>
 				   		</li>
-				   		<li><a href="ResumoCategoria.jsp;">Resumo por Categoria</a></li>
-				   		<li><a href="javascript:location.href='Filtro?acao=consultar&txtConsulta=EntradaSaida';">Lançamentos</a></li>
-				       	<li><a href="javascript:consultarMeta();">Metas</a></li>
+				   			<li><a href="javascript:consultarMeta();">Metas</a></li>
 				        <li class="dropdown">
 				        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mais <span class="caret"></span></a>
 				          	<ul class="dropdown-menu">
