@@ -111,12 +111,16 @@ public class PessoaViewHelper implements IViewHelper {
 		if(resultado.getMsg() == null){
 			if(acao.equals("salvar")){
 				resultado.setMsg("Usuario cadastrado com sucesso!");
+				Pessoa pessoa = (Pessoa) resultado.getEntidades().get(0);
+				request.getSession().setAttribute("pessoa_new", pessoa);
 				request.getSession().setAttribute("pessoa", resultado);
+				request.setAttribute("mensagem", resultado.getMsg());
 				d = request.getRequestDispatcher("/index.jsp");//redireciona a pagina
 			}
 			if (acao.equals("login")) {
-				request.getSession().setAttribute("pessoa", resultado);
 				Pessoa pessoa = (Pessoa) resultado.getEntidades().get(0);
+				request.getSession().setAttribute("pessoa_new", pessoa);
+				request.getSession().setAttribute("pessoa", resultado);
 				if(pessoa.getQuestionario().getId()!=0){
 					d = request.getRequestDispatcher("/principal.jsp");
 				}else{
@@ -124,6 +128,8 @@ public class PessoaViewHelper implements IViewHelper {
 				}
 			}
 			if (acao.equals("alterar")) {
+				Pessoa pessoa = (Pessoa) resultado.getEntidades().get(0);
+				request.getSession().setAttribute("pessoa_new", pessoa);
 				request.getSession().setAttribute("pessoa", resultado);
 				d = request.getRequestDispatcher("/principal.jsp");
 			}
@@ -135,19 +141,27 @@ public class PessoaViewHelper implements IViewHelper {
 				d = request.getRequestDispatcher("/index.jsp");
 			}
 			if(acao.equals("consultar")){
+				Pessoa pessoa = (Pessoa) resultado.getEntidades().get(0);
+				request.getSession().setAttribute("pessoa_new", pessoa);
 				request.getSession().setAttribute("pessoa", resultado);
 				d = request.getRequestDispatcher("/principal.jsp");
 			}
 			if(acao.equals("visualizar")){
+				Pessoa pessoa = (Pessoa) resultado.getEntidades().get(0);
+				request.getSession().setAttribute("pessoa_new", pessoa);
 				request.getSession().setAttribute("pessoa", resultado);
 				d = request.getRequestDispatcher("/principal.jsp#minhaConta");
 			}
 		} else{
 			if (acao.equals("salvar") || acao.equals("login")){
+				Pessoa pessoa = (Pessoa) resultado.getEntidades().get(0);
+				request.getSession().setAttribute("pessoa_new", pessoa);
 				request.getSession().setAttribute("resultado", resultado);
 				d = request.getRequestDispatcher("/index.jsp");
 			}
 			if(acao.equals("alterar")){
+				Pessoa pessoa = (Pessoa) resultado.getEntidades().get(0);
+				request.getSession().setAttribute("pessoa_new", pessoa);
 				request.getSession().setAttribute("resultado", resultado);
 				d = request.getRequestDispatcher("/principal.jsp");
 			}

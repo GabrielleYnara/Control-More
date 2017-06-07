@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://java.sun.com/xml/ns/javaee" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+ version="3.0">
   <display-name>controlMore-web</display-name>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- definição da Servlet que atenderá todas requisições -->
   <servlet>
     <description></description>
     <display-name>Servlet</display-name>
     <servlet-name>Servlet</servlet-name>
     <servlet-class>br.com.controlmore.controle.web.Servlet</servlet-class>
   </servlet>
+  
+  <!-- mapeamentos de requisição síncrona (form, href e etc) -->
   <servlet-mapping>
     <servlet-name>Servlet</servlet-name>
     <url-pattern>/Saida</url-pattern>

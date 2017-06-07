@@ -11,6 +11,9 @@
 <!-- Custom styles -->
 <link rel="stylesheet" href="css/principal.css">
 
+<!-- Import da taglib pra uso de jstl -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <title>ControlMore</title>
     
 <script type="text/javascript">
@@ -23,9 +26,9 @@
 </head>
 <body>
 <div class="container-fluid ">
-<%@include file="menu.jsp"%>
+<c:import url="menu.jsp" />
 <% request.getSession().setAttribute("saida", null); %>
-<h4><%out.print("Bem Vindo(a) " + pessoa.getNome()); %></h4>
+<h4>Bem vindo(a)${usuario.nome}</h4>
 
 	<div id="balanco" class="col-md-2"> <!-- Balanço mês atual e anterior -->
 		<div class="panel panel-info"> <!-- Painel Saída Simples -->
@@ -40,9 +43,39 @@
   			</div>
   		</div>
   	</div> <!-- Fim Balanço mês atual e anterior -->
- 
 	
-	<div class="col-md-3" hidden><!-- Painel de Contas a Pagar e Receber -->
+	<div class="painel col-md-6"><!-- Resumo Financeiro -->
+		<div class="panel panel-info"> <!-- Painel Saída Simples -->
+			<div class="panel-heading text-center">
+				Resumo financeiro
+			</div>
+			<div class="panel-body form-group">
+				<form action="" method="POST">
+  					<img src="img/grafico.png" alt="grafico">
+			  		<div align="right">
+			    		<p>Saldo Geral <saldo>R$0,00</saldo></p>
+			    		<input type="checkbox" id="nPoupanca"> Não incluir saldo de conta poupança
+			  		</div><!-- end right -->
+			  		<ul>
+			    		<li>
+			      			<i class="glyphicon glyphicon-piggy-bank"></i><p><strong>Carteira</strong> R$0,00</p>
+			      			<p>Outros</p>
+			    		</li><!-- end item lista -->
+			    		<li>
+			      			<i class="glyphicon glyphicon-picture"></i><p><strong>Itaú</strong> R$0,00</p>
+			      			<p>Conta Corrente</p>
+			    		</li><!-- end item lista -->
+			    		<li>
+			      			<i class="glyphicon glyphicon-picture"></i><p><strong>Itaú</strong> R$0,00</p>
+			      			<p>Conta Poupança</p>
+			    		</li><!-- end item lista -->
+			  		</ul><!-- end lista bancos -->
+			  	</form>
+			</div>
+		</div>
+	</div><!-- end painel resumo financeiro -->
+	
+	<div class="col-md-3"><!-- Painel de Contas a Pagar e Receber -->
 	  	<div class="panel panel-info"> <!-- Painel Saída Simples -->
 			<div class="panel-heading text-center">
 				Contas à Pagar
@@ -81,37 +114,6 @@
 			</div>
 		</div><!-- end painel de contas a receber -->
 	</div><!-- Painel de Contas a Pagar e Receber -->
-	
-	<div class="painel col-md-6"><!-- Resumo Financeiro -->
-		<div class="panel panel-info"> <!-- Painel Saída Simples -->
-			<div class="panel-heading text-center">
-				Resumo financeiro
-			</div>
-			<div class="panel-body form-group">
-				<form action="" method="POST">
-  					<img src="img\grafico.png" alt="grafico">
-			  		<div align="right">
-			    		<p>Saldo Geral <saldo>R$0,00</saldo></p>
-			    		<input type="checkbox" id="nPoupanca"> Não incluir saldo de conta poupança
-			  		</div><!-- end right -->
-			  		<ul>
-			    		<li>
-			      			<i class="glyphicon glyphicon-piggy-bank"></i><p><strong>Carteira</strong> R$0,00</p>
-			      			<p>Outros</p>
-			    		</li><!-- end item lista -->
-			    		<li>
-			      			<i class="glyphicon glyphicon-picture"></i><p><strong>Itaú</strong> R$0,00</p>
-			      			<p>Conta Corrente</p>
-			    		</li><!-- end item lista -->
-			    		<li>
-			      			<i class="glyphicon glyphicon-picture"></i><p><strong>Itaú</strong> R$0,00</p>
-			      			<p>Conta Poupança</p>
-			    		</li><!-- end item lista -->
-			  		</ul><!-- end lista bancos -->
-			  	</form>
-			</div>
-		</div>
-	</div><!-- end painel resumo financeiro -->
 
 	<div class="col-md-3" ><!-- Resumo de metas e cartão-->
   		<div class="panel panel-info"> <!-- Painel Saída Simples -->
