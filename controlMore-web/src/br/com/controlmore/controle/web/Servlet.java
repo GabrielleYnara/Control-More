@@ -28,6 +28,7 @@ import br.com.controlmore.vh.PessoaViewHelper;
 import br.com.controlmore.vh.QuestionarioViewHelper;
 import br.com.controlmore.vh.RelCatViewHelper;
 import br.com.controlmore.vh.SaidaViewHelper;
+import br.com.controlmore.vh.UpFileViewHelper;
 
 
 /**
@@ -71,6 +72,7 @@ public class Servlet extends HttpServlet {
     	vhs.put("/controlMore-web/Filtro", new FiltroViewHelper());
     	vhs.put("/controlMore-web/Questionario", new QuestionarioViewHelper());
     	vhs.put("/controlMore-web/Avaliacao", new AvaliacaoViewHelper());
+    	vhs.put("/controlMore-web/UpFile", new UpFileViewHelper());
     	
     }// construtor Servlet
     

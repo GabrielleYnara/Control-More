@@ -25,8 +25,9 @@
 
 </head>
 <body>
-<div class="container-fluid ">
 <c:import url="menu.jsp" />
+<!-- <div class="row affix-row"> //FROM menu
+    <div class="col-sm-3 col-md-2 affix-sidebar"> -->
 <% request.getSession().setAttribute("saida", null); %>
 <h4>Bem vindo(a)${usuario.nome}</h4>
 
@@ -162,6 +163,7 @@
 			</div>
   		</div><!-- end painel resumo cartão -->
  	</div><!-- end Resumo de metas e cartão -->
-</div><!-- end container -->
+	</div><!--  .row affix-row -->
+</div> <!-- .col-sm-3 col-md-2 affix-sidebar -->
 </body>
 </html>
