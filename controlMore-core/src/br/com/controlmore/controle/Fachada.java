@@ -18,6 +18,7 @@ import br.com.controlmore.negocio.Avaliacao;
 import br.com.controlmore.negocio.CompletarDtCadastro;
 import br.com.controlmore.negocio.IStrategy;
 import br.com.controlmore.negocio.SimularMeta;
+import br.com.controlmore.negocio.ValidarData;
 import br.com.controlmore.negocio.VerificarSaldo;
 import br.com.controlmore.aplicacao.Resultado;
 import br.com.controlmore.dao.AvaliacaoDAO;
@@ -77,6 +78,7 @@ public class Fachada implements IFachada {
 		CompletarDtCadastro cDtCadastro = new CompletarDtCadastro();
 		SimularMeta simularMeta = new SimularMeta();
 		VerificarSaldo verificarSaldo = new VerificarSaldo();
+		ValidarData validarData = new ValidarData();
 		
 		/* Criando uma lista para conter as regras de negócio 
 		 * quando a operação for salvar */
@@ -108,6 +110,9 @@ public class Fachada implements IFachada {
 		/* Adicionando as regras a serem utilizadas na operação salvar Entrada*/
 		rnsSalvarSaida.add(cDtCadastro);
 		
+		/* Adicionando as regras a serem utilizadas na operação consultar Filtro */
+		rnsConsultarFiltro.add(validarData);
+		
 		/* Cria o mapa que poderá conter todas as listas de regras de negócio específica por operação */
 		Map<String, List<IStrategy>> rnsPessoa = new HashMap<String, List<IStrategy>>();
 		Map<String, List<IStrategy>> rnsMeta = new HashMap<String, List<IStrategy>>();
@@ -127,6 +132,7 @@ public class Fachada implements IFachada {
 		
 		/* Adiciona a listra de regras na operação colsultar*/
 		rnsMeta.put("CONSULTAR", rnsConsultarMeta);
+		rnsFiltro.put("CONSULTAR", rnsConsultarFiltro);
 		
 		/* Adiciona o mapa com as regras indexadas pelas operações no mapa geral indexado 
 		 * pelo nome da entidade */
@@ -235,8 +241,14 @@ public class Fachada implements IFachada {
 			List<IStrategy> regras = regrasOperacao.get(operacao);
 		
 			if(regras != null){
-				for(IStrategy s: regras){			
-					String m = s.processar(entidade);			
+				for(IStrategy s: regras){
+					String m;
+					if(nmClasse.equals("br.com.controlmore.dominio.Filtro")){
+						Filtro filtro = (Filtro) entidade;
+						m = s.processar(filtro.getDtInicio(),filtro.getDtFinal());
+					}else{
+						m = s.processar(entidade);
+					}
 					
 					if(m != null){
 						msg.append(m);

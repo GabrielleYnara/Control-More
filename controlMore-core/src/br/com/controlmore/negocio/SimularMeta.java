@@ -146,4 +146,10 @@ public class SimularMeta implements IStrategy {
 		return null;
 	}
 
+	@Override
+	public String processar(Date dtInicio, Date dtFinal) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

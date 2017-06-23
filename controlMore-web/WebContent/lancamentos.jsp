@@ -70,8 +70,8 @@ function listarS(){
 	}
 	entidades.clear();
 	List<EntidadeDominio> entradaSaida = new ArrayList<EntidadeDominio>();
-	if(request.getSession().getAttribute("filtro")!=null){
-		resultado= (Resultado) request.getSession().getAttribute("filtro");
+	if(request.getAttribute("filtro")!=null){
+		resultado= (Resultado) request.getAttribute("filtro");
 		entradaSaida = resultado.getEntidades();
 	}
 %>

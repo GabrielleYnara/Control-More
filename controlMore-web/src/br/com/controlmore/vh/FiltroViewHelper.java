@@ -67,13 +67,19 @@ RequestDispatcher d = null; //Será responsável por redirecionamento
 				
 			}
 			if(acao.equals("consultar")){
-				request.getSession().setAttribute("filtro", resultado);
+				request.setAttribute("filtro", resultado);
 				d = request.getRequestDispatcher("/lancamentos.jsp");
 			}
 			if(acao.equals("visualizar")){
 				
 			}
+		}else{
+			if(acao.equals("consultar")){
+				request.setAttribute("filtro", resultado);
+				d = request.getRequestDispatcher("/principal.jsp");
+			}
 		}
+		
 		d.forward(request, response);
 
 	}

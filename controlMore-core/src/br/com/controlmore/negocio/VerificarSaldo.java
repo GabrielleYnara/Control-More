@@ -1,5 +1,7 @@
 package br.com.controlmore.negocio;
 
+import java.util.Date;
+
 import br.com.controlmore.dao.RelatorioCategoriaDAO;
 import br.com.controlmore.dominio.EntidadeDominio;
 import br.com.controlmore.dominio.Saida;
@@ -36,6 +38,12 @@ public class VerificarSaldo implements IStrategy{
 				
 			return msg.toString();
 		}
+		return null;
+	}
+
+	@Override
+	public String processar(Date dtInicio, Date dtFinal) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

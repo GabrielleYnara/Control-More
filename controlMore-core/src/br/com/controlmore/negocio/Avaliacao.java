@@ -1,6 +1,7 @@
 package br.com.controlmore.negocio;
 
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.List;
 
 import br.com.controlmore.dominio.AvaliacaoGasto;
@@ -116,6 +117,12 @@ public class Avaliacao implements IStrategy{
 			}
 		}
 		System.out.println(msg);
+		return null;
+	}
+
+	@Override
+	public String processar(Date dtInicio, Date dtFinal) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
