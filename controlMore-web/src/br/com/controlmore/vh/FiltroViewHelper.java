@@ -75,7 +75,7 @@ RequestDispatcher d = null; //Será responsável por redirecionamento
 			}
 		}else{
 			if(acao.equals("consultar")){
-				request.setAttribute("filtro", resultado);
+				request.setAttribute("resultado", resultado);
 				d = request.getRequestDispatcher("/principal.jsp");
 			}
 		}

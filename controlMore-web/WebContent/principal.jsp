@@ -29,9 +29,9 @@
 <!-- <div class="row affix-row"> //FROM menu
     <div class="col-sm-3 col-md-2 affix-sidebar"> -->
 <% request.getSession().setAttribute("saida", null); %>
-<h4>Bem vindo(a)${usuario.nome}</h4>
+<h4>Bem vindo(a) ${usuario.nome}</h4>
 
-	<div id="balanco" class="col-md-2"> <!-- Balanço mês atual e anterior -->
+	<div id="balanco" class="col-md-3"> <!-- Balanço mês atual e anterior -->
 		<div class="panel panel-info"> <!-- Painel Saída Simples -->
 			<div class="panel-heading text-center">
 				Mês/Ano

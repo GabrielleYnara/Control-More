@@ -168,16 +168,16 @@ function grafico() {
 <br><br>
 <div align="center" >
 	<form action="Filtro?acao=consultar&txtConsulta=EntradaSaida" method="post">
-		<div class="col-md-1">
+		<div class="col-md-2">
 			Data Inicial
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-3">
 			<input type="date" name="txtDataInicial" class="form-control" data-toggle="tooltip" title="Início" required autofocus><br>
 		</div>
-		<div class="col-md-1">
+		<div class="col-md-2">
 			Data Final
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-3">
 			<input type="date" name="txtDataFinal" class="form-control" data-toggle="tooltip" title="Início" required autofocus><br>
 		</div>
 		<div class="col-md-1">

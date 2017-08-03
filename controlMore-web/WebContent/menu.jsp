@@ -68,7 +68,6 @@ function filtro(){
 
 </script>
 <body >
-<c:import url="WEB-INF/util/mensagem.jsp"></c:import>
 <div class="row affix-row">
     <div class="col-sm-3 col-md-2 affix-sidebar">
 		<div class="sidebar-nav">
@@ -131,7 +130,7 @@ function filtro(){
 	<div class="col-sm-9 col-md-10 affix-content">
 		<div class="container-fluid">
   
-<!-- Bootstrap -->
 
+<c:import url="WEB-INF/util/mensagem.jsp"></c:import>
 </body>
 </html>
