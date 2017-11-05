@@ -9,10 +9,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Contas à Receber Completa</title>
 </head>
 <body>
-<div class="container-fluid">
+
 <%@include file="menu.jsp"%>
 <%
 	List<EntidadeDominio> entradas = new ArrayList<EntidadeDominio>();
@@ -23,7 +25,7 @@
 		entrada = (Entrada) entradas.get(0);
 	}
 %>
-	<div class="col-md-6 col-md-offset-3">
+	<div class="col-sm-12 col-md-6 col-md-offset-3">
 		<div class="panel panel-info">
 			<div class="panel-heading text-center">
 		  		Cadastrar Entrada
@@ -175,6 +177,8 @@
 			</div><!-- end painel body -->
 		</div><!-- end painel -->
 	</div><!-- end col-4 -->
-</div><!-- end container -->
+ 	</div> <!-- col-sm-9 col-md-10 affix-content -->
+  </div> <!--  container-fluid -->
+</div> <!-- row affix-row -->
 </body>
 </html>

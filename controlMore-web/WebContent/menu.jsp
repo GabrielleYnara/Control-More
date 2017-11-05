@@ -11,6 +11,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Import da taglib pra uso de jstl -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -19,7 +21,7 @@
 <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
 
 <!-- Custom CSS -->
-    <link href="plugins/bootstrap/css/simple-sidebar.css" rel="stylesheet">
+<link href="plugins/bootstrap/css/simple-sidebar.css" rel="stylesheet">
 <link rel="stylesheet" href="css/menu.css">
 
 <!-- Optional theme -->
@@ -68,15 +70,16 @@ function filtro(){
 
 </script>
 <body >
-<div class="row affix-row">
-    <div class="col-sm-3 col-md-2 affix-sidebar">
-		<div class="sidebar-nav">
+<!-- <div class="row affix-row">
+  <header>
+     <div class="col-xs-12 col-sm-3 col-md-2 affix-sidebar" >
+		<div id="menu" class="sidebar-nav">
 			<div class="navbar navbar-default" role="navigation">
 			    <div class="navbar-header">
 			      	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
 				    	<span class="sr-only">Toggle navigation</span>
 				      	<span class="icon-bar"></span>
-				      	<span class="icon-bar"></span>
+				  		<span class="icon-bar"></span>
 				      	<span class="icon-bar"></span>
 				    </button>
 				    <span class="visible-xs navbar-brand">Control More</span>
@@ -122,13 +125,64 @@ function filtro(){
 						<li><a href="minhaConta.jsp">Minha Conta </a></li>
 						<li><a href="javascript:location.href='Pessoa?acao=logout'">Log Out</a></li>
 					</ul>
-				</div><!--/.nav-collapse -->
+				</div><!--/.nav-collapse 
 		    </div>
   		</div>
 	</div>
-	</header> <!-- Fim de cabeçalho -->
-	<div class="col-sm-9 col-md-10 affix-content">
-		<div class="container-fluid">
+  	-->
+  	<header>
+  	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">Control More</a>
+	      
+		</div>
+	
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="principal.jsp"><span class="glyphicon glyphicon-lock"></span> Home</a></li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+				   <span class="glyphicon glyphicon-cloud"></span> Relatório <span class="caret"></span>
+				</a>
+	          <ul class="dropdown-menu">
+			    <li hidden><a href="projecaoEconomia.jsp">Projeção de Economia</a></li>
+			    <li><a href="analisarAtraso.jsp">Análise de Atrasos</a></li>
+			    <li><a href="javascript:location.href='Filtro?acao=consultar&txtConsulta=EntradaSaida';">Lançamentos</a></li>
+			    <li><a href="javascript:consultarRelCat();">Resumo por Categoria</a></li>
+		      </ul>
+	        </li>
+	        <li><a href="javascript:consultarMeta();"> <span class="glyphicon glyphicon-calendar"></span>Metas</a></li>
+	        <li class="dropdown">
+	          	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+				   Mais <span class="caret"></span>
+				</a>
+	            <ul class="dropdown-menu">
+	              <li><a href="#">Agenda</a></li>
+				  <li><a href="#">Calculadora</a></li>
+				  <li><a href="#">Conversor de Moeda</a></li>
+				  <li><a href="Info.jsp">Info</a></li>
+	            </ul>
+	        </li>
+	        <li><a href="faleConosco.jsp">Fale Conosco</a></li>
+			<li><a href="minhaConta.jsp">Minha Conta </a></li>
+			<li><a href="javascript:location.href='Pessoa?acao=logout'">Log Out</a></li>
+			<li><a href="testeJSTL.jsp">testeJSTL</a></li>
+		  </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+  </header> <!-- Fim de cabeçalho -->
+  <div class="col-sm-12 col-md-12 affix-content"> <!-- col-sm-9 col-md-10 affix-content-->
+    <div class="container-fluid">
   
 
 <c:import url="WEB-INF/util/mensagem.jsp"></c:import>

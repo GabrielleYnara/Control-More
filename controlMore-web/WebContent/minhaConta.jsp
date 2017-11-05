@@ -4,12 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>ControlMore</title>
 </head>
 <body>
-<div class="container-fluid">
 <%@include file="menu.jsp"%>
-	<div class="col-md-6">
+	  <div class="col-md-6">
 		<div class="panel panel-info">
 			<div class="panel-heading text-center">
 		  		Dados da conta
@@ -79,7 +80,9 @@
   				</form><!-- end form -->
   			</div>
   		</div>
-  	</div>
-</div>
+  	  </div>
+    </div> <!-- col-sm-9 col-md-10 affix-content -->
+  </div> <!--  container-fluid -->
+</div> <!-- row affix-row -->
 </body>
 </html>

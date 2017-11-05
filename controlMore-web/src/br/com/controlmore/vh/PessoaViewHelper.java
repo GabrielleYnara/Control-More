@@ -121,8 +121,6 @@ public class PessoaViewHelper implements IViewHelper {
 				Pessoa pessoa = (Pessoa) resultado.getEntidades().get(0);
 				request.getSession().setAttribute("pessoa_new", pessoa);
 				request.getSession().setAttribute("pessoa", resultado);
-				resultado.setMsg("Teste");
-				request.setAttribute("resultado", resultado);
 				if(pessoa.getQuestionario().getId()!=0){
 					d = request.getRequestDispatcher("/principal.jsp");
 				}else{

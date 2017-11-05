@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cadastro ControlMore</title>
 <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -30,8 +30,8 @@ $(document).ready(function(){
 });
 </script>
 
-<div class="container" >
-	<form action="Pessoa?acao=salvar" method="post" class="col-md-8 form-cadastro">
+<div class="container-fluid" >
+	<form action="Pessoa?acao=salvar" method="post" class="col-md-8 col-md-offset-2 col-xs-12 form-cadastro">
 		<h2 class="form-signin-heading" align="center">ControlMore</h2>
 		<div class="col-md-3">
 		  Nome Completo
@@ -45,10 +45,10 @@ $(document).ready(function(){
 		<div class="col-md-9">
 		  <input type="email" name="txtEmail" class="form-control" placeholder="Ex: joaquina@email.com" required autofocus><br>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-3" hidden>
 		  Confirmar Email
 		</div>
-		<div class="col-md-9">
+		<div class="col-md-9" hidden>
 		  <input type="email" name="txtConfirmEmail" class="form-control" placeholder="Ex: joaquina@email.com" required autofocus><br>
 		</div>
 		<div class="col-md-3">
@@ -78,6 +78,8 @@ $(document).ready(function(){
 		<div class="col-md-4"></div>
 		<div class="col-md-4">
 		  <button class="btn btn-lg btn-info btn-block" id="btnCadastrar" type="submit" name="acao" value="salvar" placeholder="Cadastrar">Cadastar</button>
+		  <button class="btn btn-lg btn-default btn-block" id="btnVoltar" type="submit" name="acao" value="voltar" placeholder="Voltar"><a href="index.jsp">Voltar</a></button>
+		  
 		</div>
 	
 	</form>

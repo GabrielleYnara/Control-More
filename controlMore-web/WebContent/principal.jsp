@@ -26,26 +26,39 @@
 </head>
 <body>
 <c:import url="menu.jsp" />
-<!-- <div class="row affix-row"> //FROM menu
-    <div class="col-sm-3 col-md-2 affix-sidebar"> -->
+<!-- //FROM menu
+<div class="row affix-row"> 
+  <div class="col-sm-3 col-md-2 affix-sidebar"> 
+    <div class="container-fluid" -->
 <% request.getSession().setAttribute("saida", null); %>
+<% request.getSession().setAttribute("entrada", null); %>
+
 <h4>Bem vindo(a) ${usuario.nome}</h4>
 
-	<div id="balanco" class="col-md-3"> <!-- Balanço mês atual e anterior -->
-		<div class="panel panel-info"> <!-- Painel Saída Simples -->
-			<div class="panel-heading text-center">
-				Mês/Ano
-			</div>
-			<div class="panel-body form-group">
-				<form action="" method="POST">
-					<p id="anterior">Você fechou o <strong>MÊS ANTERIOR</strong> com o balanço de <strong>R$X,XX</strong></p>
-					<p id="atual">Para o <strong>MÊS ATUAL</strong> a previsão de fechamento é de <strong>R$X,XX</strong></p>
-  				</form>
-  			</div>
-  		</div>
-  	</div> <!-- Fim Balanço mês atual e anterior -->
-	
-	<div class="painel col-md-6"><!-- Resumo Financeiro -->
+	<div class=" col-sm-4 col-md-3">
+	  <div class="bs-callout bs-callout-info " > <!-- Callout Saldo -->
+	  	<div align="center">
+	      <h4> R$ </h4>
+	  		<p data-toggle="tooltip" data-placement="right" title="Saldo de todas as contas">Saldo Geral</p>
+	  	</div>
+	  </div> <!-- Fim Callout Saldo -->
+  	
+  	  <!-- Botão Registrar Entrada  -->
+  	  <div>
+  	    <a type="button" class="btn btn-success btn-lg col-xs-12" id="espaco" href="entradaCompleta.jsp">
+  	      Registrar Entrada <span class="glyphicon glyphicon-arrow-up"></span>
+  	    </a>
+  	  </div>
+  	  
+  	  <!-- Botão Registrar Saida  -->
+  	  <div >
+  	    <a type="button" class="btn btn-warning btn-lg col-xs-12" id="espaco" href="saidaCompleta.jsp">
+  	      Registrar Saida <span class="glyphicon glyphicon-arrow-down"></span>
+  	    </a>
+  	  </div>
+  </div> <!-- Fim col-xs-12 col-sm-4 col-md-2 -->
+  
+	<div class="painel col-xs-12 col-sm-8 col-md-6"><!-- Resumo Financeiro -->
 		<div class="panel panel-info"> <!-- Painel Saída Simples -->
 			<div class="panel-heading text-center">
 				Resumo financeiro
@@ -76,7 +89,7 @@
 		</div>
 	</div><!-- end painel resumo financeiro -->
 	
-	<div class="col-md-3"><!-- Painel de Contas a Pagar e Receber -->
+	<div class="col-xs-12 col-sm-6 col-md-3"><!-- Painel de Contas a Pagar e Receber -->
 	  	<div class="panel panel-info"> <!-- Painel Saída Simples -->
 			<div class="panel-heading text-center">
 				Contas à Pagar
@@ -116,7 +129,7 @@
 		</div><!-- end painel de contas a receber -->
 	</div><!-- Painel de Contas a Pagar e Receber -->
 
-	<div class="col-md-3" ><!-- Resumo de metas e cartão-->
+	<div class="col-xs-12 col-sm-6 col-md-3" ><!-- Resumo de metas e cartão-->
   		<div class="panel panel-info"> <!-- Painel Saída Simples -->
 			<div class="panel-heading text-center">
 				Resumo de Metas
@@ -163,7 +176,9 @@
 			</div>
   		</div><!-- end painel resumo cartão -->
  	</div><!-- end Resumo de metas e cartão -->
-	</div><!--  .row affix-row -->
-</div> <!-- .col-sm-3 col-md-2 affix-sidebar -->
+ 	
+ 	</div> <!-- col-sm-9 col-md-10 affix-content -->
+  </div> <!--  container-fluid -->
+</div> <!-- row affix-row -->
 </body>
 </html>

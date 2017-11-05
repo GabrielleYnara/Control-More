@@ -4,12 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Cadastro de Cartão</title>
 </head>
 <body>
-<div class="container-fluid">
 <%@include file="menu.jsp"%>
-	<div class="col-md-5">
+	  <div class="col-md-5">
 		<div class="panel panel-info">
 			<div class="panel-heading text-center">
 		  		Cadastro de Cartão 	
@@ -82,7 +83,8 @@
 				</form>
 			</div><!-- end painel body -->
 		</div><!-- end painel -->
-	</div><!-- end col-4 -->
-</div><!-- end container -->
-</body>
+	  </div><!-- end col-4 -->
+    </div> <!-- col-sm-9 col-md-10 affix-content -->
+  </div> <!--  container-fluid -->
+</div> <!-- row affix-row --></body>
 </html>

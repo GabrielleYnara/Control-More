@@ -10,6 +10,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <!-- CSS -->
 <link rel="stylesheet" href="css/metas.css">
 
@@ -17,7 +19,6 @@
 </head>
 
 <body>
-<div class="container-fluid">
 <%@include file="menu.jsp"%>
 <% 
 	List<EntidadeDominio> metas = new ArrayList<EntidadeDominio>();
@@ -453,8 +454,6 @@ function consultarMeta(id){
 			</table>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-4">
 			
 			
 		</div><!-- end col-md-8 -->

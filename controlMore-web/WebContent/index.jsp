@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ControlMore Login</title>
 
 <!-- Bootstrap core CSS -->
@@ -19,9 +20,8 @@
 <body>
 <div class="container-fluid">
 	<form class="form-signin" action="Pessoa?acao=login" method=post>
-
 		<h2 class="form-signin-heading" align="center">
-		<img src="img/Logo.png" alt="Control More logo"></h2>
+		<img src="img/Logo.png" class="img-responsive" alt="Control More logo"></h2>
 		<label for="inputEmail" class="sr-only">Email</label>
 		<input type="email" id="inputEmail" name="txtEmail" class="form-control" placeholder="Email" required autofocus>
 		<label for="inputPassword" class="sr-only">Senha</label>
@@ -35,7 +35,6 @@
 			</label>
 		</div>
 		<input type='submit' class="btn btn-lg btn-info btn-block" id='btnEntrar' value='Entrar'>
-		
 	</form>
 </div> <!-- /container -->
 <script>

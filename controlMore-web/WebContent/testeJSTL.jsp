@@ -15,7 +15,6 @@
 <c:import url="menu.jsp" />
 
 	<label>Teste JSTL, pegando atributo pessoa da sessão </label>
-	<c:set value="${pessoa}" var="usuario" scope="session" />
 	<br>
 	<label>exibe objeto: ${usuario.nome}</label>
 	
@@ -25,5 +24,15 @@
 	  	<br/>
 	  	<input type="submit" value="Press"> to upload the file!
 	</form>
+<script type="text/javascript">
+	
+	var date = new Date();
+	var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+	document.write(ultimoDia.getDate());
+	
+
+</script>
+
 </body>
 </html>

@@ -8,10 +8,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Control More</title>
 </head>
 <body>
-<div class="container-fluid">
 <%@include file="menu.jsp"%>
 <%
 	List<EntidadeDominio> saidas = new ArrayList<EntidadeDominio>();
@@ -266,6 +267,8 @@ $(document).ready(function(){
 			</div><!-- panel-body -->
 		</div><!-- panel -->
 	</div><!-- col-md-6 -->
-</div><!-- end container -->
+ 	</div> <!-- col-sm-9 col-md-10 affix-content -->
+  </div> <!--  container-fluid -->
+</div> <!-- row affix-row -->
 </body>
 </html>

@@ -4,18 +4,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>ControlMore</title>
 </head>
 <body>
-<div class="container-fluid">
+
 <%@include file="menu.jsp"%>
-	<div class="col-md-10">
+	<div class="col-md-12">
 		<div class="panel panel-info">
 			<div class="panel-heading text-center">
 		  		Analisar Contas à Pagar Atrasadas
 		  	</div>
 		  	<div class="panel-body">
 				<form action="acao=salvar" method="POST">
+				  <div class="table-responsive">
 					<table class="table table-hover">
 			 			<thead><!-- cabeçalho -->
 					     	<tr><!-- linha -->
@@ -60,7 +63,8 @@
 								
 						</tbody>
 					</table>
-					<div class="row" align="left">
+				  </div>
+				  <div class="row" align="left">
 						<button type='submit' class="btn btn-primary" id='acao'>Salvar</button>
 						<button type='submit' class="btn btn-default" id='acao'>Imprimir</button>
 
@@ -69,6 +73,8 @@
 			</div><!-- end painel body -->
 		</div><!-- end painel -->
 	</div><!-- end col-4 -->
-</div><!-- end container -->
+ 	</div> <!-- col-sm-9 col-md-10 affix-content -->
+  </div> <!--  container-fluid -->
+</div> <!-- row affix-row -->
 </body>
 </html>
