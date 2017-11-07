@@ -462,7 +462,7 @@ public class SaidaDAO extends AbstractDAO{
 			sql.append("LEFT JOIN Categoria ON Saida.Categoria = Categoria.Id ");
 			sql.append("LEFT JOIN Conta ON Saida.Conta = Conta.Id ");
 			sql.append("LEFT JOIN Cartao ON Saida.Cartao = Cartao.Id ");
-			sql.append("ORDER BY DataSaida ");
+			sql.append("ORDER BY DataSaida DESC ");
 		}
 		try(PreparedStatement preparador = conexao.prepareStatement(sql.toString())){
 			if(saida.getId()!=0){

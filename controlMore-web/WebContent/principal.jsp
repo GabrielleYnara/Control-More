@@ -10,9 +10,15 @@
 
 <!-- Custom styles -->
 <link rel="stylesheet" href="css/principal.css">
+<link rel="stylesheet" href="css/HighCharts.css">
 
 <!-- Import da taglib pra uso de jstl -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<!-- HighCharts -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
 
 <title>ControlMore</title>
     
@@ -21,6 +27,7 @@
     	alert("Sinto muito! \n"
     		 +"Esta funcionalidade ainda não está disponível!");
     }
+    
 </script>
 
 </head>
@@ -48,14 +55,14 @@
   	    <a type="button" class="btn btn-success btn-lg col-xs-12" id="espaco" href="entradaCompleta.jsp">
   	      Registrar Entrada <span class="glyphicon glyphicon-arrow-up"></span>
   	    </a>
-  	  </div>
+  	  </div><!-- Fim Botão Registrar Entrada  -->
   	  
   	  <!-- Botão Registrar Saida  -->
   	  <div >
   	    <a type="button" class="btn btn-warning btn-lg col-xs-12" id="espaco" href="saidaCompleta.jsp">
   	      Registrar Saida <span class="glyphicon glyphicon-arrow-down"></span>
   	    </a>
-  	  </div>
+  	  </div><!-- Fim Botão Registrar Saida  -->
   </div> <!-- Fim col-xs-12 col-sm-4 col-md-2 -->
   
 	<div class="painel col-xs-12 col-sm-8 col-md-6"><!-- Resumo Financeiro -->
@@ -65,7 +72,7 @@
 			</div>
 			<div class="panel-body form-group">
 				<form action="" method="POST">
-  					<img src="img/grafico.png" alt="grafico">
+  					<div id="graficoMensal"></div>
 			  		<div align="right">
 			    		<p>Saldo Geral <saldo>R$0,00</saldo></p>
 			    		<input type="checkbox" id="nPoupanca"> Não incluir saldo de conta poupança
@@ -180,5 +187,7 @@
  	</div> <!-- col-sm-9 col-md-10 affix-content -->
   </div> <!--  container-fluid -->
 </div> <!-- row affix-row -->
+<script src="js/graficoLancamentos.js"></script>
+
 </body>
 </html>

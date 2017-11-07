@@ -68,7 +68,10 @@ RequestDispatcher d = null; //Será responsável por redirecionamento
 			}
 			if(acao.equals("consultar")){
 				request.setAttribute("filtro", resultado);
-				d = request.getRequestDispatcher("/lancamentos.jsp");
+				if(request.getParameter("txtConsulta").equals("EntradaSaida"))
+					d = request.getRequestDispatcher("/lancamentos.jsp");
+				if(request.getParameter("txtConsulta").equals("EntradaSaidaMensal"))
+					d = request.getRequestDispatcher("/principal.jsp");
 			}
 			if(acao.equals("visualizar")){
 				

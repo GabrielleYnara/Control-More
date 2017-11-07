@@ -36,7 +36,8 @@ public class FiltroDAO extends AbstractDAO{
 		Filtro filtro = (Filtro) entidade;
 		StringBuilder sql = new StringBuilder();
 		List<EntidadeDominio> entradasSaidas = new ArrayList<EntidadeDominio>(); //cria uma lista de entradas e saidas
-		if(filtro.getConsulta().equals("EntradaSaida")){
+		
+		if(filtro.getConsulta().equals("EntradaSaida")){//(Anual/Período)
 			if(filtro.getDtInicio()!=null && filtro.getDtFinal()!=null){
 				sql.append("SELECT SUM(Valor) AS Total, ");
 				sql.append("TO_CHAR(DataEntrada, 'mm') as Mes ");
@@ -108,7 +109,57 @@ public class FiltroDAO extends AbstractDAO{
 				e.printStackTrace();
 			}
 			return entradasSaidas;
-		}
+		}//if EntradaSaida (Anual/Período)
+		
+		if(filtro.getConsulta().equals("EntradaSaidaMensal")){
+			sql.append("SELECT SUM(Valor) AS Total, ");
+			sql.append("TO_CHAR(DataEntrada, 'dd') as Dia ");
+			sql.append("FROM Entrada ");
+			sql.append("WHERE DataEntrada BETWEEN (SELECT TO_DATE('01'||TO_CHAR(sysdate,'/mm/yyyy') , 'dd/mm/yyyy') ");
+			sql.append("						   FROM dual) AND Last_day((SELECT TO_DATE('01'||TO_CHAR(sysdate,'/mm/yyyy') , 'dd/mm/yyyy') ");
+			sql.append("													FROM dual)) ");
+			sql.append("GROUP BY TO_CHAR(DataEntrada, 'dd') ");
+			sql.append("ORDER BY TO_CHAR(DataEntrada, 'dd') ");
+			
+			try(PreparedStatement preparador = conexao.prepareStatement(sql.toString())){
+				ResultSet result = preparador.executeQuery(); //passa o resultado da execução da Query para a variável result
+				
+				while(result.next()){
+					Entrada entrada = new Entrada();
+					entrada.setValor(result.getFloat("Total"));
+					entrada.setDescricao(result.getString("Dia"));
+					
+					entradasSaidas.add(entrada);
+				}
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			sql.delete(0, sql.length());
+			
+			sql.append("SELECT SUM(Valor) AS Total, ");
+			sql.append("TO_CHAR(DataSaida, 'dd') as Dia ");
+			sql.append("FROM Saida ");
+			sql.append("WHERE DataSaida BETWEEN (SELECT TO_DATE('01/'||TO_CHAR(sysdate,'mm/yyyy') , 'dd/mm/yyyy') ");
+			sql.append("						FROM dual) AND Last_day((SELECT TO_DATE('01/'||TO_CHAR(sysdate,'mm/yyyy') , 'dd/mm/yyyy') ");
+			sql.append("												 FROM dual)) ");
+			sql.append("GROUP BY TO_CHAR(DataSaida, 'dd')");
+			sql.append("ORDER BY TO_CHAR(DataSaida, 'dd') ");
+			
+			try(PreparedStatement preparador = conexao.prepareStatement(sql.toString())){
+				ResultSet result = preparador.executeQuery(); //passa o resultado da execução da Query para a variável result
+				
+				while(result.next()){
+					Saida saida = new Saida();
+					saida.setValor(result.getFloat("Total"));
+					saida.setDescricao(result.getString("Dia"));
+						
+					entradasSaidas.add(saida);
+				}
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			return entradasSaidas;
+		}//if EntradaSaidaMensal
 		
 		return null;
 	}

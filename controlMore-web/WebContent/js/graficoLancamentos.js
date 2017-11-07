@@ -1,50 +1,30 @@
-function graficoMensal() {
-	var now = new Date();
-	document.write(now);
-	
-	var dias = ['1', '2', '3', '4', '5', 'Junho',
-	                'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-	
-	// Obtém o mês inicial e final do relatório.
-	if(entradaSaida.size()>0){
-		int mesInicial = 12;
-		int mesFinal = 1;
- 	   	for(int i=0; i<entradaSaida.size(); i++){
- 		   if(entradaSaida.get(i).getClass().getName().equals("br.com.controlmore.dominio.Entrada")){ 
- 			   Entrada entrada = (Entrada) entradaSaida.get(i);
-     		   if(Integer.valueOf(entrada.getDescricao()) < mesInicial) {
-     			   mesInicial = Integer.valueOf(entrada.getDescricao());
-     		   }
-     		  	if(Integer.valueOf(entrada.getDescricao()) > mesFinal) {
-    			   mesFinal = Integer.valueOf(entrada.getDescricao());
-    		   }
- 		   }
- 	   }
- 	   out.println("var mesInicial = " + mesInicial + ";");
- 	   out.println("var mesFinal = " + mesFinal + ";");
-    }
-    
-	var mesesDoRelatorio = [];
-	console.log(mesInicial + "-" + mesFinal);
-	for(i = mesInicial; i <= mesFinal; i++) {
-		if(i > 12) {
-			i = 1;
-		}
-		mesesDoRelatorio.push(meses[i-1]);
-	}
-	
-    Highcharts.chart('container',{
+//<!-- Import da taglib pra uso de jstl -->
+//<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+/*
+ * Sugestão: colocar a execução do gráfico em uma fuction que recebe uma lista de Entradas e Saidas
+ * - na pagina principal, executar a View Helper de Filtro (Filtro?acao=consultar&txtConsulta=EntradaSaidaMensal) 
+ * ao carregar a tela.
+ * - usar JSTL para receber os dados da view e passar a lista para a function grafilMensal();
+ */
+	var date = new Date();   
+	var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+	var dias = [1,5,10,15,20,15,30];
+	/*for (i = 0; i<ultimoDia.getDate(); i++){
+	   	dias.push(i+1);
+	}*/
+
+    Highcharts.chart('graficoMensal',{
         chart: {
             type: 'line'
         },
         title: {
-            text: 'Gasto anual'
+            text: 'Gasto mensal'
         },
         subtitle: {
             text: 'Contas a pagar e receber'
         },
         xAxis: {
-        	 categories: mesesDoRelatorio
+        	 categories: dias
         				
         },
         yAxis: {
@@ -62,29 +42,9 @@ function graficoMensal() {
         },
         series: [{
 	            name: 'A Receber',
-	            data:[
-	                   if(entradaSaida.size()>0){
-	                	   for(int i=0; i<entradaSaida.size(); i++){
-	                		   if(entradaSaida.get(i).getClass().getName().equals("br.com.controlmore.dominio.Entrada")){ 
-	                			   Entrada entrada = (Entrada) entradaSaida.get(i);
-		                		   out.print(entrada.getValor() + ", ");
-	                		   }
-	                	   }
-	                   }
-	                   ]
+	            data:[20,40,75,87,98,12,14,21,02]
 	        		},
 	        	{name: 'A Pagar',
-	            data:[
-	                  if(entradaSaida.size()>0){
-	               	   for(int i=0; i<entradaSaida.size(); i++){
-	               		   if(entradaSaida.get(i).getClass().getName().equals("br.com.controlmore.dominio.Saida")){ 
-	               			   Saida saida = (Saida) entradaSaida.get(i);
-		                		   out.print(saida.getValor() + ", ");
-	               		   }
-	               	   }
-	                  }
-	                 ]
-	        	}
-	        	]
+	            data:[15,37,84,72,76,85,25,82]
+	        	}]
     });
-});

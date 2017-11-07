@@ -89,10 +89,10 @@
   .affix-content .container .page-header{
     margin-top: 0;
   }
-  .affix-content{
+ /* .affix-content{
     padding-right: 30px;
     padding-left: 30px;
-  }  
+  }  */
   .affix-title{
     border-bottom: 1px solid #ecf0f1; 
     padding-bottom:10px;
