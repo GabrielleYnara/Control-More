@@ -27,7 +27,6 @@
     	alert("Sinto muito! \n"
     		 +"Esta funcionalidade ainda não está disponível!");
     }
-    
 </script>
 
 </head>
@@ -188,6 +187,5 @@
   </div> <!--  container-fluid -->
 </div> <!-- row affix-row -->
 <script src="js/graficoLancamentos.js"></script>
-
 </body>
 </html>
