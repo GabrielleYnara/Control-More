@@ -20,6 +20,7 @@ import br.com.controlmore.command.SalvarCommand;
 import br.com.controlmore.command.VisualizarCommand;
 import br.com.controlmore.dominio.EntidadeDominio;
 import br.com.controlmore.vh.AvaliacaoViewHelper;
+import br.com.controlmore.vh.CategoriaViewHelper;
 import br.com.controlmore.vh.EntradaViewHelper;
 import br.com.controlmore.vh.FiltroViewHelper;
 import br.com.controlmore.vh.IViewHelper;
@@ -73,6 +74,7 @@ public class Servlet extends HttpServlet {
     	vhs.put("/controlMore-web/Questionario", new QuestionarioViewHelper());
     	vhs.put("/controlMore-web/Avaliacao", new AvaliacaoViewHelper());
     	vhs.put("/controlMore-web/UpFile", new UpFileViewHelper());
+    	vhs.put("/controlMore-web/Categoria", new CategoriaViewHelper());
     	
     }// construtor Servlet
     

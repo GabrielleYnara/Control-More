@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import br.com.controlmore.dominio.AvaliacaoGasto;
+import br.com.controlmore.dominio.Categoria;
 import br.com.controlmore.dominio.EntidadeDominio;
 import br.com.controlmore.dominio.Entrada;
 import br.com.controlmore.dominio.Filtro;
@@ -22,6 +23,7 @@ import br.com.controlmore.negocio.ValidarData;
 import br.com.controlmore.negocio.VerificarSaldo;
 import br.com.controlmore.aplicacao.Resultado;
 import br.com.controlmore.dao.AvaliacaoDAO;
+import br.com.controlmore.dao.CategoriaDAO;
 import br.com.controlmore.dao.EntradaDAO;
 import br.com.controlmore.dao.FiltroDAO;
 import br.com.controlmore.dao.IDAO;
@@ -63,6 +65,7 @@ public class Fachada implements IFachada {
 		FiltroDAO filtroDAO = new FiltroDAO();
 		QuestionarioDAO questionarioDAO = new QuestionarioDAO();
 		AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
+		CategoriaDAO categoriaDAO = new CategoriaDAO();
 		
 		/* Adicionando cada dao no MAP indexando pelo nome da classe */
 		daos.put(Pessoa.class.getName(), pessoaDAO);
@@ -73,6 +76,7 @@ public class Fachada implements IFachada {
 		daos.put(Filtro.class.getName(), filtroDAO);
 		daos.put(Questionario.class.getName(), questionarioDAO);
 		daos.put(AvaliacaoGasto.class.getName(), avaliacaoDAO);
+		daos.put(Categoria.class.getName(), categoriaDAO);
 		
 		/* Criando instâncias de regras de negócio a serem utilizados*/		
 		CompletarDtCadastro cDtCadastro = new CompletarDtCadastro();

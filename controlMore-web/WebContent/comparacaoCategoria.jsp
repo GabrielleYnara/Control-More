@@ -19,6 +19,8 @@
 </head>
 <body>
 <c:import url="menu.jsp" />
+<c:set value="${categoria}" var="categorias" scope="request" />
+
 <!-- //FROM menu
 <div class="row affix-row"> 
   <div class="col-sm-3 col-md-2 affix-sidebar"> 
@@ -40,10 +42,9 @@
         	<div class="col-xs-8 col-sm-4 col-md-2 selectContainer">
               <select class="form-control" name="size">
                 <option value="">Escolha uma categoria</option>
-                <option value="s">Small (S)</option>
-                <option value="m">Medium (M)</option>
-                <option value="l">Large (L)</option>
-                <option value="xl">Extra large (XL)</option>
+                <c:forEach var="categoria" items="${categorias}">
+   				  <option value="${categoria.id}">${categoria.descricao}</option>
+				</c:forEach >
               </select><br>
         	</div>
     	  </div>
@@ -52,10 +53,9 @@
         	<div class="col-xs-8 col-sm-4 col-md-2 selectContainer">
               <select class="form-control" name="size">
                 <option value="">Escolha uma categoria</option>
-                <option value="s">Small (S)</option>
-                <option value="m">Medium (M)</option>
-                <option value="l">Large (L)</option>
-                <option value="xl">Extra large (XL)</option>
+                <c:forEach var="categoria2" items="${categorias}">
+   				  <option value="${categoria2.id}">${categoria2.descricao}</option>
+				</c:forEach >
               </select><br>
         	</div>
     	  </div>

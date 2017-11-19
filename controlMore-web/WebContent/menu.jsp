@@ -158,6 +158,7 @@ function filtro(){
 			    <li><a href="analisarAtraso.jsp">Análise de Atrasos</a></li>
 			    <li><a href="javascript:location.href='Filtro?acao=consultar&txtConsulta=EntradaSaida';">Lançamentos</a></li>
 			    <li><a href="javascript:consultarRelCat();">Resumo por Categoria</a></li>
+			    <li><a href="javascript:location.href='Categoria?acao=consultar';">Comparação de Categorias</a>
 		      </ul>
 	        </li>
 	        <li><a href="javascript:consultarMeta();"> <span class="glyphicon glyphicon-calendar"></span>Metas</a></li>

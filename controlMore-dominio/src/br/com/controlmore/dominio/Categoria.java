@@ -17,5 +17,12 @@ public class Categoria extends EntidadeDominio{
 	public void setCor(String cor) {
 		this.cor = cor;
 	}
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria cat) {
+		this.categoria = cat;
+	}
+	
 	
 }
