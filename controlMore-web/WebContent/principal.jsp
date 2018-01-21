@@ -1,3 +1,9 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.time.format.TextStyle"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="br.com.controlmore.aplicacao.Resultado"%>
+<%@page import="br.com.controlmore.vm.ResumoVM"%>
+
 <%//@page import="br.com.controlmore.dominio.Conta"%>
 <%//@page import="br.com.controlmore.dominio.Frequencia"%>
 <%//@page import="java.util.List"%>
@@ -14,6 +20,9 @@
 
 <!-- Import da taglib pra uso de jstl -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<!-- Taglib para formatação de datas -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!-- HighCharts -->
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -40,11 +49,10 @@
 <% request.getSession().setAttribute("entrada", null); %>
 
 <h4>Bem vindo(a) ${usuario.nome}</h4>
-
 	<div class=" col-sm-4 col-md-3">
 	  <div class="bs-callout bs-callout-info " > <!-- Callout Saldo -->
 	  	<div align="center">
-	      <h4> R$ </h4>
+	      <h4> R$ ${resultado.modeloVisao.saldo}</h4>
 	  		<p data-toggle="tooltip" data-placement="right" title="Saldo de todas as contas">Saldo Geral</p>
 	  	</div>
 	  </div> <!-- Fim Callout Saldo -->
@@ -73,7 +81,7 @@
 				<form action="" method="POST">
   					<div id="graficoMensal"></div>
 			  		<div align="right">
-			    		<p>Saldo Geral <saldo>R$0,00</saldo></p>
+			    		<p>Saldo Geral <saldo>R$ ${resultado.modeloVisao.saldo}</saldo></p>
 			    		<input type="checkbox" id="nPoupanca"> Não incluir saldo de conta poupança
 			  		</div><!-- end right -->
 			  		<ul>
@@ -95,25 +103,44 @@
 		</div>
 	</div><!-- end painel resumo financeiro -->
 	
-	<div class="col-xs-12 col-sm-6 col-md-3"><!-- Painel de Contas a Pagar e Receber -->
+	<div class="col-xs-12 col-sm-6 col-md-3"><!-- Painel de Contas a Pagar -->
 	  	<div class="panel panel-info"> <!-- Painel Saída Simples -->
 			<div class="panel-heading text-center">
 				Contas à Pagar
 			</div>
 			<div class="panel-body form-group">
 				<form action="" method="POST">
-		    		<h5>contas atrasadas <i class="glyphicon glyphicon-thumbs-down"></i></h5>
-		    		<ul>
-		      			<li>alguma conta 02/08 R$X,XX</li>
-		    		</ul><!-- end lista proximas -->
-		    		<h5>próximas <spam class="glyphicon glyphicon-thumbs-down"></spam></h5>
-		    		<ul>
-			  			<li>alguma conta 02/08 R$X,XX</li>
-					</ul><!-- end lista proximas -->
+		    		<h5>Contas Atrasadas <i class="glyphicon glyphicon-thumbs-down"></i></h5>
+		    		<table class="col-md-12">
+		    		  <tbody>
+		    		    <c:forEach var="aPagarVencida" items="${resultado.modeloVisao.aPagarVencida}">
+		    		      <tr>
+		    		    	<td> &bull;	&nbsp;	${aPagarVencida.descricao}</td>
+		    		    	<td class="text-right"> <fmt:formatDate value="${aPagarVencida.data}" pattern="dd/MM/YY"/></td>
+		    		    	<td class="text-right"> R$${aPagarVencida.valor}</td>
+		    		      </tr>
+		    		    </c:forEach>	
+		    		  </tbody>
+		    		</table>
+		    		
+		    		<h5>Próximas <spam class="glyphicon glyphicon-thumbs-down"></spam></h5>
+		    		<table class="col-md-12">
+		    		  <tbody>
+		    		    <c:forEach var="aPagar" items="${resultado.modeloVisao.aPagar}">
+		    		      <tr>
+		    		    	<td> &bull;	&nbsp;	${aPagar.descricao}</td>
+		    		    	<td class="text-right"> <fmt:formatDate value="${aPagar.data}" pattern="DD/MM"/></td>
+		    		    	<td class="text-right"> R$${aPagar.valor}</td>
+		    		      </tr>
+		    		    </c:forEach>	
+		    		  </tbody>
+		    		</table>
 				</form>
 			</div>
 		</div><!-- end painel de Contas a Pagar -->
-		  
+	</div>
+	<div class="col-xs-12 col-sm-6 col-md-3"><!-- Painel de Contas a Receber -->
+	
 		<div><!-- Painel de Contas a Receber -->
 			<div class="panel panel-info"> <!-- Painel Saída Simples -->
 				<div class="panel-heading text-center">
@@ -122,13 +149,29 @@
 				<div class="panel-body form-group">
 					<form action="" method="POST">
 			 			<h5>Recebimentos Atrasadas <spam class="glyphicon glyphicon-thumbs-up"></spam></h5>
-						<ul>
-							<li>alguma conta 02/08 R$X,XX</li>
-						</ul><!-- end lista -->
-						<h5>próximas <spam class="glyphicon glyphicon-thumbs-up"></spam></h5>
-						<ul>
-							<li>alguma conta 02/08 R$X,XX</li>
-						</ul><!-- end lista-->
+						<table class="col-md-12">
+			    		  <tbody>
+			    		    <c:forEach var="aReceberAtrasada" items="${resultado.modeloVisao.aReceberAtrasada}">
+			    		      <tr>
+			    		    	<td> &bull;	&nbsp;	${aReceberAtrasada.descricao}</td>
+			    		    	<td class="text-right"> <fmt:formatDate value="${aReceberAtrasada.dataEntrada}" pattern="dd/MM/YY"/></td>
+			    		    	<td class="text-right"> R$${aReceberAtrasada.valor}</td>
+			    		      </tr>
+			    		    </c:forEach>	
+			    		  </tbody>
+			    		</table>
+						<h5>Próximas <spam class="glyphicon glyphicon-thumbs-up"></spam></h5>
+						<table class="col-md-12">
+			    		  <tbody>
+			    		    <c:forEach var="aReceber" items="${resultado.modeloVisao.aReceber}">
+			    		      <tr>
+			    		    	<td> &bull;	&nbsp;	${aReceber.descricao}</td>
+			    		    	<td class="text-right"> <fmt:formatDate value="${aReceber.dataEntrada}" pattern="dd/MM"/></td>
+			    		    	<td class="text-right"> R$${aReceber.valor}</td>
+			    		      </tr>
+			    		    </c:forEach>	
+			    		  </tbody>
+			    		</table>
 					</form>
 				</div>
 			</div>
@@ -186,6 +229,70 @@
  	</div> <!-- col-sm-9 col-md-10 affix-content -->
   </div> <!--  container-fluid -->
 </div> <!-- row affix-row -->
-<script src="js/graficoLancamentos.js"></script>
+
+<%--TROCAR PARA INCLUDE. 
+<script src="js/graficoMensal.js"></script>--%>
+<script type="text/javascript">
+	<% Resultado resultado = (Resultado) request.getAttribute("resultado"); 
+		ResumoVM rVM = new ResumoVM();
+		rVM = (ResumoVM) resultado.getModeloVisao();
+	%>
+	Highcharts.chart('graficoMensal',{
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: '<% 
+        		LocalDate data = LocalDate.now();
+        		out.print("Gasto Mensal " + data.getMonth().getDisplayName(TextStyle.FULL, new Locale("pt")));
+        	 %>'
+    },
+    subtitle: {
+        text: 'Contas a pagar e receber'
+    },
+    xAxis: {//Dias
+    	 categories: [<%
+    	 				if(rVM.getDias().size()>0){
+    	 					for(int i=0; i<rVM.getDias().size(); i++){
+  		   		   				out.print(rVM.getDias().get(i)+ ", ");
+		   					}
+	   					}
+    	 			%>]
+    				
+    },
+    yAxis: {
+        title: {
+            text: 'R$'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: true
+        }
+    },
+    series: [{
+            name: 'A Receber',
+            data:[<%
+            		if(rVM.getcRecebidas().size()>0){
+						for(int i=0; i<rVM.getcRecebidas().size(); i++){
+	 		   				out.print(rVM.getcRecebidas().get(i)+ ", ");
+						}
+					}
+            	 %>]
+        		},
+        	{name: 'A Pagar',
+            data:[<% 
+		            if(rVM.getcPagas().size()>0){
+						for(int i=0; i<rVM.getcPagas().size(); i++){
+				   				out.print(rVM.getcPagas().get(i)+ ", ");
+						}
+					}
+            	 %>]
+        	}]
+	});
+</script>
 </body>
 </html>

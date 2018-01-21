@@ -16,6 +16,7 @@ import br.com.controlmore.command.ExcluirCommand;
 import br.com.controlmore.command.ICommand;
 import br.com.controlmore.command.LoginCommand;
 import br.com.controlmore.command.LogoutCommand;
+import br.com.controlmore.command.ResumoCommand;
 import br.com.controlmore.command.SalvarCommand;
 import br.com.controlmore.command.VisualizarCommand;
 import br.com.controlmore.dominio.EntidadeDominio;
@@ -23,14 +24,13 @@ import br.com.controlmore.vh.AvaliacaoViewHelper;
 import br.com.controlmore.vh.CategoriaViewHelper;
 import br.com.controlmore.vh.EntradaViewHelper;
 import br.com.controlmore.vh.FiltroViewHelper;
+import br.com.controlmore.vh.HomeViewHelper;
 import br.com.controlmore.vh.IViewHelper;
 import br.com.controlmore.vh.MetaViewHelper;
 import br.com.controlmore.vh.PessoaViewHelper;
 import br.com.controlmore.vh.QuestionarioViewHelper;
 import br.com.controlmore.vh.RelCatViewHelper;
 import br.com.controlmore.vh.SaidaViewHelper;
-import br.com.controlmore.vh.UpFileViewHelper;
-
 
 /**
  * Servlet implementation class Servlet
@@ -55,6 +55,7 @@ public class Servlet extends HttpServlet {
     	commands.put("login", new LoginCommand());
     	commands.put("logout", new LogoutCommand());
     	commands.put("visualizar", new VisualizarCommand());
+    	commands.put("resumo", new ResumoCommand());
  
     	
     	/* Utilizando o ViewHelper para tratar especificações de qualquer tela e indexando 
@@ -73,8 +74,8 @@ public class Servlet extends HttpServlet {
     	vhs.put("/controlMore-web/Filtro", new FiltroViewHelper());
     	vhs.put("/controlMore-web/Questionario", new QuestionarioViewHelper());
     	vhs.put("/controlMore-web/Avaliacao", new AvaliacaoViewHelper());
-    	vhs.put("/controlMore-web/UpFile", new UpFileViewHelper());
     	vhs.put("/controlMore-web/Categoria", new CategoriaViewHelper());
+    	vhs.put("/controlMore-web/Home", new HomeViewHelper());
     	
     }// construtor Servlet
     
@@ -119,7 +120,6 @@ public class Servlet extends HttpServlet {
 
 		//Obtêm o command para executar a respectiva operação
 		ICommand command = commands.get(acao);
-		
 		
 		/*Executa o command que chamará a fachada para executar a operação requisitada
 		 * o retorno é uma instância da classe resultado que pode conter mensagens derro 

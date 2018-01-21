@@ -40,10 +40,10 @@
 		  <div class="form-group">
         	<label class="col-xs-4 col-sm-2 col-md-1">Categoria 1</label>
         	<div class="col-xs-8 col-sm-4 col-md-2 selectContainer">
-              <select class="form-control" name="size">
+              <select class="form-control" name="categoria1">
                 <option value="">Escolha uma categoria</option>
                 <c:forEach var="categoria" items="${categorias}">
-   				  <option value="${categoria.id}">${categoria.descricao}</option>
+   				  <option value="${categoria.descricao}">${categoria.descricao}</option>
 				</c:forEach >
               </select><br>
         	</div>
@@ -51,10 +51,10 @@
     	  <div>
         	<label class="col-xs-4 col-sm-2 col-md-1">Categoria 2</label>
         	<div class="col-xs-8 col-sm-4 col-md-2 selectContainer">
-              <select class="form-control" name="size">
+              <select class="form-control" name="categoria2">
                 <option value="">Escolha uma categoria</option>
                 <c:forEach var="categoria2" items="${categorias}">
-   				  <option value="${categoria2.id}">${categoria2.descricao}</option>
+   				  <option value="${categoria2.descricao}">${categoria2.descricao}</option>
 				</c:forEach >
               </select><br>
         	</div>

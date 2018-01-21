@@ -5,6 +5,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.com.controlmore.aplicacao.Resultado;
+import br.com.controlmore.dao.AvaliacaoDAO;
+import br.com.controlmore.dao.CategoriaDAO;
+import br.com.controlmore.dao.EntradaDAO;
+import br.com.controlmore.dao.FiltroDAO;
+import br.com.controlmore.dao.IDAO;
+import br.com.controlmore.dao.MetaDAO;
+import br.com.controlmore.dao.PessoaDAO;
+import br.com.controlmore.dao.QuestionarioDAO;
+import br.com.controlmore.dao.RelatorioCategoriaDAO;
+import br.com.controlmore.dao.ResumoDAO;
+import br.com.controlmore.dao.SaidaDAO;
 import br.com.controlmore.dominio.AvaliacaoGasto;
 import br.com.controlmore.dominio.Categoria;
 import br.com.controlmore.dominio.EntidadeDominio;
@@ -21,17 +33,7 @@ import br.com.controlmore.negocio.IStrategy;
 import br.com.controlmore.negocio.SimularMeta;
 import br.com.controlmore.negocio.ValidarData;
 import br.com.controlmore.negocio.VerificarSaldo;
-import br.com.controlmore.aplicacao.Resultado;
-import br.com.controlmore.dao.AvaliacaoDAO;
-import br.com.controlmore.dao.CategoriaDAO;
-import br.com.controlmore.dao.EntradaDAO;
-import br.com.controlmore.dao.FiltroDAO;
-import br.com.controlmore.dao.IDAO;
-import br.com.controlmore.dao.MetaDAO;
-import br.com.controlmore.dao.PessoaDAO;
-import br.com.controlmore.dao.QuestionarioDAO;
-import br.com.controlmore.dao.RelatorioCategoriaDAO;
-import br.com.controlmore.dao.SaidaDAO;
+import br.com.controlmore.vm.ResumoVM;
 
 public class Fachada implements IFachada {
 
@@ -91,7 +93,6 @@ public class Fachada implements IFachada {
 		List<IStrategy> rnsSalvarEntrada = new ArrayList<IStrategy>();
 		List<IStrategy> rnsSalvarSaida = new ArrayList<IStrategy>();
 		List<IStrategy> rnsSalvarQuestionario = new ArrayList<IStrategy>();
-		
 		
 		/* Criando uma lista para conter as regras de negócio 
 		 * quando a operação for salvar */
@@ -220,7 +221,7 @@ public class Fachada implements IFachada {
 		
 		if(msg == null){
 			IDAO dao = daos.get(nmClasse);
-				resultado.setEntidades(dao.consultar(entidade));
+			resultado.setEntidades(dao.consultar(entidade));
 		}else{
 			resultado.setMsg(msg);
 		}
@@ -290,5 +291,69 @@ public class Fachada implements IFachada {
 	public Resultado logout(EntidadeDominio entidade){
 		resultado = new Resultado();
 		return resultado;
+	}
+	
+	public Resultado resumo() {
+		
+		Resultado resultado = new Resultado();
+		ResumoVM resumoVM = new ResumoVM();
+		resultado.setModeloVisao(resumoVM);
+		
+		// Criar objeto de algum DAO diretamente.
+		ResumoDAO rDAO = new ResumoDAO();
+		
+		// Executar consulta para recuperar saldo.
+		double saldoS = rDAO.saldoSaida();
+		double saldoE = rDAO.saldoEntrada();
+		resumoVM.setSaldo(saldoE-saldoS);
+		
+		
+		// Obter dados para o grafico geral mensal.
+		ResumoVM rVM = rDAO.graficoMensal();
+		if(rVM.getDias().size()>0){//Adicionando os dias
+			for(int i=0; i<rVM.getDias().size(); i++){
+				resumoVM.setDias(rVM.getDias().get(i));
+			}
+		}
+		if(rVM.getcRecebidas().size()>0){//Adicionando as contas recebidas
+			for(int i=0; i<rVM.getcRecebidas().size(); i++){
+	   			resumoVM.setcRecebidas(rVM.getcRecebidas().get(i));
+			}
+		}		
+		if(rVM.getcPagas().size()>0){//Adicionando as contas pagas
+			for(int i=0; i<rVM.getcPagas().size(); i++){
+	   			resumoVM.setcPagas(rVM.getcPagas().get(i));
+			}
+		}
+		
+		//Obter dados das contas proximas (a receber e a pagar)
+		rVM= rDAO.proximosVencimentos();
+		if(rVM.getaPagar().size()>0){//Adicionando contas a pagar proximas ao vencimento
+			for(int i =0; i<rVM.getaPagar().size(); i++){
+				resumoVM.setaPagar(rVM.getaPagar().get(i));
+			}
+		}
+		rVM= rDAO.proximosRecebimentos();
+		if(rVM.getaReceber().size()>0){//Adicionando contas a receber nos proximos dias
+			for(int i =0; i<rVM.getaReceber().size(); i++){
+				resumoVM.setaReceber(rVM.getaReceber().get(i));
+			}
+		}
+		
+		//Obter dados das contas vencidas (a receber e a pagar)
+		rVM= rDAO.aPagarVencidas();
+		if(rVM.getaPagarVencida().size()>0){//Adicionando contas vencidas
+			for(int i =0; i<rVM.getaPagarVencida().size(); i++){
+				resumoVM.setaPagarVencida(rVM.getaPagarVencida().get(i));
+			}
+		}
+		rVM= rDAO.aReceberAtrasadas();
+		if(rVM.getaReceberAtrasada().size()>0){//Adicionando contas a receber nos proximos dias
+			for(int i =0; i<rVM.getaReceberAtrasada().size(); i++){
+				resumoVM.setaReceberAtrasada(rVM.getaReceberAtrasada().get(i));
+			}
+		}
+		return resultado;
+		
 	}
 }

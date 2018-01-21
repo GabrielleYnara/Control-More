@@ -91,7 +91,7 @@ function grafico() {
                    }%>
                    ]
         }, {
-            name: 'London',
+            name: 'Saida',
             data: [<%if(saidas.size()>0){
 				   for(int i=0; i<saidas.size(); i++){
 					   Saida saida = saidas.get(i);

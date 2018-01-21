@@ -118,15 +118,20 @@ public class EntradaViewHelper implements IViewHelper{
 		
 		if(resultado.getMsg() == null){
 			if(acao.equals("salvar")){
-				resultado.setMsg("Entrada cadastrada com sucesso!");
+				resultado.setMsg("Conta a receber cadastrada com sucesso!");
+				request.setAttribute("resultado", resultado);
 				request.getSession().setAttribute("entrada", resultado);
-				d = request.getRequestDispatcher("/principal.jsp");//redireciona a pagina
+				d = request.getRequestDispatcher("/Home?acao=resumo");//redireciona a pagina
 			}
 			if (acao.equals("alterar")) {
+				resultado.setMsg("Conta a receber alterada com sucesso!");
+				request.setAttribute("resultado", resultado);
 				request.getSession().setAttribute("entrada", resultado);
 				d = request.getRequestDispatcher("/lancamentos.jsp");
 			}
 			if (acao.equals("excluir")){
+				resultado.setMsg("Conta a receber excluida com sucesso!");
+				request.setAttribute("resultado", resultado);
 				request.getSession().setAttribute("entrada", null);
 				d = request.getRequestDispatcher("/lancamentos.jsp");
 			}

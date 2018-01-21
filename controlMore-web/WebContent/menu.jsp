@@ -35,7 +35,8 @@
 <%
 	Resultado resultado = (Resultado) request.getSession().getAttribute("pessoa");
 	Pessoa pessoa = new Pessoa();
-	pessoa = (Pessoa) resultado.getEntidades().get(0);
+	// TODO
+//	pessoa = (Pessoa) resultado.getEntidades().get(0);
 %>
 <c:set value="${pessoa_new}" var="usuario" scope="session" />
 <script type="text/javascript">
@@ -148,7 +149,7 @@ function filtro(){
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="principal.jsp"><span class="glyphicon glyphicon-lock"></span> Home</a></li>
+	        <li><a href="Home?acao=resumo"><span class="glyphicon glyphicon-lock"></span> Home</a></li>
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 				   <span class="glyphicon glyphicon-cloud"></span> Relatório <span class="caret"></span>

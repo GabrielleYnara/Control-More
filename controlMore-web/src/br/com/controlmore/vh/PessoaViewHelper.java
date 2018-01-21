@@ -122,7 +122,7 @@ public class PessoaViewHelper implements IViewHelper {
 				request.getSession().setAttribute("pessoa_new", pessoa);
 				request.getSession().setAttribute("pessoa", resultado);
 				if(pessoa.getQuestionario().getId()!=0){
-					d = request.getRequestDispatcher("/principal.jsp");
+					d = request.getRequestDispatcher("/Home?acao=resumo");
 				}else{
 					d = request.getRequestDispatcher("/questionario.jsp");
 				}
@@ -131,7 +131,7 @@ public class PessoaViewHelper implements IViewHelper {
 				Pessoa pessoa = (Pessoa) resultado.getEntidades().get(0);
 				request.getSession().setAttribute("pessoa_new", pessoa);
 				request.getSession().setAttribute("pessoa", resultado);
-				d = request.getRequestDispatcher("/principal.jsp");
+				d = request.getRequestDispatcher("/Home?acao=resumo");
 			}
 			if (acao.equals("excluir") || acao.equals("logout")){
 				request.getSession().setAttribute("pessoa", null);
@@ -144,7 +144,7 @@ public class PessoaViewHelper implements IViewHelper {
 				Pessoa pessoa = (Pessoa) resultado.getEntidades().get(0);
 				request.getSession().setAttribute("pessoa_new", pessoa);
 				request.getSession().setAttribute("pessoa", resultado);
-				d = request.getRequestDispatcher("/principal.jsp");
+				d = request.getRequestDispatcher("/Home?acao=resumo");
 			}
 			if(acao.equals("visualizar")){
 				Pessoa pessoa = (Pessoa) resultado.getEntidades().get(0);
@@ -163,7 +163,7 @@ public class PessoaViewHelper implements IViewHelper {
 				Pessoa pessoa = (Pessoa) resultado.getEntidades().get(0);
 				request.getSession().setAttribute("pessoa_new", pessoa);
 				request.getSession().setAttribute("resultado", resultado);
-				d = request.getRequestDispatcher("/principal.jsp");
+				d = request.getRequestDispatcher("/Home?acao=resumo");
 			}
 		}
 		d.forward(request, response);

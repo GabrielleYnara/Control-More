@@ -13,7 +13,7 @@
 		}
 	}else if(request.getAttribute("resultado")!= null){
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
-		if (!resultado.getMsg().isEmpty()){		
+		if (resultado.getMsg() != null && !resultado.getMsg().isEmpty()){		
 			
 		}
 	}
@@ -21,7 +21,7 @@
 %>
 <c:set value="${resultado}" var="mensagem" scope="request" />
 
-<c:if test="${mensagem != null}">
+<c:if test="${mensagem.msg != null}">
 	<div id="modalMsg" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 	    	<!-- Modal content-->

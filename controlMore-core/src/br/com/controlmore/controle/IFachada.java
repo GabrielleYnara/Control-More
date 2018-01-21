@@ -11,4 +11,5 @@ public interface IFachada {
 	public Resultado visualizar (EntidadeDominio entidade);
 	public Resultado login(EntidadeDominio entidade);
 	public Resultado logout(EntidadeDominio entidade);
+	public Resultado resumo();
 }

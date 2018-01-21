@@ -104,6 +104,7 @@ public class MetaViewHelper implements IViewHelper{
 		if(resultado.getMsg() == null){
 			if(acao.equals("salvar")){
 				resultado.setMsg("Meta cadastrada com sucesso!");
+				// TODO: mover de sessão para request.
 				request.getSession().setAttribute("meta", resultado);
 				d = request.getRequestDispatcher("/principal.jsp");//redireciona a pagina
 			}
