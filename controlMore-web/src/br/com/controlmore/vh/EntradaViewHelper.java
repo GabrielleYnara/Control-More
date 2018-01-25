@@ -49,7 +49,7 @@ public class EntradaViewHelper implements IViewHelper{
 				id = Integer.parseInt(request.getParameter("txtId"));
 			}
 			if(request.getParameter("txtValor")!= null){
-				valor = Float.parseFloat(request.getParameter("txtValor"));
+				valor = Float.parseFloat(request.getParameter("txtValor").replace(",", "."));
 			}
 			if(request.getParameter("txtDescricao")!=null){
 				descricao = request.getParameter("txtDescricao");
@@ -116,21 +116,17 @@ public class EntradaViewHelper implements IViewHelper{
 		
 		String acao = request.getParameter("acao");
 		
-		if(resultado.getMsg() == null){
 			if(acao.equals("salvar")){
-				resultado.setMsg("Conta a receber cadastrada com sucesso!");
-				request.setAttribute("resultado", resultado);
+				request.getSession().setAttribute("resultado", resultado);
 				request.getSession().setAttribute("entrada", resultado);
 				d = request.getRequestDispatcher("/Home?acao=resumo");//redireciona a pagina
 			}
 			if (acao.equals("alterar")) {
-				resultado.setMsg("Conta a receber alterada com sucesso!");
 				request.setAttribute("resultado", resultado);
 				request.getSession().setAttribute("entrada", resultado);
 				d = request.getRequestDispatcher("/lancamentos.jsp");
 			}
 			if (acao.equals("excluir")){
-				resultado.setMsg("Conta a receber excluida com sucesso!");
 				request.setAttribute("resultado", resultado);
 				request.getSession().setAttribute("entrada", null);
 				d = request.getRequestDispatcher("/lancamentos.jsp");
@@ -146,7 +142,6 @@ public class EntradaViewHelper implements IViewHelper{
 				request.getSession().setAttribute("entradaR", resultado);
 				d = request.getRequestDispatcher("/entradaCompleta.jsp");
 			}
-		}
 		d.forward(request, response);
 	}
 

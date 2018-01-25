@@ -40,7 +40,8 @@ public class ResumoDAO extends AbstractDAO{
 	public double saldoSaida(){
 		double saldo;
 		String sql = "SELECT SUM(valor) AS saida "
-				   + "  FROM Saida";
+				   + "  FROM Saida"
+				   + " WHERE UPPER(Situacao) like 'PAGO'";
 		try(PreparedStatement preparador = conexao.prepareStatement(sql)){//preparador que vai gerenciar o SQL
 			//executa o SQL
 			ResultSet result = preparador.executeQuery(); //passa o resultado da execução da Query para a variável result
@@ -57,7 +58,8 @@ public class ResumoDAO extends AbstractDAO{
 	public double saldoEntrada() {
 		double saldo =0;
 		String sql = "SELECT SUM(valor) AS entrada "
-				   + "  FROM Entrada";
+				   + "  FROM Entrada"
+				   + " WHERE UPPER(Situacao) like 'PAGO'";
 		try(PreparedStatement preparador = conexao.prepareStatement(sql)){//preparador que vai gerenciar o SQL
 			//executa o SQL
 			ResultSet result = preparador.executeQuery(); //passa o resultado da execução da Query para a variável result
@@ -79,6 +81,7 @@ public class ResumoDAO extends AbstractDAO{
 				   + "  FROM Saida "
 				   + " WHERE DataSaida BETWEEN (SELECT to_date( '01/'||to_char(sysdate, 'mm/yyyy'), 'dd/mm/yyyy') "
 				   + "                          FROM dual) AND LAST_DAY(SYSDATE) "
+				   + "   AND UPPER(Situacao) like 'PAGO'"
 				   + " GROUP BY DataSaida "
 				   + " UNION ALL "
 				   + "SELECT SUM(Valor) AS Valor, "
@@ -87,6 +90,7 @@ public class ResumoDAO extends AbstractDAO{
 				   + "  FROM Entrada "
 				   + " WHERE DataEntrada BETWEEN (SELECT to_date( '01/'||to_char(SYSDATE, 'mm/yyyy'), 'dd/mm/yyyy') "
 				   + "                            FROM dual) AND LAST_DAY(SYSDATE) "
+				   + "   AND UPPER(Situacao) like 'PAGO'"
 				   + " GROUP BY DataEntrada "
 				   + " ORDER BY Data, Tipo";
 		
@@ -137,7 +141,6 @@ public class ResumoDAO extends AbstractDAO{
 	
 	public ResumoVM proximosVencimentos(){
 		ResumoVM rVM = new ResumoVM();
-		Saida s = new Saida();
 		String sql = "SELECT Valor, "
 				   + "		 Descricao, "
 				   + "		 DataSaida as Data "
@@ -148,6 +151,8 @@ public class ResumoDAO extends AbstractDAO{
 			//executa o SQL
 			ResultSet result = preparador.executeQuery(); //passa o resultado da execução da Query para a variável result
 			while(result.next()){
+				Saida s = new Saida();
+
 				s.setValor(result.getFloat("Valor"));
 				s.setDescricao(result.getString("Descricao"));
 				s.setData(result.getDate("Data"));
@@ -163,7 +168,6 @@ public class ResumoDAO extends AbstractDAO{
 	
 	public ResumoVM proximosRecebimentos(){
 		ResumoVM rVM = new ResumoVM();
-		Entrada e = new Entrada();
 		String sql = "SELECT Valor, "
 				   + "		 Descricao, "
 				   + "		 DataEntrada as Data "
@@ -174,6 +178,8 @@ public class ResumoDAO extends AbstractDAO{
 			//executa o SQL
 			ResultSet result = preparador.executeQuery(); //passa o resultado da execução da Query para a variável result
 			while(result.next()){
+				Entrada e = new Entrada();
+
 				e.setValor(result.getFloat("Valor"));
 				e.setDescricao(result.getString("Descricao"));
 				e.setDataEntrada(result.getDate("Data"));
@@ -189,7 +195,6 @@ public class ResumoDAO extends AbstractDAO{
 
 	public ResumoVM aPagarVencidas(){
 		ResumoVM rVM = new ResumoVM();
-		Saida s = new Saida();
 		String sql = "SELECT Valor, "
 				   + "		 Descricao, "
 				   + "       DataSaida "
@@ -201,13 +206,12 @@ public class ResumoDAO extends AbstractDAO{
 			//executa o SQL
 			ResultSet result = preparador.executeQuery(); //passa o resultado da execução da Query para a variável result
 			while(result.next()){
+				Saida s = new Saida();
+
 				s.setValor(result.getFloat("Valor"));
 				s.setDescricao(result.getString("Descricao"));
 				s.setData(result.getDate("DataSaida"));
-				System.out.println(s.getDescricao() + " - " + s.getData() + " - " + s.getValor());
-
 				rVM.setaPagarVencida(s);
-
 			}
 			return rVM;
 		}catch (SQLException e) {
@@ -218,7 +222,6 @@ public class ResumoDAO extends AbstractDAO{
 	
 	public ResumoVM aReceberAtrasadas(){
 		ResumoVM rVM = new ResumoVM();
-		Entrada e = new Entrada();
 		String sql = "SELECT Valor, "
 				   + "       Descricao, "
 				   + "       DataEntrada "
@@ -230,6 +233,8 @@ public class ResumoDAO extends AbstractDAO{
 			//executa o SQL
 			ResultSet result = preparador.executeQuery(); //passa o resultado da execução da Query para a variável result
 			while(result.next()){
+				Entrada e = new Entrada();
+
 				e.setValor(result.getFloat("Valor"));
 				e.setDescricao(result.getString("Descricao"));
 				e.setDataEntrada(result.getDate("DataEntrada"));

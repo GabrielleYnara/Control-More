@@ -12,4 +12,6 @@ public interface IFachada {
 	public Resultado login(EntidadeDominio entidade);
 	public Resultado logout(EntidadeDominio entidade);
 	public Resultado resumo();
+	public Resultado contaReceber();
+	public Resultado contaPagar();
 }

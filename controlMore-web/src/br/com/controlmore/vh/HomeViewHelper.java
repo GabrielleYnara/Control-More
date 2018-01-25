@@ -23,6 +23,7 @@ public class HomeViewHelper implements IViewHelper {
 
 	@Override
 	public EntidadeDominio getEntidade(HttpServletRequest request) {
+		
 		return null;
 	}
 
@@ -30,10 +31,22 @@ public class HomeViewHelper implements IViewHelper {
 	public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		RequestDispatcher d = null; //Será responsável por redirecionamento
-		
-		request.getSession().setAttribute("resultado", null);
-		request.setAttribute("resultado", resultado);
-				d = request.getRequestDispatcher("/principal.jsp");//redireciona a pagina
+		String acao = request.getParameter("acao");
+		if(acao.equals("resumo")){
+			request.getSession().setAttribute("resultado", null);
+			request.setAttribute("resultado", resultado);
+			d = request.getRequestDispatcher("/principal.jsp");//redireciona a pagina
+		}
+		if(acao.equals("contaReceber")){
+			request.getSession().setAttribute("resultado", null);
+			request.setAttribute("resultado", resultado);
+			d = request.getRequestDispatcher("/entradaCompleta.jsp");//redireciona a pagina
+		}
+		if(acao.equals("contaPagar")){
+			request.getSession().setAttribute("resultado", null);
+			request.setAttribute("resultado", resultado);
+			d = request.getRequestDispatcher("/saidaCompleta.jsp");//redireciona a pagina
+		}
 		d.forward(request, response);
 
 

@@ -30,7 +30,7 @@ $(document).ready(function(){
     });
 });
 </script>
-	<div class="col-md-6">
+	<div class="col-md-7">
 		<div class="panel panel-info">
 			<div class="panel-heading text-center">
 		  		Contas a pagar 
@@ -58,7 +58,7 @@ $(document).ready(function(){
 	    	  			<div class="col-md-2" >
 	    	  				Valor R$
 	    	  			</div>
-	    	  			<div class="col-md-3">
+	    	  			<div class="col-md-4">
 	    	  				<input type="text" name="txtValor" class="form-control" placeholder="R$0,00" required autofocus
 	    	  					<%if(saida.getValor()!=0){
 	    	  						out.print("value='"+saida.getValor()+"'");
@@ -68,7 +68,7 @@ $(document).ready(function(){
 	    	  			<div class="col-md-2">
 	    	  				Frequência
 	    	  			</div>
-	    	  			<div class="col-md-4">
+	    	  			<div class="col-md-3">
 		      				<select class="form-control" name="txtFreq">
 		      					<%if(saida.getFrequencia()!=null){
 	    	  						out.print("<option value='"+saida.getFrequencia().getId()+"'>"+
@@ -79,7 +79,7 @@ $(document).ready(function(){
 								<option value="2" >Semanal</option>
 							</select>
 	    				</div>
-		    			<div class="col-md-1">
+		    			<div class="col-md-1" hidden>
 		    				<a href="cadastroFrequencia.jsp"><i class="glyphicon glyphicon-plus"></i></a>
 		    			</div> 
 	    			</div><!-- end row -->
@@ -101,25 +101,28 @@ $(document).ready(function(){
 		    			<div class="col-md-2">
 							Conta/ Cartão
 		   				</div>
-		   				<div class="col-md-3">
+		   				<div class="col-md-4">
 		      				<select class="form-control"  name="txtConta">
 		      					<%if(saida.getConta()!=null){
 	    	  						out.print("<option value='"+saida.getConta().getId()+"'>"+
 		      						saida.getConta().getBanco()+"</option>");
 	    	  					}%>
-			    				<option value="1">Itaú - CC</option>
+			    				<!-- <option value="1">Itaú - CC</option>
 							   	<option value="2">Itaú - CP</option>
-							   	<option value="4">Carteira </option>
+							   	<option value="4">Carteira </option>-->
+							   	<c:forEach var="contaCartao" items="${resultado.modeloVisao.contasCartoes}">
+						   			<option value="${contaCartao.id}/${contaCartao.info}">${contaCartao.tipo} - ${contaCartao.banco}</option>
+						   		</c:forEach>
 							</select>
 		    			</div>
 		    			<div class="col-md-1">
-		    				<a href="cadastroConta.jsp"><i class="glyphicon glyphicon-plus"></i></a>
+		    				<a href="cadastroConta.jsp"><i class="glyphicon glyphicon-plus" data-toggle="tooltip" data-placement="bottom" title="Adicionar nova Conta ou Cartão"></i></a>
 		    			</div>
 		    			<div class="col-md-1">
 		    				Data
 		    			</div>
-		    			<div class="col-md-4">
-		    				<input type="date" name="txtData" class="form-control" placeholder="" required autofocus
+		    			<div class="col-md-3">
+		    				<input type="date" name="txtData" class="form-control" placeholder="" required autofocus data-toggle="tooltip" data-placement="bottom" title="Data de vencimento"
 		    					<%if(saida.getData()!=null){
 	    	  						out.print("value='"+saida.getData()+"'");
 	    	  					}%>
@@ -134,23 +137,20 @@ $(document).ready(function(){
 		      			<div class="col-md-9">
 					      	<select class="form-control" name="txtCategoria">
 					      		<%if(saida.getCategoria()!=null){
-	    	  						out.print("<opntion value='"+saida.getCategoria().getId()+"'>"+
+	    	  						out.print("<option value='"+saida.getCategoria().getId()+"'>"+
 					      			saida.getCategoria().getDescricao()+"</option>");
 	    	  					}%>
-							    <option value="1">Alimentação</option>
-							    <option value="6">Educação</option>
-							    <option value="3">Lazer</option>
-							    <option value="2">Moradia</option>
-							    <option value="5">Outros</option>
-							    <option value="7">Transporte</option>
-							    <option value="4">Vestuario</option>
+	    	  					
+							    <c:forEach var="categoria" items="${resultado.modeloVisao.categorias}">
+						   			<option value="${categoria.id}">${categoria.descricao}</option>
+						   		</c:forEach>
 						   	</select>
 						</div>
 						<div class="col-md-1">
-		    				<a href="cadastroCategoria.jsp"><i class="glyphicon glyphicon-plus"></i></a>
+		    				<a href="cadastroCategoria.jsp"><i class="glyphicon glyphicon-plus" data-toggle="tooltip" data-placement="bottom" title="Adicionar nova Categoria"></i></a>
 		    			</div> 
 			 		</div><!-- end row -->
-		 		<br>
+		 		
 			 		<!-- <div class="col-md-3">
 			    		<input id="parcelado" value="Parcelado" type="checkbox">Parcelado
 					</div>
@@ -200,27 +200,27 @@ $(document).ready(function(){
 	    			</div>
     			
 	    			<div class="row">
-	    		  		<div class="col-md-1" >
-	    		  			Juros
+	    		  		<div class="col-md-2" >
+	    		  			Multa R$
 	    		  		</div>
-	    		  		<div class="col-md-3">
-		    	  			<input type="text" name="txtMulta" class="form-control" placeholder="R$0,00" autofocus
+	    		  		<div class="col-md-2">
+		    	  			<input type="text" name="txtMulta" class="form-control" placeholder="0,00" autofocus
 		    	  				<%if(saida.getJuros()!=null){
 	    	  						out.print("value='"+saida.getJuros().getMulta()+"'");
 	    	  					}%>
 		    	  			>
 	    				</div>
-	    		  		<div class="col-md-1" >
-	    		  			+
+	    		  		<div class="col-md-2" >
+	    		  			+ Juros R$
 	    		  		</div>
-	    		  		<div class="col-md-3">
-		    	  			<input type="text" name="txtJuros" class="form-control" placeholder="R$0,00" autofocus
+	    		  		<div class="col-md-2">
+		    	  			<input type="text" name="txtJuros" class="form-control" placeholder="0,00" autofocus
 		    	  				<%if(saida.getJuros()!=null){
 	    	  						out.print("value='"+saida.getJuros().getJuros()+"'");
 	    	  					}%>
 		    	  			>
 	    		  		</div>
-	    		  		<div class="col-md-3">
+	    		  		<div class="col-md-2">
 			    		  	<select class="form-control" name="txtIntervalo">
 			    		  		<%if(saida.getJuros()!=null){
 	    	  						out.print("<option value='"+saida.getJuros().getIntervaloCobranca()+"'>"+
@@ -234,18 +234,7 @@ $(document).ready(function(){
 	    			</div>
     				<br>
 	    			<div class="row">
-			    	 	<div class="col-md-4">
-			    	 		Nível de importância: 
-			    	 	</div>
-			    	 	<div class="col-md-8">
-				    	  	<label class="radio-inline"><input type="radio" name="txtImportancia" value="1">Pequeno</label>
-						  	<label class="radio-inline"><input type="radio" name="txtImportancia" value="2">Médio</label>
-						 	<label class="radio-inline"><input type="radio" name="txtImportancia" value="3">Grande</label><br><br>
-						</div>
-					</div>
-					
-					<div class="row" >
-						<div class="col-md-2">
+	    			 	<div class="col-md-2">
 							Situação
 						</div>
 						<div class="col-md-3">
@@ -256,13 +245,33 @@ $(document).ready(function(){
 	    	  					}%>
 			    		    	<option value="Pendente">Pendente</option>
 			    		    	<option value="Pago">Pago</option>
-			    		    	<option value="Pago parcial">Pago parcial</option>
+			    		    	<!--  Sistema ainda não esta preparado para pagamento parcial
+			    		    	<option value="Pago parcial">Pago parcial</option> -->
 			    		  	</select>
 						</div>
-						<div class="col-md-7 text-right">
-							<button class="btn btn-default" type="submit" >Salvar</button>
+						
+			    	 	<div class="col-md-3">
+			    	 		Nível de importância: 
+			    	 	</div>
+			    	 	<div class="col-md-3">
+			    	 		<select class="form-control" name="txtImportancia">
+				    	  		<option value="1">Baixa</option>
+						  		<option value="2">Média</option>
+						 		<option value="3">Alta</option>
+						 	</select>
 						</div>
-			  		</div>
+					</div>
+					<br>
+					<div align="left" class="col-xs-6 col-sm-6 col-md-6">
+		    			<a href="javascript:location.href='Home?acao=resumo';" class="btn btn-default">Cancelar</a>
+	      			</div><!-- end row -->
+		  			<div align="right" class="col-xs-6 col-sm-6 col-md-6">
+		    			<button class="btn btn-primary" type="submit">Salvar</button>		    			
+	      			</div>
+	      		</div>
+						
+						
+			 </div>
 				<%out.print("</form>");%>
 			</div><!-- panel-body -->
 		</div><!-- panel -->

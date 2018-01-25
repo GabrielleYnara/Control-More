@@ -11,7 +11,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Contas à Receber Completa</title>
+<!-- Import da taglib pra uso de jstl -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<title>Conta a Receber</title>
 </head>
 <body>
 
@@ -25,7 +28,7 @@
 		entrada = (Entrada) entradas.get(0);
 	}
 %>
-	<div class="col-sm-12 col-md-6 col-md-offset-3">
+	<div class="col-sm-12 col-md-7 col-md-offset-2">
 		<div class="panel panel-info">
 			<div class="panel-heading text-center">
 		  		Cadastrar Entrada
@@ -40,17 +43,17 @@
 					<div class="col-md-2">
 	    				Valor R$
 	    			</div>
-	    			<div class="col-md-3">
+	    			<div class="col-md-4">
 	    				<input type="text" name="txtValor" class="form-control" placeholder="R$0,00" required autofocus
 	    				<%if(entrada.getValor()!= 0)
 	    					out.print("value='"+entrada.getValor()+"'");
 	    				%>>
 					</div>
 					
-					<div class="col-md-2">
+					<div class="col-md-2" align="right">
 						Frequência
 	   				</div>
-	   				<div class="col-md-4">
+	   				<div class="col-md-3">
 	      				<select class="form-control" name="txtFreq">
 	      					<%if(entrada.getFrenquencia()!=null){
 	      						out.print("<option value='"+entrada.getFrenquencia().getId()+"' > " +
@@ -62,7 +65,7 @@
 							<option value="2" >Semanal</option>
 						</select>
 	    			</div>
-	    			<div class="col-md-1">
+	    			<div class="col-md-1" hidden>
 	    				<a href="cadastroFrequencia.jsp"><i class="glyphicon glyphicon-plus"></i></a>
 	    			</div>
 	  			</div>
@@ -82,28 +85,31 @@
 				
 				<div class="row">
 	  				<div class="col-md-2">
-						Conta/ Cartão
+						Conta
 	   				</div>
-	   				<div class="col-md-3">
+	   				<div class="col-md-4">
 	      				<select class="form-control"  name="txtConta">
 	      					<%if(entrada.getConta()!=null){
 	      						out.print("<option value='"+entrada.getConta().getId()+"' > " +
 	      						entrada.getConta().getBanco() + "</option>");
 	      					}
 	      					%> 
-			    			<option value="1">Itaú - CC</option>
+			    			<!-- <option value="1">Itaú - CC</option>
 						   	<option value="2">Itaú - CP</option>
-						   	<option value="4">Carteira </option>
+						   	<option value="4">Carteira </option>-->
+						   	<c:forEach var="conta" items="${resultado.modeloVisao.contas}">
+						   		<option value="${conta.id}">${conta.banco} - ${conta.tipo}</option>
+						   	</c:forEach>
 						</select>
 	    			</div>
 	    			<div class="col-md-1">
-	    				<a href="cadastroConta.jsp"><i class="glyphicon glyphicon-plus"></i></a>
+	    				<a href="cadastroConta.jsp"><i class="glyphicon glyphicon-plus" data-toggle="tooltip" data-placement="bottom" title="Adicionar nova Conta ou Cartão"></i></a>
 	    			</div>
 	    			<div class="col-md-1">
 	    				Data
 	    			</div>
-	    			<div class="col-md-4">
-	    				<input type="date" name="txtData" class="form-control" required autofocus
+	    			<div class="col-md-3">
+	    				<input type="date" name="txtData" class="form-control" required autofocus data-toggle="tooltip" data-placement="bottom" title="Data de recebimento"
 	    				<%if(entrada.getDataEntrada()!=null)
 	    					out.print("value='"+entrada.getDataEntrada()+"'");
 	    				%>>
@@ -164,16 +170,21 @@
 	    	  				}%>
 			    		    <option value="Pendente">Pendente</option>
 			    		    <option value="Pago">Pago</option>
-			    		    <option value="Pago parcial">Pago parcial</option>
+			    		    <!-- Por enquanto o sistema não está preparado para pagamento parcial
+			    		     <option value="Pago parcial">Pago parcial</option> -->
 			    		</select>
 					</div>
 				</div>
-	  			<div class="row" align="center">
-	    			<!-- <button class="btn btn-primary" id="btnSalvarEntrada" type="submit">Salvar</button> -->
-	    			<button class="btn btn-default" type="submit">Salvar</button>
-	    			
-      			</div><!-- end row -->
- 				</form>
+				
+				<div align="left" class="col-xs-6 col-sm-6 col-md-6">
+		    			<a href="javascript:location.href='Home?acao=resumo';" class="btn btn-default">Cancelar</a>
+	      			</div><!-- end row -->
+		  			<div align="right" class="col-xs-6 col-sm-6 col-md-6">
+		    			<button class="btn btn-primary" type="submit">Salvar</button>		    			
+	      			</div>
+	      			
+	      		</div>
+ 			  </form>
 			</div><!-- end painel body -->
 		</div><!-- end painel -->
 	</div><!-- end col-4 -->

@@ -172,6 +172,7 @@ function filtro(){
 				  <li><a href="#">Calculadora</a></li>
 				  <li><a href="#">Conversor de Moeda</a></li>
 				  <li><a href="Info.jsp">Info</a></li>
+				  <li><a href="javascript:location.href='Categoria?acao=consultar';">Listar Categorias</a></li>
 	            </ul>
 	        </li>
 	        <li><a href="faleConosco.jsp">Fale Conosco</a></li>

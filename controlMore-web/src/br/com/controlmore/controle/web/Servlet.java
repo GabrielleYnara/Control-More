@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.controlmore.aplicacao.Resultado;
 import br.com.controlmore.command.AlterarCommand;
 import br.com.controlmore.command.ConsultarCommand;
+import br.com.controlmore.command.ContaPagarCommand;
 import br.com.controlmore.command.ExcluirCommand;
 import br.com.controlmore.command.ICommand;
 import br.com.controlmore.command.LoginCommand;
@@ -19,6 +20,7 @@ import br.com.controlmore.command.LogoutCommand;
 import br.com.controlmore.command.ResumoCommand;
 import br.com.controlmore.command.SalvarCommand;
 import br.com.controlmore.command.VisualizarCommand;
+import br.com.controlmore.command.contaReceberCommand;
 import br.com.controlmore.dominio.EntidadeDominio;
 import br.com.controlmore.vh.AvaliacaoViewHelper;
 import br.com.controlmore.vh.CategoriaViewHelper;
@@ -56,6 +58,8 @@ public class Servlet extends HttpServlet {
     	commands.put("logout", new LogoutCommand());
     	commands.put("visualizar", new VisualizarCommand());
     	commands.put("resumo", new ResumoCommand());
+    	commands.put("contaReceber", new contaReceberCommand());
+    	commands.put("contaPagar", new ContaPagarCommand());
  
     	
     	/* Utilizando o ViewHelper para tratar especificações de qualquer tela e indexando 

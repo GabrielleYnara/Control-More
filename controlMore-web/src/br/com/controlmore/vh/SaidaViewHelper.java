@@ -48,7 +48,7 @@ public class SaidaViewHelper implements IViewHelper {
 				id = Integer.parseInt(request.getParameter("txtId"));
 			}
 			if(request.getParameter("txtValor")!= null){
-				valor = Double.parseDouble(request.getParameter("txtValor"));
+				valor = Double.parseDouble(request.getParameter("txtValor").replace(",", "."));
 			}
 			if(request.getParameter("txtFreq")!= null){
 				frequencia.setId(Integer.parseInt(request.getParameter("txtFreq")));
@@ -56,8 +56,12 @@ public class SaidaViewHelper implements IViewHelper {
 			if(request.getParameter("txtDescricao")!= null){
 				descricao = request.getParameter("txtDescricao");
 			}
-			if(request.getParameter("txtConta")!= null){
-				conta.setId(Integer.parseInt(request.getParameter("txtConta")));
+			if(request.getParameter("txtConta")!= null && request.getParameter("txtConta").trim().equals("")){
+				String array[] = request.getParameter("txtConta").split("/");
+				if(array[1].equals("conta"))
+					conta.setId(Integer.parseInt(array[0]));
+				if(array[1].equals("cartao"))
+					cartao.setId(Integer.parseInt(array[0]));
 			}
 			if(request.getParameter("txtData")!= null){
 				data = LocalDate.parse(request.getParameter("txtData"));
@@ -85,24 +89,24 @@ public class SaidaViewHelper implements IViewHelper {
 			if(request.getParameter("txtValorParcela")!=null){
 				for(int i = 1; i<=qteParcelas;i++){
 					parcela.setNumParcela(i);
-					double valorP = Double.parseDouble(request.getParameter("txtValorParcela"));
+					double valorP = Double.parseDouble(request.getParameter("txtValorParcela").replace(",", "."));
 					parcela.setValorParcela( (float) valorP);
 					parcela.setSituacao(request.getParameter("txtSituacao"));
 					saida.setParcela(parcela);
 				}
 			}
-			if(request.getParameter("txtMulta")!=null){
-				juros.setMulta(Float.parseFloat(request.getParameter("txtMulta")));
+			if(request.getParameter("txtMulta")!=null && !request.getParameter("txtMulta").trim().equals("")){
+				juros.setMulta(Float.parseFloat(request.getParameter("txtMulta").replace(",", ".")));
 			}
-			if(request.getParameter("txtJuros")!=null){
-				juros.setJuros(Float.parseFloat(request.getParameter("txtJuros")));
+			if(request.getParameter("txtJuros")!=null && !request.getParameter("txtJuros").trim().equals("")){
+				juros.setJuros(Float.parseFloat(request.getParameter("txtJuros").replace(",", ".")));
 			}
 			if(request.getParameter("txtIntervalo")!=null){
 				juros.setIntervaloCobranca(request.getParameter("txtIntervalo"));
 			}
-			/*if(request.getParameter("txtImportancia")!= null){
-				importancia = Integer.parseInt(request.getParameter("txtConta"));
-			}*/
+			if(request.getParameter("txtImportancia")!= null){
+				importancia = Integer.parseInt(request.getParameter("txtImportancia"));
+			}
 			if(request.getParameter("txtSituacao")!= null){
 				situacao = request.getParameter("txtSituacao");
 			}
@@ -145,12 +149,10 @@ public class SaidaViewHelper implements IViewHelper {
 		
 		String acao = request.getParameter("acao");
 		
-		if(resultado.getMsg() == null){
 			if(acao.equals("salvar")){
-				resultado.setMsg("Saida cadastrada com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);
 				request.getSession().setAttribute("saida", resultado);
-				d = request.getRequestDispatcher("/principal.jsp");//redireciona a pagina
+				d = request.getRequestDispatcher("/Home?acao=resumo");//redireciona a pagina
 			}
 			if (acao.equals("alterar")) {
 				request.getSession().setAttribute("saida", resultado);
@@ -171,10 +173,6 @@ public class SaidaViewHelper implements IViewHelper {
 				request.getSession().setAttribute("saida", resultado);
 				d = request.getRequestDispatcher("/saidaCompleta.jsp");
 			}
-		}else{
-			request.getSession().setAttribute("resultado", resultado);
-			d = request.getRequestDispatcher("/principal.jsp");
-		}
 		d.forward(request, response);
 
 	}

@@ -10,45 +10,61 @@
 </head>
 <body>
 <%@include file="menu.jsp"%>
+<c:set value="${categoria}" var="categoria" />
+
 	  <div class="col-md-4">
 		<div class="panel panel-info">
 			<div class="panel-heading text-center">
 		  		Cadastrar Categoria
 		  	</div>
 		  	<div class="panel-body">
-				<form action="acao=salvar" method="POST">
-					<div class="radio">
+		  	<c:if test="${not empty categoria}">
+		  		<form action="Categoria?acao=alterar" method="POST">
+		  	</c:if>
+		  	<c:if test="${empty categoria }">
+		  		<form action="Categoria?acao=salvar" method="POST">
+		  	</c:if>
+					<div class="radio" >
 					  	<label>
 					    	<input type="radio" name="optCategoria" value="categoria" checked>
 					    	Categoria
 					  	</label>
 					</div>
 					<div class="radio">
-					  	<label>
-					    	<input type="radio" name="optCategoria" value="subcategoria">
+					  	<label hidden>
+					    	<input type="radio" name="optCategoria" value="subcategoria" >
 					    	Subcategoria
 					  	</label>
 					</div>
 					<label>Nome</label>
-					<input type="text" name="txtNome" class="form-control">
+					  <c:if test="${not empty categoria.descricao}">
+						<input type="text" name="txtDescricao" class="form-control" 
+					  	value="${categoria.descricao}"/>
+					  </c:if>
+					  <c:if test="${empty categoria.descricao}">
+					    <input type="text" name="txtDescricao" class="form-control" >
+					  </c:if>
 					
+					  
+					<!-- O sistema não esta preparado para configuração de cores 
 					<label>Cor</label>
-					<input type="text" name="txtQtdeDias" class="form-control">
-					
-					<%//if(optCategoria.equals("subcategoria"){
-						out.print("<select class='form-control'>"+
-							"<option>lista de categorias</option>"+
-						  	"<option>2</option>"+
-						  	"<option>3</option>"+
-						  	"<option>4</option>"+
-						  	"<option>5</option>"+
-						"</select>");
-						%>
-					
-					<div class="row" align="center">
-						<button type='submit' class="btn btn-primary" id='acao'>Salvar</button>
-					</div>
-				</form>
+					<input type="text" name="txtCor" class="form-control"
+					  <c:if test="${not empty categoria.cor}"> 
+					    <c:out value="${categoria.cor}"/>
+					  </c:if>
+					> -->
+					<c:if test="${not empty categoria.id}">
+						<input type="text" name="txtId" class="form-control" 
+					  	value="${categoria.id}" hidden/>
+					  </c:if>
+					<div align="left" class="col-xs-6 col-sm-6 col-md-6">
+		    			<a href="javascript:location.href='Home?acao=resumo';" class="btn btn-default">Cancelar</a>
+	      			</div><!-- end row -->
+		  			<div align="right" class="col-xs-6 col-sm-6 col-md-6">
+		    			<button class="btn btn-primary" type="submit">Salvar</button>		    			
+	      			</div>
+	      		</div>
+			  </form>
 			</div><!-- end painel body -->
 		</div><!-- end painel -->
 	  </div><!-- end col-4 -->

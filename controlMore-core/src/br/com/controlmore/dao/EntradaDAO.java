@@ -204,7 +204,7 @@ public class EntradaDAO extends AbstractDAO{
 			}
 		}
 		if(entrada.getSituacao()!=null){
-			sql="UPDATE Saida SET Situacao=? WHERE Id=?";
+			sql="UPDATE Entrada SET Situacao=? WHERE Id=?";
 			try(PreparedStatement preparador = conexao.prepareStatement(sql)){
 				//Substitue as ? pelos "valores" que compõe o objeto
 				preparador.setString(1, entrada.getSituacao());
@@ -277,7 +277,8 @@ public class EntradaDAO extends AbstractDAO{
 			sql.append("Cartao.Limite as Cartao_Limite, ");
 			sql.append("Cartao.Limite_Utilizado as Cartao_Limite_Utilizado, ");
 			sql.append("Cartao.Vence_Dia as Cartao_Vence_Dia, ");
-			sql.append("Entrada.Observacao ");
+			sql.append("Entrada.Observacao, ");
+			sql.append("Entrada.Situacao ");
 			sql.append("FROM Entrada ");
 			sql.append("LEFT JOIN Frequencia ON Entrada.Frequencia = Frequencia.id ");
 			sql.append("LEFT JOIN Conta ON Entrada.Conta = Conta.Id ");

@@ -59,14 +59,16 @@
   	
   	  <!-- Botão Registrar Entrada  -->
   	  <div>
-  	    <a type="button" class="btn btn-success btn-lg col-xs-12" id="espaco" href="entradaCompleta.jsp">
+  	    <a type="button" class="btn btn-success btn-lg col-xs-12" id="espaco" 
+  	    	href="javascript:location.href='Home?acao=contaReceber';">
   	      Registrar Entrada <span class="glyphicon glyphicon-arrow-up"></span>
   	    </a>
   	  </div><!-- Fim Botão Registrar Entrada  -->
   	  
   	  <!-- Botão Registrar Saida  -->
   	  <div >
-  	    <a type="button" class="btn btn-warning btn-lg col-xs-12" id="espaco" href="saidaCompleta.jsp">
+  	    <a type="button" class="btn btn-warning btn-lg col-xs-12" id="espaco" 
+			href="javascript:location.href='Home?acao=contaPagar';">
   	      Registrar Saida <span class="glyphicon glyphicon-arrow-down"></span>
   	    </a>
   	  </div><!-- Fim Botão Registrar Saida  -->
@@ -102,8 +104,8 @@
 			</div>
 		</div>
 	</div><!-- end painel resumo financeiro -->
-	
-	<div class="col-xs-12 col-sm-6 col-md-3"><!-- Painel de Contas a Pagar -->
+		
+<div class="col-xs-12 col-sm-6 col-md-3"><!-- Painel de Contas a Pagar -->
 	  	<div class="panel panel-info"> <!-- Painel Saída Simples -->
 			<div class="panel-heading text-center">
 				Contas à Pagar
@@ -116,7 +118,7 @@
 		    		    <c:forEach var="aPagarVencida" items="${resultado.modeloVisao.aPagarVencida}">
 		    		      <tr>
 		    		    	<td> &bull;	&nbsp;	${aPagarVencida.descricao}</td>
-		    		    	<td class="text-right"> <fmt:formatDate value="${aPagarVencida.data}" pattern="dd/MM/YY"/></td>
+		    		    	<td class="text-right"><fmt:formatDate value="${aPagarVencida.data}" pattern="dd/MM/YY"/></td>
 		    		    	<td class="text-right"> R$${aPagarVencida.valor}</td>
 		    		      </tr>
 		    		    </c:forEach>	

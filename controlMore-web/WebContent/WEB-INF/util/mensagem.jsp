@@ -19,9 +19,9 @@
 	}
 
 %>
-<c:set value="${resultado}" var="mensagem" scope="request" />
+<c:set value="${resultado}" var="mensagem" />
 
-<c:if test="${mensagem.msg != null}">
+<c:if test="${not empty mensagem.msg}">
 	<div id="modalMsg" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 	    	<!-- Modal content-->

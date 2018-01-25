@@ -8,6 +8,7 @@ import java.util.Map;
 import br.com.controlmore.aplicacao.Resultado;
 import br.com.controlmore.dao.AvaliacaoDAO;
 import br.com.controlmore.dao.CategoriaDAO;
+import br.com.controlmore.dao.ContaDAO;
 import br.com.controlmore.dao.EntradaDAO;
 import br.com.controlmore.dao.FiltroDAO;
 import br.com.controlmore.dao.IDAO;
@@ -17,8 +18,10 @@ import br.com.controlmore.dao.QuestionarioDAO;
 import br.com.controlmore.dao.RelatorioCategoriaDAO;
 import br.com.controlmore.dao.ResumoDAO;
 import br.com.controlmore.dao.SaidaDAO;
+import br.com.controlmore.dao.aPagarDAO;
 import br.com.controlmore.dominio.AvaliacaoGasto;
 import br.com.controlmore.dominio.Categoria;
+import br.com.controlmore.dominio.Conta;
 import br.com.controlmore.dominio.EntidadeDominio;
 import br.com.controlmore.dominio.Entrada;
 import br.com.controlmore.dominio.Filtro;
@@ -34,6 +37,8 @@ import br.com.controlmore.negocio.SimularMeta;
 import br.com.controlmore.negocio.ValidarData;
 import br.com.controlmore.negocio.VerificarSaldo;
 import br.com.controlmore.vm.ResumoVM;
+import br.com.controlmore.vm.aPagarVM;
+import br.com.controlmore.vm.aReceberVM;
 
 public class Fachada implements IFachada {
 
@@ -165,6 +170,7 @@ public class Fachada implements IFachada {
 			List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
 			entidades.add(entidade);
 			resultado.setEntidades(entidades);
+			resultado.setMsg("Salvo com sucesso!");
 		}else{
 			resultado.setMsg(msg);
 		}
@@ -185,6 +191,7 @@ public class Fachada implements IFachada {
 				List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
 				entidades.add(entidade);
 				resultado.setEntidades(entidades);
+				resultado.setMsg("Alterado com sucesso");
 		}else{
 			resultado.setMsg(msg);
 		}
@@ -206,6 +213,7 @@ public class Fachada implements IFachada {
 				List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
 				entidades.add(entidade);
 				resultado.setEntidades(entidades);
+				resultado.setMsg("Excluido com sucesso");
 		}else{
 			resultado.setMsg(msg);			
 		}
@@ -355,5 +363,59 @@ public class Fachada implements IFachada {
 		}
 		return resultado;
 		
+	}
+
+	/**
+	 * Será responsável por montar os objetos necessários para tela de Cadastro de Contas a Receber
+	 */
+	@Override
+	public Resultado contaReceber() {
+		Resultado resultado = new Resultado();
+		aReceberVM aReceberVM = new aReceberVM();
+		resultado.setModeloVisao(aReceberVM);
+		
+		// Criar objeto ContaDAO diretamente para realizar consulta
+		ContaDAO cDAO = new ContaDAO();
+		//Trazer resultados de contas cadastradas
+		List<EntidadeDominio> contas = new ArrayList<EntidadeDominio>();
+		Conta ct = new Conta();
+		contas.addAll(cDAO.consultar(ct));
+		if(contas.size()>0){
+			for(int i =0; i<contas.size(); i++){
+				aReceberVM.setConta((Conta)contas.get(i)); 
+			}
+		}
+		
+		return resultado;
+	}
+	
+	public Resultado contaPagar(){
+		Resultado resultado = new Resultado();
+		aPagarVM aPagarVM = new aPagarVM();
+		resultado.setModeloVisao(aPagarVM);
+		
+		//Instacia DAO
+		aPagarDAO aPagarDAO = new aPagarDAO();
+		
+		//Obter dados das contas e cartoes cadastrados
+		aPagarVM pVM= aPagarDAO.contasCartoes();
+		if(pVM.getContasCartoes().size()>0){//Adicionando contas vencidas
+			for(int i =0; i<pVM.getContasCartoes().size(); i++){
+				aPagarVM.setContasCartoes(pVM.getContasCartoes().get(i));
+			}
+		}
+		
+		//Obter dados das categorias cadastradas
+		CategoriaDAO cDAO = new CategoriaDAO();
+		//Trazer resultados
+		List<EntidadeDominio> categorias = new ArrayList<EntidadeDominio>();
+		Categoria ct = new Categoria();
+		categorias.addAll(cDAO.consultar(ct));
+		if(categorias.size()>0){
+			for(int i =0; i<categorias.size(); i++){
+				aPagarVM.setCategoria((Categoria)categorias.get(i)); 
+			}
+		}
+		return resultado;
 	}
 }

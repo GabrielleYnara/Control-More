@@ -98,36 +98,39 @@ public class CategoriaViewHelper implements IViewHelper{
 		
 		String acao = request.getParameter("acao");
 		
-		if(resultado.getMsg() == null){
+		
 			if(acao.equals("salvar")){
-				resultado.setMsg("Entrada cadastrada com sucesso!");
+				request.getSession().setAttribute("resultado",null);
+				request.getSession().setAttribute("resultado", resultado);
 				request.setAttribute("categoria", resultado);
-				d = request.getRequestDispatcher("/principal.jsp");//redireciona a pagina
+				d = request.getRequestDispatcher("/Home?acao=resumo.jsp");//redireciona a pagina
 			}
 			if (acao.equals("alterar")) {
 				request.setAttribute("categoria", resultado);
-				d = request.getRequestDispatcher("/lancamentos.jsp");
+				d = request.getRequestDispatcher("/Home?acao=resumo.jsp");
 			}
 			if (acao.equals("excluir")){
 				request.setAttribute("categoria", null);
-				d = request.getRequestDispatcher("/lancamentos.jsp");
+				d = request.getRequestDispatcher("/Home?acao=resumo.jsp");
 			}
 			if(acao.equals("consultar")){
 				List<EntidadeDominio> categorias = new ArrayList<EntidadeDominio>();
 				for (EntidadeDominio entidadeDominio : resultado.getEntidades()) {
 					categorias.add(entidadeDominio);
 				}
-				request.setAttribute("categoria", categorias);
-				if(categorias.size()==1)
+				if(categorias.size()==1){
+					request.setAttribute("categoria", categorias.get(0));
 					d = request.getRequestDispatcher("/cadastroCategoria.jsp");
-				else
-					d = request.getRequestDispatcher("/comparacaoCategoria.jsp");
+				}else{
+					request.setAttribute("categoria", categorias);
+					d = request.getRequestDispatcher("/listaCategorias.jsp");
+				}
 			}
 			if(acao.equals("visualizar")){
 				request.setAttribute("categoria", resultado);
 				d = request.getRequestDispatcher("/cadastroCategoria.jsp");
 			}
-		}
+		
 		d.forward(request, response);
 	}
 
