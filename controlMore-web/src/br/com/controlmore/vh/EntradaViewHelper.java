@@ -124,12 +124,12 @@ public class EntradaViewHelper implements IViewHelper{
 			if (acao.equals("alterar")) {
 				request.setAttribute("resultado", resultado);
 				request.getSession().setAttribute("entrada", resultado);
-				d = request.getRequestDispatcher("/lancamentos.jsp");
+				d = request.getRequestDispatcher("/Home?acao=resumo");
 			}
 			if (acao.equals("excluir")){
 				request.setAttribute("resultado", resultado);
 				request.getSession().setAttribute("entrada", null);
-				d = request.getRequestDispatcher("/lancamentos.jsp");
+				d = request.getRequestDispatcher("/Home?acao=resumo");
 			}
 			if(acao.equals("consultar")){
 				request.getSession().setAttribute("entrada", resultado);

@@ -54,8 +54,10 @@
 					  </c:if>
 					> -->
 					<c:if test="${not empty categoria.id}">
+					<div hidden>
 						<input type="text" name="txtId" class="form-control" 
-					  	value="${categoria.id}" hidden/>
+					  	value="${categoria.id}"/>
+					  	</div>
 					  </c:if>
 					<div align="left" class="col-xs-6 col-sm-6 col-md-6">
 		    			<a href="javascript:location.href='Home?acao=resumo';" class="btn btn-default">Cancelar</a>

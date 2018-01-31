@@ -41,24 +41,33 @@
 </head>
 <body>
 <c:import url="menu.jsp" />
-<!-- //FROM menu
-<div class="row affix-row"> 
-  <div class="col-sm-3 col-md-2 affix-sidebar"> 
-    <div class="container-fluid" -->
-<% request.getSession().setAttribute("saida", null); %>
-<% request.getSession().setAttribute("entrada", null); %>
 
-<h4>Bem vindo(a) ${usuario.nome}</h4>
-	<div class=" col-sm-4 col-md-3">
-	  <div class="bs-callout bs-callout-info " > <!-- Callout Saldo -->
+  <div class="container-fluid" >
+  <% request.getSession().setAttribute("saida", null); %>
+  <% request.getSession().setAttribute("entrada", null); %>
+
+	<h4>Bem vindo(a) ${usuario.nome}</h4>
+	
+	<div class="col-sm-5 col-md-3">
+	  <div class="bs-callout bs-callout-info" > <!-- Callout Saldo -->
 	  	<div align="center">
 	      <h4> R$ ${resultado.modeloVisao.saldo}</h4>
-	  		<p data-toggle="tooltip" data-placement="right" title="Saldo de todas as contas">Saldo Geral</p>
+	  	  <p data-toggle="tooltip" data-placement="right" title="Saldo de todas as contas">Saldo Geral</p>
 	  	</div>
 	  </div> <!-- Fim Callout Saldo -->
-  	
-  	  <!-- Botão Registrar Entrada  -->
-  	  <div>
+  	  
+  	  <div class="bs-callout bs-callout-warning">
+	  	Programe-se para viver com 70% da sua renda mensal.
+		<ul>
+		  <li>55% para gastos essenciais.</li>
+		  <li>5% para gastos com educação.</li>
+		  <li>10% para gastos diversos.</li>
+		</ul>
+		Reserve 30% da sua renda mensal para projetos a longo prazo.
+	  </div> <!-- class="bs-callout bs-callout-info" -->
+	  
+	  <!-- Botão Registrar Entrada  -->
+  	  <div class="col-md-12">
   	    <a type="button" class="btn btn-success btn-lg col-xs-12" id="espaco" 
   	    	href="javascript:location.href='Home?acao=contaReceber';">
   	      Registrar Entrada <span class="glyphicon glyphicon-arrow-up"></span>
@@ -66,171 +75,141 @@
   	  </div><!-- Fim Botão Registrar Entrada  -->
   	  
   	  <!-- Botão Registrar Saida  -->
-  	  <div >
-  	    <a type="button" class="btn btn-warning btn-lg col-xs-12" id="espaco" 
+  	  <div class="col-md-12">
+  	    <a type="button" class="btn btn-warning btn-lg col-xs-12" id="espaco"  
 			href="javascript:location.href='Home?acao=contaPagar';">
   	      Registrar Saida <span class="glyphicon glyphicon-arrow-down"></span>
   	    </a>
   	  </div><!-- Fim Botão Registrar Saida  -->
-  </div> <!-- Fim col-xs-12 col-sm-4 col-md-2 -->
+	</div> <!-- calss="col-sm-4 col-md-3" -->
   
-	<div class="painel col-xs-12 col-sm-8 col-md-6"><!-- Resumo Financeiro -->
-		<div class="panel panel-info"> <!-- Painel Saída Simples -->
-			<div class="panel-heading text-center">
-				Resumo financeiro
-			</div>
-			<div class="panel-body form-group">
-				<form action="" method="POST">
-  					<div id="graficoMensal"></div>
-			  		<div align="right">
-			    		<p>Saldo Geral <saldo>R$ ${resultado.modeloVisao.saldo}</saldo></p>
-			    		<input type="checkbox" id="nPoupanca"> Não incluir saldo de conta poupança
-			  		</div><!-- end right -->
-			  		<ul>
-			    		<li>
-			      			<i class="glyphicon glyphicon-piggy-bank"></i><p><strong>Carteira</strong> R$0,00</p>
-			      			<p>Outros</p>
-			    		</li><!-- end item lista -->
-			    		<li>
-			      			<i class="glyphicon glyphicon-picture"></i><p><strong>Itaú</strong> R$0,00</p>
-			      			<p>Conta Corrente</p>
-			    		</li><!-- end item lista -->
-			    		<li>
-			      			<i class="glyphicon glyphicon-picture"></i><p><strong>Itaú</strong> R$0,00</p>
-			      			<p>Conta Poupança</p>
-			    		</li><!-- end item lista -->
-			  		</ul><!-- end lista bancos -->
-			  	</form>
-			</div>
+	<div class="painel col-xs-12 col-sm-7 col-md-6"><!-- Resumo Financeiro -->
+	  <div class="panel panel-info"> <!-- Painel -->
+		<div class="panel-heading text-center">
+		  Resumo financeiro
 		</div>
-	</div><!-- end painel resumo financeiro -->
+		<div class="panel-body form-group">
+		  <form action="" method="POST">
+  			<div id="graficoMensal">
+  			<!-- Vai exibir o grafico aqui -->
+  			</div>
+			<div align="right">
+			  <p>Saldo Geral <saldo>R$ ${resultado.modeloVisao.saldo}</saldo></p>
+			</div><!-- end right -->
+			<ul>
+			  <li>
+			    <i class="glyphicon glyphicon-piggy-bank"></i><p><strong>Carteira</strong> R$0,00</p>
+			    <p>Outros</p>
+			  </li><!-- end item lista -->
+			  <li>
+			    <i class="glyphicon glyphicon-picture"></i><p><strong>Itaú</strong> R$0,00</p>
+			    <p>Conta Corrente</p>
+			  </li><!-- end item lista -->
+			  <li>
+			  	<i class="glyphicon glyphicon-picture"></i><p><strong>Itaú</strong> R$0,00</p>
+			  	<p>Conta Poupança</p>
+			  </li><!-- end item lista -->
+			</ul><!-- end lista bancos -->
+		  </form>
+		</div><!-- painel body -->
+	  </div> <!-- painel -->
+	</div><!-- Resumo Financeiro -->
 		
-<div class="col-xs-12 col-sm-6 col-md-3"><!-- Painel de Contas a Pagar -->
-	  	<div class="panel panel-info"> <!-- Painel Saída Simples -->
-			<div class="panel-heading text-center">
-				Contas à Pagar
-			</div>
-			<div class="panel-body form-group">
-				<form action="" method="POST">
-		    		<h5>Contas Atrasadas <i class="glyphicon glyphicon-thumbs-down"></i></h5>
-		    		<table class="col-md-12">
-		    		  <tbody>
-		    		    <c:forEach var="aPagarVencida" items="${resultado.modeloVisao.aPagarVencida}">
-		    		      <tr>
-		    		    	<td> &bull;	&nbsp;	${aPagarVencida.descricao}</td>
-		    		    	<td class="text-right"><fmt:formatDate value="${aPagarVencida.data}" pattern="dd/MM/YY"/></td>
-		    		    	<td class="text-right"> R$${aPagarVencida.valor}</td>
-		    		      </tr>
-		    		    </c:forEach>	
-		    		  </tbody>
-		    		</table>
+	<div class="col-xs-12 col-sm-6 col-md-3"><!-- Painel de Contas a Pagar -->
+	  <div class="panel panel-info"> <!-- Painel  -->
+		<div class="panel-heading text-center">
+		  Contas à Pagar
+		</div>
+		<div class="panel-body form-group">
+		  <form action="" method="POST">
+		    <h5>Contas Atrasadas <i class="glyphicon glyphicon-thumbs-down"></i></h5>
+		    <table class="col-md-12">
+		      <tbody>
+		      	<c:if test="${empty resultado.modeloVisao.aPagarVencida}">
+		      	  <tr>
+		    		<td align="center"> Nenhuma conta atrasada.</td>
+		    	  </tr>
+		      	</c:if>
+		    	<c:forEach var="aPagarVencida" items="${resultado.modeloVisao.aPagarVencida}">
+		    	  <tr>
+		    		<td><a href="javascript:location.href='Saida?acao=consultar&txtId=${aPagarVencida.id}';"> &bull;	&nbsp;	${aPagarVencida.descricao}</a></td>
+		    		<td class="text-right"><fmt:formatDate value="${aPagarVencida.data}" pattern="dd/MM/YY"/></td>
+		    		<td class="text-right"> R$${aPagarVencida.valor}</td>
+		    	  </tr>
+		    	</c:forEach>	
+		      </tbody>
+		    </table><!-- table contas atrasadas -->
 		    		
-		    		<h5>Próximas <spam class="glyphicon glyphicon-thumbs-down"></spam></h5>
-		    		<table class="col-md-12">
-		    		  <tbody>
-		    		    <c:forEach var="aPagar" items="${resultado.modeloVisao.aPagar}">
-		    		      <tr>
-		    		    	<td> &bull;	&nbsp;	${aPagar.descricao}</td>
-		    		    	<td class="text-right"> <fmt:formatDate value="${aPagar.data}" pattern="DD/MM"/></td>
-		    		    	<td class="text-right"> R$${aPagar.valor}</td>
-		    		      </tr>
-		    		    </c:forEach>	
-		    		  </tbody>
-		    		</table>
-				</form>
-			</div>
-		</div><!-- end painel de Contas a Pagar -->
-	</div>
+		    <h5>Próximas <spam class="glyphicon glyphicon-thumbs-down"></spam></h5>
+		    <table class="col-md-12">
+		      <tbody>
+		      	<c:if test="${empty resultado.modeloVisao.aPagar}">
+		      	  <tr>
+		    		<td align="center"> Nenhuma conta nos próximos 10 dias.</td>
+		    	  </tr>
+		      	</c:if>
+		    	<c:forEach var="aPagar" items="${resultado.modeloVisao.aPagar}">
+		    	  <tr>
+		    		<td> &bull;	&nbsp;	${aPagar.descricao}</td>
+		    		<td class="text-right"> <fmt:formatDate value="${aPagar.data}" pattern="DD/MM"/></td>
+		    	  	<td class="text-right"> R$${aPagar.valor}</td>
+		    	  </tr>
+		    	</c:forEach>	
+		      </tbody>
+		    </table>
+		  </form>
+		</div><!-- painel body -->
+	  </div><!-- end painel -->
+	</div><!-- end painel de Contas a Pagar -->
+	
 	<div class="col-xs-12 col-sm-6 col-md-3"><!-- Painel de Contas a Receber -->
-	
-		<div><!-- Painel de Contas a Receber -->
-			<div class="panel panel-info"> <!-- Painel Saída Simples -->
-				<div class="panel-heading text-center">
-					Contas à Receber
-				</div>
-				<div class="panel-body form-group">
-					<form action="" method="POST">
-			 			<h5>Recebimentos Atrasadas <spam class="glyphicon glyphicon-thumbs-up"></spam></h5>
-						<table class="col-md-12">
-			    		  <tbody>
-			    		    <c:forEach var="aReceberAtrasada" items="${resultado.modeloVisao.aReceberAtrasada}">
-			    		      <tr>
-			    		    	<td> &bull;	&nbsp;	${aReceberAtrasada.descricao}</td>
-			    		    	<td class="text-right"> <fmt:formatDate value="${aReceberAtrasada.dataEntrada}" pattern="dd/MM/YY"/></td>
-			    		    	<td class="text-right"> R$${aReceberAtrasada.valor}</td>
-			    		      </tr>
-			    		    </c:forEach>	
-			    		  </tbody>
-			    		</table>
-						<h5>Próximas <spam class="glyphicon glyphicon-thumbs-up"></spam></h5>
-						<table class="col-md-12">
-			    		  <tbody>
-			    		    <c:forEach var="aReceber" items="${resultado.modeloVisao.aReceber}">
-			    		      <tr>
-			    		    	<td> &bull;	&nbsp;	${aReceber.descricao}</td>
-			    		    	<td class="text-right"> <fmt:formatDate value="${aReceber.dataEntrada}" pattern="dd/MM"/></td>
-			    		    	<td class="text-right"> R$${aReceber.valor}</td>
-			    		      </tr>
-			    		    </c:forEach>	
-			    		  </tbody>
-			    		</table>
-					</form>
-				</div>
-			</div>
-		</div><!-- end painel de contas a receber -->
-	</div><!-- Painel de Contas a Pagar e Receber -->
+	  <div class="panel panel-info"> <!-- Painel Saída Simples -->
+		<div class="panel-heading text-center">
+		  Contas à Receber
+		</div>
+		<div class="panel-body form-group">
+		  <form action="" method="POST">
+			<h5>Recebimentos Atrasadas <spam class="glyphicon glyphicon-thumbs-up"></spam></h5>
+			<table class="col-md-12">
+			  <tbody>
+			  	<c:if test="${empty resultado.modeloVisao.aReceberAtrasada}">
+			  	  <tr>
+			  	  	<td align="center">Nenhum recebimento atrasado.</td>
+			  	  </tr>
+			  	</c:if>
+			    <c:forEach var="aReceberAtrasada" items="${resultado.modeloVisao.aReceberAtrasada}">
+			      <tr>
+			    	<td><a href="javascript:location.href='Entrada?acao=consultar&txtId=${aReceberAtrasada.id}';"> &bull;	&nbsp;	${aReceberAtrasada.descricao}</a></td>
+			    	<td class="text-right"> <fmt:formatDate value="${aReceberAtrasada.dataEntrada}" pattern="dd/MM/YY"/></td>
+			    	<td class="text-right"> R$${aReceberAtrasada.valor}</td>
+			      </tr>
+			    </c:forEach>	
+			  </tbody>
+			</table>
+				<br>
+			<h5>Próximas <spam class="glyphicon glyphicon-thumbs-up"></spam></h5>
+			<table class="col-md-12">
+			  <tbody>
+			    <c:if test="${empty resultado.modeloVisao.aReceber}">
+			  	  <tr>
+			  	  	<td align="center">Nenhum recebimento nos proximos 10 dias.</td>
+			  	  </tr>
 
-	<div class="col-xs-12 col-sm-6 col-md-3" ><!-- Resumo de metas e cartão-->
-  		<div class="panel panel-info"> <!-- Painel Saída Simples -->
-			<div class="panel-heading text-center">
-				Resumo de Metas
-			</div>
-			<div class="panel-body form-group">
-				<form action="" method="POST">
-		    		<ul>
-		      			<li>
-					        <p><strong>Carro</strong> 5%</p>
-						    <p>Projetada: R$0,00</p>
-						    <p>Realizada: R$0,00</p>
-						</li>
-						<li>
-						    <p><strong>Viagem</strong> 10%</p>
-						    <p>Projetada: R$0,00</p>
-						    <p>Realizada: R$0,00</p>
-			  			</li>
-		    		</ul>
-		    	</form>
-		    </div>
-  		</div><!-- end resumo Metas -->
-	
-  		<div class="panel panel-info"> <!-- Painel Saída Simples -->
-			<div class="panel-heading text-center">
-				Cartão de crédito
-			</div>
-			<div class="panel-body form-group">
-				<form action="" method="POST">
-					<ul>
-			  			<li>
-		        			<i class="glyphicon glyphicon-credit-card"></i><label>Master Itaú</label>
-					        <p>Fatura Atual:R$0,00</p>
-					        <p>Limite:R$0,00</p>
-					        <button class="btn btn-default" id="VerFatura" type="submit">Ver Fatura</button>
-			  			</li><!-- end item lista -->
-			  			<li>
-		        			<i class="glyphicon glyphicon-credit-card"></i><label>Visa BB</label>
-					        <p>Fatura Atual:R$0,00</p>
-					        <p>Limite:R$0,00</p>
-					        <button class="btn btn-default" id="VerFatura" type="submit">Ver Fatura</button>
-			  			</li><!-- end item lista -->
-					</ul><!-- end lista cartões -->
-				</form>
-			</div>
-  		</div><!-- end painel resumo cartão -->
- 	</div><!-- end Resumo de metas e cartão -->
- 	
- 	</div> <!-- col-sm-9 col-md-10 affix-content -->
-  </div> <!--  container-fluid -->
-</div> <!-- row affix-row -->
+			  	</c:if>
+			    <c:forEach var="aReceber" items="${resultado.modeloVisao.aReceber}">
+			   	  <tr>
+			   		<td> &bull;	&nbsp;	${aReceber.descricao}</td>
+			   		<td class="text-right"> <fmt:formatDate value="${aReceber.dataEntrada}" pattern="dd/MM"/></td>
+			   		<td class="text-right"> R$${aReceber.valor}</td>
+			   	  </tr>
+			   	</c:forEach>	
+			  </tbody>
+			</table>
+		  </form>
+		</div><!-- painel body -->
+	  </div><!-- painel -->
+	</div><!-- end painel de contas a receber -->
+</div> <!--  container-fluid -->
 
 <%--TROCAR PARA INCLUDE. 
 <script src="js/graficoMensal.js"></script>--%>

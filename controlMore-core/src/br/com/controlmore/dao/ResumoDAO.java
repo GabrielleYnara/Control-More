@@ -141,7 +141,8 @@ public class ResumoDAO extends AbstractDAO{
 	
 	public ResumoVM proximosVencimentos(){
 		ResumoVM rVM = new ResumoVM();
-		String sql = "SELECT Valor, "
+		String sql = "SELECT Id, "
+				   + " 		 Valor, "
 				   + "		 Descricao, "
 				   + "		 DataSaida as Data "
 				   + "  FROM Saida "
@@ -153,6 +154,7 @@ public class ResumoDAO extends AbstractDAO{
 			while(result.next()){
 				Saida s = new Saida();
 
+				s.setId(result.getInt("Id"));
 				s.setValor(result.getFloat("Valor"));
 				s.setDescricao(result.getString("Descricao"));
 				s.setData(result.getDate("Data"));
@@ -168,7 +170,8 @@ public class ResumoDAO extends AbstractDAO{
 	
 	public ResumoVM proximosRecebimentos(){
 		ResumoVM rVM = new ResumoVM();
-		String sql = "SELECT Valor, "
+		String sql = "SELECT Id, "
+				   + " 		 Valor, "
 				   + "		 Descricao, "
 				   + "		 DataEntrada as Data "
 				   + "  FROM Entrada "
@@ -180,6 +183,7 @@ public class ResumoDAO extends AbstractDAO{
 			while(result.next()){
 				Entrada e = new Entrada();
 
+				e.setId(result.getInt("Id"));
 				e.setValor(result.getFloat("Valor"));
 				e.setDescricao(result.getString("Descricao"));
 				e.setDataEntrada(result.getDate("Data"));
@@ -195,7 +199,8 @@ public class ResumoDAO extends AbstractDAO{
 
 	public ResumoVM aPagarVencidas(){
 		ResumoVM rVM = new ResumoVM();
-		String sql = "SELECT Valor, "
+		String sql = "SELECT Id,"
+				   + " 		 Valor, "
 				   + "		 Descricao, "
 				   + "       DataSaida "
 				   + "  FROM Saida "
@@ -208,6 +213,7 @@ public class ResumoDAO extends AbstractDAO{
 			while(result.next()){
 				Saida s = new Saida();
 
+				s.setId(result.getInt("Id"));
 				s.setValor(result.getFloat("Valor"));
 				s.setDescricao(result.getString("Descricao"));
 				s.setData(result.getDate("DataSaida"));
@@ -222,7 +228,8 @@ public class ResumoDAO extends AbstractDAO{
 	
 	public ResumoVM aReceberAtrasadas(){
 		ResumoVM rVM = new ResumoVM();
-		String sql = "SELECT Valor, "
+		String sql = "SELECT Id, "
+				   + " 		 Valor, "
 				   + "       Descricao, "
 				   + "       DataEntrada "
 				   + "  FROM Entrada "
@@ -235,6 +242,7 @@ public class ResumoDAO extends AbstractDAO{
 			while(result.next()){
 				Entrada e = new Entrada();
 
+				e.setId(result.getInt("Id"));
 				e.setValor(result.getFloat("Valor"));
 				e.setDescricao(result.getString("Descricao"));
 				e.setDataEntrada(result.getDate("DataEntrada"));

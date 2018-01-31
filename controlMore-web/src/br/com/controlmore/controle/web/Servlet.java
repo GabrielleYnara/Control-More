@@ -33,6 +33,7 @@ import br.com.controlmore.vh.PessoaViewHelper;
 import br.com.controlmore.vh.QuestionarioViewHelper;
 import br.com.controlmore.vh.RelCatViewHelper;
 import br.com.controlmore.vh.SaidaViewHelper;
+import br.com.controlmore.vh.UpLoadViewHelper;
 
 /**
  * Servlet implementation class Servlet
@@ -80,6 +81,7 @@ public class Servlet extends HttpServlet {
     	vhs.put("/controlMore-web/Avaliacao", new AvaliacaoViewHelper());
     	vhs.put("/controlMore-web/Categoria", new CategoriaViewHelper());
     	vhs.put("/controlMore-web/Home", new HomeViewHelper());
+    	vhs.put("/controlMore-web/Upload", new UpLoadViewHelper());
     	
     }// construtor Servlet
     
@@ -119,7 +121,7 @@ public class Servlet extends HttpServlet {
 		//Obtêm um viewhelper indexado pela uri que invocou esta servlet
 		IViewHelper vh = vhs.get(uri);
 		
-		//O viewhelper retorna a entidade especifica para a tela que chamou esta servlet
+		//O floppier retorna a entidade especifica para a tela que chamou esta servlet
 		EntidadeDominio entidade =  vh.getEntidade(request);
 
 		//Obtêm o command para executar a respectiva operação

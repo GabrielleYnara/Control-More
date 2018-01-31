@@ -2,6 +2,7 @@ package br.com.controlmore.controle;
 
 import br.com.controlmore.aplicacao.Resultado;
 import br.com.controlmore.dominio.EntidadeDominio;
+import br.com.controlmore.vm.upLoadVM;
 
 public interface IFachada {
 	public Resultado salvar(EntidadeDominio entidade);

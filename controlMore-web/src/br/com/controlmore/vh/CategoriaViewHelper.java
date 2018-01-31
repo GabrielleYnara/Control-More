@@ -103,15 +103,15 @@ public class CategoriaViewHelper implements IViewHelper{
 				request.getSession().setAttribute("resultado",null);
 				request.getSession().setAttribute("resultado", resultado);
 				request.setAttribute("categoria", resultado);
-				d = request.getRequestDispatcher("/Home?acao=resumo.jsp");//redireciona a pagina
+				d = request.getRequestDispatcher("/Home?acao=resumo");//redireciona a pagina
 			}
 			if (acao.equals("alterar")) {
 				request.setAttribute("categoria", resultado);
-				d = request.getRequestDispatcher("/Home?acao=resumo.jsp");
+				d = request.getRequestDispatcher("/Home?acao=resumo");
 			}
 			if (acao.equals("excluir")){
 				request.setAttribute("categoria", null);
-				d = request.getRequestDispatcher("/Home?acao=resumo.jsp");
+				d = request.getRequestDispatcher("/Home?acao=resumo");
 			}
 			if(acao.equals("consultar")){
 				List<EntidadeDominio> categorias = new ArrayList<EntidadeDominio>();

@@ -21,6 +21,7 @@
 	Meta meta = new Meta();
 	meta = (Meta) metas.get(0);
 %>
+  <div class="container-fluid" >
 	  <div class="col-md-5">
 		<div class="panel panel-info">
 		  	<div class="panel-heading text-center">
@@ -59,9 +60,7 @@
 			</div><!-- end painel body -->
 		</div><!-- end painel -->
 	  </div>
- 	</div> <!-- col-sm-9 col-md-10 affix-content -->
   </div> <!--  container-fluid -->
-</div> <!-- row affix-row -->
 
 </body>
 </html>

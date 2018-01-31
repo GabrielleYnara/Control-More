@@ -35,37 +35,37 @@ public class QuestionarioViewHelper implements IViewHelper {
 			questionario = new Questionario();
 			
 			if(request.getParameter("txtRenda")!=null){
-				renda = (float) Double.parseDouble(request.getParameter("txtRenda"));
+				renda = (float) Double.parseDouble(request.getParameter("txtRenda").replace(",", "."));
 			}
 			if(request.getParameter("txtCompra")!=null){
-				compra = (float) Double.parseDouble(request.getParameter("txtCompra"));
+				compra = (float) Double.parseDouble(request.getParameter("txtCompra").replace(",", "."));
 			}
 			if(request.getParameter("txtAgua")!=null){
-				agua = (float) Double.parseDouble(request.getParameter("txtAgua"));
+				agua = (float) Double.parseDouble(request.getParameter("txtAgua").replace(",", "."));
 			}
 			if(request.getParameter("txtLuz")!=null){
-				luz = (float) Double.parseDouble(request.getParameter("txtLuz"));
+				luz = (float) Double.parseDouble(request.getParameter("txtLuz").replace(",", "."));
 			}
 			if(request.getParameter("txtInternet")!=null){
-				internet = (float) Double.parseDouble(request.getParameter("txtInternet"));
+				internet = (float) Double.parseDouble(request.getParameter("txtInternet").replace(",", "."));
 			}
 			if(request.getParameter("txtRecarga")!=null){
-				recarga = (float) Double.parseDouble(request.getParameter("txtRecarga"));
+				recarga = (float) Double.parseDouble(request.getParameter("txtRecarga").replace(",", "."));
 			}
 			if(request.getParameter("txtTransporte")!=null){
-				transporte = (float) Double.parseDouble(request.getParameter("txtTransporte"));
+				transporte = (float) Double.parseDouble(request.getParameter("txtTransporte").replace(",", "."));
 			}
 			if(request.getParameter("txtAluguel")!=null){
-				aluguel = (float) Double.parseDouble(request.getParameter("txtAluguel"));
+				aluguel = (float) Double.parseDouble(request.getParameter("txtAluguel").replace(",", "."));
 			}
 			if(request.getParameter("txtEducacao")!=null){
-				educacao = (float) Double.parseDouble(request.getParameter("txtEducacao"));
+				educacao = (float) Double.parseDouble(request.getParameter("txtEducacao").replace(",", "."));
 			}
 			if(request.getParameter("txtLazer")!=null){
-				lazer = (float) Double.parseDouble(request.getParameter("txtLazer"));
+				lazer = (float) Double.parseDouble(request.getParameter("txtLazer").replace(",", "."));
 			}
 			if(request.getParameter("txtOutros")!=null){
-				outros = (float) Double.parseDouble(request.getParameter("txtOutros"));
+				outros = (float) Double.parseDouble(request.getParameter("txtOutros").replace(",", "."));
 			}
 			if(request.getParameter("txtId")!=null && !request.getParameter("txtId").trim().equals("")){
 				id = Integer.parseInt(request.getParameter("txtId"));
@@ -110,20 +110,19 @@ public class QuestionarioViewHelper implements IViewHelper {
 		
 		String acao = request.getParameter("acao");
 		
-		if(resultado.getMsg() == null){
 			if(acao.equals("salvar")){
 				resultado.setMsg("Obrigado por colaborar :)");
 				request.getSession().setAttribute("resultado", resultado);
 				request.getSession().setAttribute("questionario", resultado);
-				d = request.getRequestDispatcher("/principal.jsp");//redireciona a pagina
+				d = request.getRequestDispatcher("/Home?acao=resumo");//redireciona a pagina
 			}
 			if (acao.equals("alterar")) {
 				
-				d = request.getRequestDispatcher("/principal.jsp");
+				d = request.getRequestDispatcher("/Home?acao=resumo");
 			}
 			if (acao.equals("excluir")){
 				
-				d = request.getRequestDispatcher("/principal.jsp");
+				d = request.getRequestDispatcher("/Home?acao=resumo");
 			}
 			if(acao.equals("consultar")){
 				
@@ -131,10 +130,7 @@ public class QuestionarioViewHelper implements IViewHelper {
 			if(acao.equals("visualizar")){
 				
 			}
-		}else{
-			request.getSession().setAttribute("resultado", resultado);
-			d = request.getRequestDispatcher("/principal.jsp");
-		}
+		
 		d.forward(request, response);
 	}
 }

@@ -165,6 +165,8 @@ function grafico() {
     });
 };
 </script>
+  <div class="container-fluid" >
+
 <div id="container" ></div>
 <br><br>
 <div align="center" >
@@ -267,6 +269,8 @@ function grafico() {
 }// end if%> 
  </tbody><!-- end corpo -->
 </table><!-- end table -->
+
+</div>
 
 <script type="text/javascript">
 window.load = grafico();

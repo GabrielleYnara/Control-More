@@ -80,6 +80,7 @@ function grafico() {
     });
 };
 </script>
+  <div class="container-fluid" >
 
 	<div class="row" align="center">
 		<form action="RelCat?acao=consultar" method="post">
@@ -158,7 +159,7 @@ function grafico() {
 			<div id="grafico"></div>
 		</div>
 	</div>
-
+</div>
 	<script type="text/javascript">
 	window.load = grafico();
 </script>

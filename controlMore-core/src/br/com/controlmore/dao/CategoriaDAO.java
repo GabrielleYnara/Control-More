@@ -118,13 +118,7 @@ public class CategoriaDAO extends AbstractDAO {
 				//executa o SQL
 				preparador.execute();
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
-				return e.toString();
+				e.printStackTrace();
 			}
 		}		return null;
 	}

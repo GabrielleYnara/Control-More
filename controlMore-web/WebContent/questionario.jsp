@@ -6,11 +6,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="css/bootstrap-theme.min.css" >
+
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>

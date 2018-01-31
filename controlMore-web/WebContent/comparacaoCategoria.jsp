@@ -20,11 +20,7 @@
 <body>
 <c:import url="menu.jsp" />
 <c:set value="${categoria}" var="categorias" scope="request" />
-
-<!-- //FROM menu
-<div class="row affix-row"> 
-  <div class="col-sm-3 col-md-2 affix-sidebar"> 
-    <div class="container-fluid" -->	
+    <div class="container-fluid">	
 	  <div class="row" align="center">
 	    <form action="RelCat?acao=consultar" method="post">
 		  <label class="col-xs-4 col-sm-2 col-md-1">Data Inicial</label>
@@ -103,9 +99,8 @@
 			<div id="grafico"></div>
 		</div>
 	  </div>
-    </div> <!-- col-sm-9 col-md-10 affix-content -->
   </div> <!--  container-fluid -->
-</div> <!-- row affix-row -->
+
 
 </body>
 </html>

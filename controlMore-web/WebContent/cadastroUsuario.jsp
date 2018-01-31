@@ -49,7 +49,7 @@ $(document).ready(function(){
 		  Confirmar Email
 		</div>
 		<div class="col-md-9" hidden>
-		  <input type="email" name="txtConfirmEmail" class="form-control" placeholder="Ex: joaquina@email.com" required autofocus><br>
+		  <input type="email" name="txtConfirmEmail" class="form-control" placeholder="Ex: joaquina@email.com"><br>
 		</div>
 		<div class="col-md-3">
 		  Senha

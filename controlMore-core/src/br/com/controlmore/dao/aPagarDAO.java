@@ -56,10 +56,10 @@ public class aPagarDAO extends AbstractDAO{
 			while(result.next()){
 				Conta c = new Conta();
 
-				c.setId(result.getInt("Id"));
-				c.setTipo(result.getString("Tipo"));
-				c.setBanco(result.getString("Banco"));
-				c.setInfo(result.getString("TP"));
+				c.setId(result.getInt("Id"));//Id
+				c.setTipo(result.getString("Tipo"));//Bandeira ou tipo de conta
+				c.setBanco(result.getString("Banco"));//Banco
+				c.setInfo(result.getString("TP"));//Conta ou Cartão
 				aPagarVM.setContasCartoes(c);
 			}
 			

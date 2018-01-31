@@ -24,11 +24,15 @@
 	}
 %>
 <script type="text/javascript">
+function excluirS(id){
+	location.href="Saida?acao=excluir&txtId="+ id;
+}
 $(document).ready(function(){
     $("#parcelado").click(function(){
         $(".parcelado").toggle();
     });
 });
+
 </script>
 	<div class="col-md-7">
 		<div class="panel panel-info">
@@ -264,6 +268,11 @@ $(document).ready(function(){
 					<br>
 					<div align="left" class="col-xs-6 col-sm-6 col-md-6">
 		    			<a href="javascript:location.href='Home?acao=resumo';" class="btn btn-default">Cancelar</a>
+		    			<%if(saida.getId()!=0){%>
+		    			<a href="javascript:excluirS(<%out.print(saida.getId());%>);" class="btn btn-default">Excluir</a>
+		    			
+	    	  			<%}%>
+		    			
 	      			</div><!-- end row -->
 		  			<div align="right" class="col-xs-6 col-sm-6 col-md-6">
 		    			<button class="btn btn-primary" type="submit">Salvar</button>		    			

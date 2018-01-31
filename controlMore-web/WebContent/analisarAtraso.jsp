@@ -11,6 +11,8 @@
 <body>
 
 <%@include file="menu.jsp"%>
+<div class="container-fluid" >
+
 	<div class="col-md-12">
 		<div class="panel panel-info">
 			<div class="panel-heading text-center">
@@ -73,8 +75,6 @@
 			</div><!-- end painel body -->
 		</div><!-- end painel -->
 	</div><!-- end col-4 -->
- 	</div> <!-- col-sm-9 col-md-10 affix-content -->
-  </div> <!--  container-fluid -->
-</div> <!-- row affix-row -->
+</div> <!--  container-fluid -->
 </body>
 </html>

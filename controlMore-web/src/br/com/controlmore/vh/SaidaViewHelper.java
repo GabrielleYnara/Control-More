@@ -156,11 +156,12 @@ public class SaidaViewHelper implements IViewHelper {
 			}
 			if (acao.equals("alterar")) {
 				request.getSession().setAttribute("saida", resultado);
-				d = request.getRequestDispatcher("/lancamentos.jsp");
+				d = request.getRequestDispatcher("/Home?acao=resumo");
 			}
 			if (acao.equals("excluir")){
+				request.setAttribute("resultado", resultado);
 				request.getSession().setAttribute("saida", null);
-				d = request.getRequestDispatcher("/lancamentos.jsp");
+				d = request.getRequestDispatcher("/Home?acao=resumo");
 			}
 			if(acao.equals("consultar")){
 				request.getSession().setAttribute("saida", resultado);

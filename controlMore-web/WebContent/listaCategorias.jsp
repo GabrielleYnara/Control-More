@@ -21,35 +21,35 @@
 </head>
 <body>
 <%@include file="menu.jsp"%>
-<div id="container" ></div>
-	<table class="table table-striped">
-	  <thead>
-	  	<caption><h3>Categorias</h3></caption>
-	    <tr>
-	      <th>Nome</th>
-	      <th hidden>Cor</th>
-	      <th hidden>Categoria(pai)</th>
-	      <th>Data Cadastro</th>
-	      <th></th>
-	    </tr><!-- end linha -->
-	  </thead><!-- end cabeçalho -->
-	  <tbody>
-		
-		<c:forEach var="categoria" items="${categoria}">
-		  <tr><!-- Linha -->
-		  	<!-- Colunas -->
-			<td>${categoria.descricao}</td>
-			<td hidden>${categoria.cor}</td>
-			<td hidden>${categoria.categoria.descricao}</td>
-			<td>${categoria.dtCadastro}</td>
-			<td>
-				<a href="javascript:location.href='Categoria?acao=consultar&txtId=${categoria.id}';"><span class="glyphicon glyphicon-pencil"></span></a>
-	      		<a href="javascript:location.href='Categoria?acao=excluir&txtId=${categoria.id}';"><span class="glyphicon glyphicon-trash"></span></a>
-			</td>
-		  </tr><!-- end linha -->
-		</c:forEach>
-	  </tbody>
-	</table>
-	
+<div class="container-fluid" >
+  <table class="table table-striped">
+	<thead>
+	  <caption><h3>Categorias</h3></caption>
+	  <tr>
+	 	<th>Nome</th>
+	    <th hidden>Cor</th>
+	    <th hidden>Categoria(pai)</th>
+	    <th>Data Cadastro</th>
+	    <th></th>
+	  </tr><!-- end linha -->
+	</thead><!-- end cabeçalho -->
+	<tbody>
+	  <c:forEach var="categoria" items="${categoria}">
+		<tr><!-- Linha -->
+	  	  <!-- Colunas -->
+		  <td>${categoria.descricao}</td>
+		  <td hidden>${categoria.cor}</td>
+		  <td hidden>${categoria.categoria.descricao}</td>
+		  <td>${categoria.dtCadastro}</td>
+		  <td>
+			<a href="javascript:location.href='Categoria?acao=consultar&txtId=${categoria.id}';"><span class="glyphicon glyphicon-pencil"></span></a>
+	      	<a href="javascript:location.href='Categoria?acao=excluir&txtId=${categoria.id}';"><span class="glyphicon glyphicon-trash"></span></a>
+		  </td>
+		</tr><!-- end linha -->
+	  </c:forEach>
+	</tbody>
+  </table>
+  <a href="cadastroCategoria.jsp" class="btn btn-primary">Incluir nova categoria</a>
+</div>
 </body>
 </html>

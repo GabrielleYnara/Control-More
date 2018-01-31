@@ -61,6 +61,10 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
     <servlet-name>Servlet</servlet-name>
     <url-pattern>/Home</url-pattern>
   </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>Servlet</servlet-name>
+    <url-pattern>/Upload</url-pattern>
+  </servlet-mapping>
   
   <filter>
     <display-name>SaidaFiltro</display-name>

@@ -19,6 +19,11 @@
 <body>
 
 <%@include file="menu.jsp"%>
+<script type="text/javascript">
+function excluirE(id){
+	location.href="Entrada?acao=excluir&txtId="+ id;
+}
+</script>
 <%
 	List<EntidadeDominio> entradas = new ArrayList<EntidadeDominio>();
 	Entrada entrada = new Entrada();
@@ -177,11 +182,14 @@
 				</div>
 				
 				<div align="left" class="col-xs-6 col-sm-6 col-md-6">
-		    			<a href="javascript:location.href='Home?acao=resumo';" class="btn btn-default">Cancelar</a>
-	      			</div><!-- end row -->
-		  			<div align="right" class="col-xs-6 col-sm-6 col-md-6">
-		    			<button class="btn btn-primary" type="submit">Salvar</button>		    			
-	      			</div>
+		    		<a href="javascript:location.href='Home?acao=resumo';" class="btn btn-default">Cancelar</a>
+		    		<%if(entrada.getId()!=0){%>
+		    		  <a href="javascript:excluirE(<%out.print(entrada.getId());%>);" class="btn btn-default">Excluir</a>
+		    			
+	    	  		<%}%>
+	      		</div><!-- end row -->
+		  		<div align="right" class="col-xs-6 col-sm-6 col-md-6">
+		    		<button class="btn btn-primary" type="submit">Salvar</button>		    			
 	      			
 	      		</div>
  			  </form>

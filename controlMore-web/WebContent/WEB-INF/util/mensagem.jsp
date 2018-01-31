@@ -2,26 +2,9 @@
 <!-- Import da taglib pra uso de jstl -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%
-	if(request.getSession().getAttribute("resultado")!= null){
-		Resultado resultado = (Resultado) request.getSession().getAttribute("resultado");
-		if (!resultado.getMsg().isEmpty()){%>			
-			<script type="text/javascript">
-				alert("<%=resultado.getMsg()%>");
-			</script>
-			<% 
-		}
-	}else if(request.getAttribute("resultado")!= null){
-		Resultado resultado = (Resultado) request.getAttribute("resultado");
-		if (resultado.getMsg() != null && !resultado.getMsg().isEmpty()){		
-			
-		}
-	}
+<c:set value="${resultado.msg}" var="mensagem" />
 
-%>
-<c:set value="${resultado}" var="mensagem" />
-
-<c:if test="${not empty mensagem.msg}">
+<c:if test="${not empty mensagem}">
 	<div id="modalMsg" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 	    	<!-- Modal content-->

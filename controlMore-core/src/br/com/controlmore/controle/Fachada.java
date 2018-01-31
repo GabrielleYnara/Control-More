@@ -19,6 +19,7 @@ import br.com.controlmore.dao.RelatorioCategoriaDAO;
 import br.com.controlmore.dao.ResumoDAO;
 import br.com.controlmore.dao.SaidaDAO;
 import br.com.controlmore.dao.aPagarDAO;
+import br.com.controlmore.dao.upLoadDAO;
 import br.com.controlmore.dominio.AvaliacaoGasto;
 import br.com.controlmore.dominio.Categoria;
 import br.com.controlmore.dominio.Conta;
@@ -39,6 +40,7 @@ import br.com.controlmore.negocio.VerificarSaldo;
 import br.com.controlmore.vm.ResumoVM;
 import br.com.controlmore.vm.aPagarVM;
 import br.com.controlmore.vm.aReceberVM;
+import br.com.controlmore.vm.upLoadVM;
 
 public class Fachada implements IFachada {
 
@@ -73,6 +75,7 @@ public class Fachada implements IFachada {
 		QuestionarioDAO questionarioDAO = new QuestionarioDAO();
 		AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
 		CategoriaDAO categoriaDAO = new CategoriaDAO();
+		upLoadDAO upLoadDAO = new upLoadDAO();
 		
 		/* Adicionando cada dao no MAP indexando pelo nome da classe */
 		daos.put(Pessoa.class.getName(), pessoaDAO);
@@ -84,6 +87,7 @@ public class Fachada implements IFachada {
 		daos.put(Questionario.class.getName(), questionarioDAO);
 		daos.put(AvaliacaoGasto.class.getName(), avaliacaoDAO);
 		daos.put(Categoria.class.getName(), categoriaDAO);
+		daos.put(upLoadVM.class.getName(), upLoadDAO);
 		
 		/* Criando instâncias de regras de negócio a serem utilizados*/		
 		CompletarDtCadastro cDtCadastro = new CompletarDtCadastro();
@@ -210,9 +214,9 @@ public class Fachada implements IFachada {
 		if(msg == null){
 			IDAO dao = daos.get(nmClasse);
 				dao.excluir(entidade);
-				List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
-				entidades.add(entidade);
-				resultado.setEntidades(entidades);
+				//List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+				//entidades.add(entidade);
+				//resultado.setEntidades(entidades);
 				resultado.setMsg("Excluido com sucesso");
 		}else{
 			resultado.setMsg(msg);			
