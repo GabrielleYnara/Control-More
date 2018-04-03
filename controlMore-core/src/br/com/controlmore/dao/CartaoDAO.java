@@ -31,12 +31,9 @@ public class CartaoDAO extends AbstractDAO{
 				preparador.execute();
 				//salva alteração no Banco
 				conexao.commit();
+				
 			} catch (SQLException e) {
-				try{//se der erro no try acima, vai desfazer qualquer alteração que tenha sido iniciada
-					conexao.rollback();
-				} catch (SQLException e1){
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}// fim else
@@ -61,13 +58,9 @@ public class CartaoDAO extends AbstractDAO{
 				
 				//salvar alteração no banco
 				conexao.commit();
+				
 			} catch(SQLException e){
-				try{
-					//desfaz qualquer alteração feita no banco
-					conexao.rollback();
-				} catch(SQLException e1){
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}//fim- if alterar bandeira

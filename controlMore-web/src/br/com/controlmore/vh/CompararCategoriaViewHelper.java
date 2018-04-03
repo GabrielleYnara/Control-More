@@ -13,80 +13,69 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import br.com.controlmore.aplicacao.Resultado;
+import br.com.controlmore.dominio.Categoria;
 import br.com.controlmore.dominio.EntidadeDominio;
 import br.com.controlmore.dominio.RelatorioCategoria;
+import br.com.controlmore.vm.compararCategoriaVM;
 
-public class RelCatViewHelper implements IViewHelper {
+public class CompararCategoriaViewHelper implements IViewHelper{
 
 	@Override
 	public EntidadeDominio getEntidade(HttpServletRequest request) {
-		String acao = request.getParameter("acao");
-		RelatorioCategoria relCat = new RelatorioCategoria();
+		compararCategoriaVM compararVM = new compararCategoriaVM();
 		LocalDate data = LocalDate.now();
-		String categoria1 = null;
-		String categoria2 = null;
+		int idCategoria1 = 0;
+		int idCategoria2 = 0;
 		if(request.getParameter("txtDataInicial")!= null){
 			data = LocalDate.parse(request.getParameter("txtDataInicial"));
 			Instant instant = data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-			relCat.setInicio(Date.from(instant));
+			compararVM.setDtInicial(Date.from(instant));
 		}else{// atribui primeiro dia do mês
 			data = LocalDate.now().with(TemporalAdjusters.firstDayOfMonth());
 			Instant instant = data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-			relCat.setInicio(Date.from(instant));
+			compararVM.setDtInicial(Date.from(instant));
 		}
 		if(request.getParameter("txtDataFinal")!= null){
 			data = LocalDate.parse(request.getParameter("txtDataFinal"));
 			Instant instant = data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-			relCat.setFim(Date.from(instant));
+			compararVM.setDtFinal(Date.from(instant));
 		}else{// atribui ultimo dia do mês
 			data = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
 			Instant instant = data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-			relCat.setFim(Date.from(instant));
+			compararVM.setDtFinal(Date.from(instant));
 		}
 		if(request.getParameter("categoria1")!=null){
-			categoria1 = request.getParameter("categoria1");
+			idCategoria1 = Integer.parseInt(request.getParameter("categoria1"));
 		}
 		if(request.getParameter("categoria2")!=null){
-			categoria2 = request.getParameter("categoria2");
+			idCategoria2 = Integer.parseInt(request.getParameter("categoria2"));
 		}
-		relCat.setCategoria1(categoria1);
-		relCat.setCategoria2(categoria2);
+	
 		
-		return relCat;
+		compararVM.setIdCategoria1(idCategoria1);
+		compararVM.setIdCategoria2(idCategoria2);
+		Resultado r = new Resultado();
+		r.setModeloVisao(compararVM);
+		return r;
 	}
 
 	@Override
 	public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		RequestDispatcher d = null; //Será responsável por redirecionamento
+RequestDispatcher d = null; //Será responsável por redirecionamento
 		
 		String acao = request.getParameter("acao");
 		
-		if(resultado.getMsg() == null){
-			if(acao.equals("salvar")){
-				d = request.getRequestDispatcher("/principal.jsp");//redireciona a pagina
-			}
-			if (acao.equals("alterar")) {
-				d = request.getRequestDispatcher("/principal.jsp");
-			}
-			if (acao.equals("excluir")){
-				d = request.getRequestDispatcher("/principal.jsp");
-			}
-			if(acao.equals("consultar")){
-					
-				request.getSession().setAttribute("relCat", resultado);
-				d = request.getRequestDispatcher("/ResumoCategoria.jsp");
-			}
-			if(acao.equals("visualizar")){
-				d = request.getRequestDispatcher("/principal.jsp");
-			}
+		if(acao.equals("comparar")){
+			request.getSession().setAttribute("resultado", null);
+			request.setAttribute("resultado", resultado);
+			d = request.getRequestDispatcher("/comparacaoCategoria.jsp");//redireciona a pagina
 		}
+		
 		d.forward(request, response);
-
-
+		
 	}
 
 }

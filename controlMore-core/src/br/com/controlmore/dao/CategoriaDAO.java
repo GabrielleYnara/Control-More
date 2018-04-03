@@ -28,13 +28,8 @@ public class CategoriaDAO extends AbstractDAO {
 						
 			//executar comando
 			preparador.execute();
+			
 		}catch (SQLException e) {
-			try{
-				//desfaz alteração no banco
-				conexao.rollback();
-			}catch(SQLException e1) {
-				e1.printStackTrace();
-			}
 			e.printStackTrace();
 		}
 		return null;
@@ -53,13 +48,9 @@ public class CategoriaDAO extends AbstractDAO {
 				
 				//executa o SQL
 				preparador.execute();
+				
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -72,13 +63,9 @@ public class CategoriaDAO extends AbstractDAO {
 				
 				//executa o SQL
 				preparador.execute();
+				
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -91,13 +78,9 @@ public class CategoriaDAO extends AbstractDAO {
 				
 				//executa o SQL
 				preparador.execute();
+				
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -117,6 +100,7 @@ public class CategoriaDAO extends AbstractDAO {
 				
 				//executa o SQL
 				preparador.execute();
+				
 			}catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -166,6 +150,7 @@ public class CategoriaDAO extends AbstractDAO {
 				
 				categorias.add(c);
 			}//end while
+			
 			return categorias;
 		}catch (SQLException e2) {
 			// TODO Auto-generated catch block

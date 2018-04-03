@@ -35,14 +35,20 @@ public class SaidaViewHelper implements IViewHelper {
 		Categoria categoria = new Categoria();
 		Juros juros = new Juros();
 		
-		if(!acao.equals("visualizar")){
-			int id = 0;
-			double valor = 0;
-			String descricao = null;
-			int qteParcelas=0;
-			LocalDate data = LocalDate.now();
-			int importancia = 0;
-			String situacao = null;
+		int id = 0;
+		double valor = 0;
+		String descricao = null;
+		int qteParcelas=0;
+		LocalDate data = LocalDate.now();
+		int importancia = 0;
+		String situacao = null;
+		
+		if(acao.equals("excluir")){
+			if(request.getParameter("txtId")!=null && !request.getParameter("txtId").trim().equals("")){
+				id = Integer.parseInt(request.getParameter("txtId"));
+			}
+		}
+		else if(!acao.equals("visualizar")){
 			
 			if(request.getParameter("txtId")!=null && !request.getParameter("txtId").trim().equals("")){
 				id = Integer.parseInt(request.getParameter("txtId"));
@@ -56,12 +62,14 @@ public class SaidaViewHelper implements IViewHelper {
 			if(request.getParameter("txtDescricao")!= null){
 				descricao = request.getParameter("txtDescricao");
 			}
-			if(request.getParameter("txtConta")!= null && request.getParameter("txtConta").trim().equals("")){
+			if(request.getParameter("txtConta")!= null){
 				String array[] = request.getParameter("txtConta").split("/");
-				if(array[1].equals("conta"))
-					conta.setId(Integer.parseInt(array[0]));
-				if(array[1].equals("cartao"))
-					cartao.setId(Integer.parseInt(array[0]));
+				if(array.length>1){
+					if(array[1].equals("conta"))
+						conta.setId(Integer.parseInt(array[0]));
+					if(array[1].equals("cartao"))
+						cartao.setId(Integer.parseInt(array[0]));
+				}
 			}
 			if(request.getParameter("txtData")!= null){
 				data = LocalDate.parse(request.getParameter("txtData"));
@@ -126,7 +134,7 @@ public class SaidaViewHelper implements IViewHelper {
 			HttpSession session = request.getSession();
 			Resultado resultado = (Resultado) session.getAttribute("saida");
 			String txtId = request.getParameter("txtId");
-			int id=0;
+			id=0;
 			
 			if(txtId != null && !txtId.trim().equals("")){
 				id = Integer.parseInt(txtId);

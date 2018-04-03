@@ -97,8 +97,8 @@ function filtro(){
 				Relatórios <span class="caret"></span>
 			</a>
 	        <ul class="dropdown-menu">
-				<li><a href="analisarAtraso.jsp">Análise de Atrasos</a></li>
-				<li><a href="javascript:location.href='Categoria?acao=consultar';">Comparação de Categorias</a></li>
+				<li><a href="javascript:location.href='Analisar?acao=analisar';">Análise de Atrasos</a></li>
+				<li><a href="javascript:location.href='Comparar?acao=comparar';">Comparação de Categorias</a></li>
 				<li><a href="javascript:location.href='Filtro?acao=consultar&txtConsulta=EntradaSaida';">Lançamentos</a></li>
 			    <li hidden><a href="projecaoEconomia.jsp">Projeção de Economia</a></li>
 			    <li><a href="javascript:consultarRelCat();">Resumo por Categoria</a></li>

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.controlmore.aplicacao.Resultado;
 import br.com.controlmore.command.AlterarCommand;
+import br.com.controlmore.command.AnalisarCommand;
+import br.com.controlmore.command.CompararCategoriaCommand;
 import br.com.controlmore.command.ConsultarCommand;
 import br.com.controlmore.command.ContaPagarCommand;
 import br.com.controlmore.command.ExcluirCommand;
@@ -22,8 +24,10 @@ import br.com.controlmore.command.SalvarCommand;
 import br.com.controlmore.command.VisualizarCommand;
 import br.com.controlmore.command.contaReceberCommand;
 import br.com.controlmore.dominio.EntidadeDominio;
+import br.com.controlmore.vh.AnaliseViewHelper;
 import br.com.controlmore.vh.AvaliacaoViewHelper;
 import br.com.controlmore.vh.CategoriaViewHelper;
+import br.com.controlmore.vh.CompararCategoriaViewHelper;
 import br.com.controlmore.vh.EntradaViewHelper;
 import br.com.controlmore.vh.FiltroViewHelper;
 import br.com.controlmore.vh.HomeViewHelper;
@@ -61,6 +65,8 @@ public class Servlet extends HttpServlet {
     	commands.put("resumo", new ResumoCommand());
     	commands.put("contaReceber", new contaReceberCommand());
     	commands.put("contaPagar", new ContaPagarCommand());
+    	commands.put("comparar", new CompararCategoriaCommand());
+    	commands.put("analisar", new AnalisarCommand());
  
     	
     	/* Utilizando o ViewHelper para tratar especificações de qualquer tela e indexando 
@@ -82,7 +88,8 @@ public class Servlet extends HttpServlet {
     	vhs.put("/controlMore-web/Categoria", new CategoriaViewHelper());
     	vhs.put("/controlMore-web/Home", new HomeViewHelper());
     	vhs.put("/controlMore-web/Upload", new UpLoadViewHelper());
-    	
+    	vhs.put("/controlMore-web/Comparar", new CompararCategoriaViewHelper());
+    	vhs.put("/controlMore-web/Analisar", new AnaliseViewHelper());
     }// construtor Servlet
     
     

@@ -30,10 +30,9 @@ RequestDispatcher d = null; //Será responsável por redirecionamento
 		
 		if(resultado.getMsg() == null){
 			if(acao.equals("salvar")){
-				resultado.setMsg("Saida cadastrada com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);
 				request.getSession().setAttribute("saida", resultado);
-				d = request.getRequestDispatcher("/principal.jsp");//redireciona a pagina
+				d = request.getRequestDispatcher("/Home?acao=resumo");//redireciona a pagina
 			}
 			if (acao.equals("alterar")) {
 				request.getSession().setAttribute("saida", resultado);

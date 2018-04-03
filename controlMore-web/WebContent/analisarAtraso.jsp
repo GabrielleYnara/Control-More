@@ -6,6 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!-- Import da taglib pra uso de jstl -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <title>ControlMore</title>
 </head>
 <body>
@@ -32,36 +35,27 @@
 					        	<th>Valor</th>
 					        	<th>Multa</th>
 					        	<th>Juros</th>
-					        	<th>Total Hoje</th>
-					        	<th>Priorizar?</th>
+					        	<th>Total</th>
 					      	</tr>
 					    </thead><!-- end cabeçalho -->
 					    <tbody><!-- corpo da tabela -->
-					      	
-					      		<!-- colunas -->
-					   			<tr>
-									<td></td>
-									<td>Conta de Luz</td>
-									<td>Moradia</td>
-									<td>02/09/2016</td>
-									<td>R$54,98</td>
-									<td>R$3,00</td>
-									<td>R$0,86</td>
-									<td>R$69,56</td>
-									<td>SIM</td>
-								</tr>
-								
-								<tr>
-									<td></td>
-									<td>Roupa pra festa</td>
-									<td>Vestimenta</td>
-									<td>02/09/2016</td>
-									<td>R$54,98</td>
-									<td>R$3,00</td>
-									<td>R$0,86</td>
-									<td>R$69,56</td>
-									<td>Não</td>
-								</tr>
+					      	<c:if test="${empty resultado.modeloVisao.aPagar}">
+					      	  <tr>
+					    		<td align="center"> Nenhuma conta atrasada.</td>
+					    	  </tr>
+					      	</c:if>
+					    	<c:forEach var="aPagar" items="${resultado.modeloVisao.aPagar}">
+					    	  <tr>
+					    		<td><a href="javascript:location.href='Saida?acao=consultar&txtId=${aPagar.id}';"> &bull;	&nbsp;	${aPagar.descricao}</a></td>
+					    		<td>${aPagar.categoria.descricao}</td>
+					    		<td><fmt:formatDate value="${aPagar.data}" pattern="dd/MM/YY"/></td>
+					    		<td>R$${aPagar.valor}</td>
+					    		<td>R$${aPagar.juros.multa}</td>
+					    		<td>R$${aPagar.juros.juros}</td>
+					    		<td>R$${aPagar.valor + aPagar.juros.multa + aPagar.juros.juros}</td>
+					    	  </tr>
+					    	</c:forEach>
+					      		
 								
 						</tbody>
 					</table>

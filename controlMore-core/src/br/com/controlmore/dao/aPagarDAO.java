@@ -62,7 +62,7 @@ public class aPagarDAO extends AbstractDAO{
 				c.setInfo(result.getString("TP"));//Conta ou Cartão
 				aPagarVM.setContasCartoes(c);
 			}
-			
+			 
 			return aPagarVM;
 		}catch (SQLException e) {
 			e.printStackTrace();

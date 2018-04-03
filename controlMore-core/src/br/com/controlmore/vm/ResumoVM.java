@@ -3,6 +3,7 @@ package br.com.controlmore.vm;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.controlmore.dominio.Conta;
 import br.com.controlmore.dominio.Entrada;
 import br.com.controlmore.dominio.Saida;
 import br.com.controlmore.viewmodel.IViewModel;
@@ -24,6 +25,9 @@ public class ResumoVM implements IViewModel {
 	//Serão utilizadas para controle de contas vencidas (recebimento e pagamento)
 	private List<Saida> aPagarVencida = new ArrayList<Saida>();
 	private List<Entrada> aReceberAtrasada = new ArrayList<Entrada>();
+	
+	//Será usado para armezenar as contas e saldo
+	private List<Conta> saldoContas = new ArrayList<Conta>();
 	
 	public double getSaldo() {
 		return saldo;
@@ -75,5 +79,12 @@ public class ResumoVM implements IViewModel {
 	}
 	public List<Entrada> getaReceberAtrasada(){
 		return aReceberAtrasada;
+	}
+	
+	public void setSaldoContas(Conta c){
+		this.saldoContas.add(c);
+	}
+	public List<Conta> getSaldoContas(){
+		return saldoContas;
 	}
 }

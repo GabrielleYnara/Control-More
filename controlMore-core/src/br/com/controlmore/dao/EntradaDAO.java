@@ -43,13 +43,10 @@ public class EntradaDAO extends AbstractDAO{
 			preparador.setString(9, entrada.getSituacao());
 
 			// executar o comando no banco
-			preparador.execute();					
+			preparador.execute();	
+			
 		} catch (SQLException e) {
-			try {
-				conexao.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+			
 			e.printStackTrace();			
 		}
 		return null;
@@ -73,13 +70,9 @@ public class EntradaDAO extends AbstractDAO{
 				preparador.setInt(2, entrada.getId());
 				
 				preparador.execute();
+				
 			}catch(SQLException e){
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -92,14 +85,10 @@ public class EntradaDAO extends AbstractDAO{
 				preparador.setInt(1, entrada.getCartao().getId());
 				preparador.setInt(2, entrada.getId());
 				
-				preparador.execute();				
+				preparador.execute();
+				
 			}catch(SQLException e){
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -113,13 +102,9 @@ public class EntradaDAO extends AbstractDAO{
 				preparador.setInt(2, entrada.getId());
 				
 				preparador.execute();
+				
 			}catch(SQLException e){
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -133,13 +118,9 @@ public class EntradaDAO extends AbstractDAO{
 				preparador.setInt(2, entrada.getId());
 	
 				preparador.execute();
+				
 			}catch(SQLException e){
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -153,13 +134,9 @@ public class EntradaDAO extends AbstractDAO{
 				preparador.setInt(2, entrada.getId());
 				
 				preparador.execute();
+				
 			}catch(SQLException e){
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -173,13 +150,9 @@ public class EntradaDAO extends AbstractDAO{
 				preparador.setInt(2, entrada.getId());
 				
 				preparador.execute();
+				
 			}catch(SQLException e){
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -193,13 +166,10 @@ public class EntradaDAO extends AbstractDAO{
 				preparador.setInt(2, entrada.getId());
 								
 				// executar o comando no banco
-				preparador.execute();			
+				preparador.execute();	
+				
 			} catch (SQLException e) {
-				try {
-					conexao.rollback();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				
 				e.printStackTrace();			
 			}
 		}
@@ -212,13 +182,9 @@ public class EntradaDAO extends AbstractDAO{
 				
 				//executa o SQL
 				preparador.execute();
+				
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -236,14 +202,9 @@ public class EntradaDAO extends AbstractDAO{
 			//executa a query
 			preparador.execute();
 			//salvar alteração no banco
-			conexao.commit();
+			
 		} catch (SQLException e) {
-			try{
-				//desfaz alteração no banco
-				conexao.rollback();
-			}catch(SQLException e1) {
-				return e1.toString();
-			}
+			
 			return e.toString();
 		}
 		return null;
@@ -387,6 +348,7 @@ public class EntradaDAO extends AbstractDAO{
 				}//end try parcelas*/
 				entradas.add(e);
 			}//end while
+			
 			return entradas;
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block

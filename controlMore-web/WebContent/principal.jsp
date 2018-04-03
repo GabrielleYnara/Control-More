@@ -96,7 +96,7 @@
 			<div align="right">
 			  <p>Saldo Geral <saldo>R$ ${resultado.modeloVisao.saldo}</saldo></p>
 			</div><!-- end right -->
-			<ul>
+			<ul hidden>
 			  <li>
 			    <i class="glyphicon glyphicon-piggy-bank"></i><p><strong>Carteira</strong> R$0,00</p>
 			    <p>Outros</p>
@@ -150,8 +150,8 @@
 		      	</c:if>
 		    	<c:forEach var="aPagar" items="${resultado.modeloVisao.aPagar}">
 		    	  <tr>
-		    		<td> &bull;	&nbsp;	${aPagar.descricao}</td>
-		    		<td class="text-right"> <fmt:formatDate value="${aPagar.data}" pattern="DD/MM"/></td>
+		    		<td> <a href="javascript:location.href='Saida?acao=consultar&txtId=${aPagar.id}';">&bull;	&nbsp;	${aPagar.descricao}</a></td>
+		    		<td class="text-right"> <fmt:formatDate value="${aPagar.data}" pattern="dd/MM"/></td>
 		    	  	<td class="text-right"> R$${aPagar.valor}</td>
 		    	  </tr>
 		    	</c:forEach>	

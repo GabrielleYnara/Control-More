@@ -6,10 +6,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.controlmore.dominio.Conta;
 import br.com.controlmore.dominio.EntidadeDominio;
 import br.com.controlmore.dominio.Entrada;
 import br.com.controlmore.dominio.Saida;
 import br.com.controlmore.vm.ResumoVM;
+import br.com.controlmore.vm.aPagarVM;
 
 public class ResumoDAO extends AbstractDAO{
 
@@ -49,6 +51,7 @@ public class ResumoDAO extends AbstractDAO{
 				saldo = result.getDouble("saida");
 				return saldo;
 			}
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -67,6 +70,7 @@ public class ResumoDAO extends AbstractDAO{
 				saldo = result.getDouble("entrada");
 				return saldo;
 			}
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -132,6 +136,7 @@ public class ResumoDAO extends AbstractDAO{
 					rVM.setcPagas(0);
 				}
 			}
+			
 			return rVM;
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -161,6 +166,7 @@ public class ResumoDAO extends AbstractDAO{
 				
 				rVM.setaPagar(s);
 			}
+			
 			return rVM;
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -190,6 +196,7 @@ public class ResumoDAO extends AbstractDAO{
 				
 				rVM.setaReceber(e);
 			}
+			
 			return rVM;
 		}catch (SQLException e1) {
 			e1.printStackTrace();
@@ -219,6 +226,7 @@ public class ResumoDAO extends AbstractDAO{
 				s.setData(result.getDate("DataSaida"));
 				rVM.setaPagarVencida(s);
 			}
+			
 			return rVM;
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -249,6 +257,7 @@ public class ResumoDAO extends AbstractDAO{
 				
 				rVM.setaReceberAtrasada(e);
 			}
+			
 			return rVM;
 		}catch (SQLException e1) {
 			e1.printStackTrace();

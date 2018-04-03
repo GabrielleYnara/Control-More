@@ -34,13 +34,9 @@ public class PessoaDAO extends AbstractDAO {
 			
 			// executar o comando no banco
 			preparador.execute();
+			
 		} catch (SQLException e) {
 			
-			try {
-				conexao.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
 			e.printStackTrace();			
 		}
 		
@@ -61,13 +57,9 @@ public class PessoaDAO extends AbstractDAO {
 				
 				// executar o comando no banco
 				preparador.execute();
+				
 			} catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -81,13 +73,9 @@ public class PessoaDAO extends AbstractDAO {
 				
 				// executar o comando no banco
 				preparador.execute();
+				
 			} catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -101,13 +89,9 @@ public class PessoaDAO extends AbstractDAO {
 				
 				// executar o comando no banco
 				preparador.execute();
+				
 			} catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -121,13 +105,9 @@ public class PessoaDAO extends AbstractDAO {
 				
 				// executar o comando no banco
 				preparador.execute();
+				
 			} catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+
 				return e.toString();
 			}
 		}
@@ -141,13 +121,9 @@ public class PessoaDAO extends AbstractDAO {
 				
 				// executar o comando no banco
 				preparador.execute();
+				
 			} catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -161,13 +137,9 @@ public class PessoaDAO extends AbstractDAO {
 				
 				// executar o comando no banco
 				preparador.execute();
+				
 			} catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -189,11 +161,6 @@ public class PessoaDAO extends AbstractDAO {
 			
 		} catch (SQLException e) {
 			
-			try {
-				conexao.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
 			e.printStackTrace();			
 		}
 		return null;
@@ -247,6 +214,7 @@ public class PessoaDAO extends AbstractDAO {
 
 				pessoas.add(pessoa);
 			}//fim while result
+			
 			return pessoas;
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -297,6 +265,7 @@ public class PessoaDAO extends AbstractDAO {
 				
 				return pessoa;
 			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

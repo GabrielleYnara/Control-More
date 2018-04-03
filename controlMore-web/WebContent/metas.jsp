@@ -132,7 +132,7 @@ function consultarMeta(id){
 	  </div><!-- Painel Cadastrar Meta-->
 	</div><!-- class="col-md-4 -->
 	
-	<div class="col-md-8">
+	<div class="col-md-8" hidden>
 	  <blockquote>Reparamos que nos ultimos 6 meses você tem gasto em média: </blockquote>
 	  	<div class="row">
 	  	  <div class="col-md-3">

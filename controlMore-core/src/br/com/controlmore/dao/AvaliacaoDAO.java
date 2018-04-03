@@ -56,6 +56,7 @@ public class AvaliacaoDAO extends AbstractDAO{
 				saidas.add(sda);
 			}
 			avaliacao.setSaidas(saidas);
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -83,6 +84,7 @@ public class AvaliacaoDAO extends AbstractDAO{
 				
 				avaliacao.setQuestionario(q);
 			}
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -34,8 +34,8 @@ public class SaidaDAO extends AbstractDAO{
 		}
 		if(saida.getConta().getId() !=0 && saida.getJuros().getJuros() == 0){
 			sql.append("INSERT INTO Saida(Descricao, Valor, DataCadastro, Situacao, Importancia, ");
-			sql.append("Vencimento, Qtde_Parcelas, Frequencia, Categoria, Conta, DataSaida) ");
-			sql.append("VALUES (?,?,?,?,?,?,?,?,?,?,?) ");
+			sql.append("Vencimento, Qtde_Parcelas, Frequencia, Categoria, Conta, DataSaida, Juros) ");
+			sql.append("VALUES (?,?,?,?,?,?,?,?,?,?,?, 3) ");
 		}
 		if(saida.getCartao().getId() !=0 && saida.getJuros().getJuros() != 0){
 			sql.append("INSERT INTO Saida(Descricao, Valor, DataCadastro, Situacao, Importancia, ");
@@ -44,8 +44,8 @@ public class SaidaDAO extends AbstractDAO{
 		}
 		if(saida.getCartao().getId() !=0 && saida.getJuros().getJuros() == 0){
 			sql.append("INSERT INTO Saida(Descricao, Valor, DataCadastro, Situacao, Importancia, ");
-			sql.append("Vencimento, Qtde_Parcelas, Frequencia, Categoria, Cartao, DataSaida) ");
-			sql.append("VALUES (,?,?,?,?,?,?,?,?,?,?,?) ");
+			sql.append("Vencimento, Qtde_Parcelas, Frequencia, Categoria, Cartao, DataSaida, Juros) ");
+			sql.append("VALUES (,?,?,?,?,?,?,?,?,?,?,?, 3) ");
 		}
 		try(PreparedStatement preparador = conexao.prepareStatement(sql.toString())){//Preparador que vai gerenciar o SQL
 			if(saida.getJuros().getJuros()!=0 && saida.getJuros().getMulta()!=0){
@@ -58,13 +58,9 @@ public class SaidaDAO extends AbstractDAO{
 						
 					//executar comando
 					prepara.execute();
+					
 				}catch (SQLException e) {
-					try{
-						//desfaz alteração no banco
-						conexao.rollback();
-					}catch(SQLException e1) {
-						e1.printStackTrace();
-					}
+					
 					e.printStackTrace();
 				}
 			}//end if juros not null
@@ -112,14 +108,9 @@ public class SaidaDAO extends AbstractDAO{
 					e.printStackTrace();
 				}
 			}//end if parcelas*/
-	
+			
 		}catch (SQLException e) {
-			try{
-				//desfaz alteração no banco
-				conexao.rollback();
-			}catch(SQLException e1) {
-				e1.printStackTrace();
-			}
+			
 			e.printStackTrace();
 		}
 		return null;
@@ -137,13 +128,9 @@ public class SaidaDAO extends AbstractDAO{
 				preparador.setInt(2, saida.getId());
 				//executa o SQL
 				preparador.execute();
+				
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -156,13 +143,9 @@ public class SaidaDAO extends AbstractDAO{
 				
 				//executa o SQL
 				preparador.execute();
+				
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -170,18 +153,15 @@ public class SaidaDAO extends AbstractDAO{
 			sql="UPDATE Saida SET DataSaida=? WHERE Id=?";
 			try(PreparedStatement preparador = conexao.prepareStatement(sql)){
 				//Substitue as ? pelos "valores" que compõe o objeto
-				preparador.setDate(1, new java.sql.Date(saida.getData().getTime()));
+				Timestamp time = new Timestamp(saida.getData().getTime());
+				preparador.setTimestamp(1, time);
 				preparador.setInt(2, saida.getId());
 				
 				//executa o SQL
 				preparador.execute();
+				
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -194,13 +174,9 @@ public class SaidaDAO extends AbstractDAO{
 				
 				//executa o SQL
 				preparador.execute();
+				
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -213,13 +189,9 @@ public class SaidaDAO extends AbstractDAO{
 				
 				//executa o SQL
 				preparador.execute();
+				
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -232,13 +204,9 @@ public class SaidaDAO extends AbstractDAO{
 				
 				//executa o SQL
 				preparador.execute();
+				
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -251,13 +219,9 @@ public class SaidaDAO extends AbstractDAO{
 				
 				//executa o SQL
 				preparador.execute();
+				
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -270,13 +234,9 @@ public class SaidaDAO extends AbstractDAO{
 				
 				//executa o SQL
 				preparador.execute();
+				
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -289,13 +249,9 @@ public class SaidaDAO extends AbstractDAO{
 				
 				//executa o SQL
 				preparador.execute();
+				
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -308,13 +264,9 @@ public class SaidaDAO extends AbstractDAO{
 				
 				//executa o SQL
 				preparador.execute();
+				
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -327,13 +279,9 @@ public class SaidaDAO extends AbstractDAO{
 				
 				//executa o SQL
 				preparador.execute();
+				
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -347,12 +295,7 @@ public class SaidaDAO extends AbstractDAO{
 				//executa o SQL
 				preparador.execute();
 			}catch (SQLException e) {
-				try{
-					//desfaz alteração no banco
-					conexao.rollback();
-				}catch(SQLException e1) {
-					return e1.toString();
-				}
+				
 				return e.toString();
 			}
 		}
@@ -369,13 +312,9 @@ public class SaidaDAO extends AbstractDAO{
 			
 			//executa o SQL
 			preparador.execute();
+			
 		}catch (SQLException e) {
-			try{
-				//desfaz alteração no banco
-				conexao.rollback();
-			}catch(SQLException e1) {
-				return e1.toString();
-			}
+			
 			return e.toString();
 		}
 		return null;
@@ -507,10 +446,13 @@ public class SaidaDAO extends AbstractDAO{
 				co.setBanco(result.getString("Conta_BANCO"));
 				co.setInfo(result.getString("Conta_INFO"));
 				sda.setConta(co);
+				ca.setId(result.getInt("CARTAO"));
+				ca.setBandeira(result.getString("Cartao_BANDEIRA"));
 				sda.setData(result.getDate("DataSaida"));
 				
 				saidas.add(sda);
 			}
+			
 			return saidas;
 		}catch (SQLException e) {
 			e.printStackTrace();

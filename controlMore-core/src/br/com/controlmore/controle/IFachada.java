@@ -15,4 +15,6 @@ public interface IFachada {
 	public Resultado resumo();
 	public Resultado contaReceber();
 	public Resultado contaPagar();
+	public Resultado comparar(EntidadeDominio entidade);
+	public Resultado analisar();
 }

@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import br.com.controlmore.aplicacao.Resultado;
+import br.com.controlmore.dao.AnaliseDAO;
 import br.com.controlmore.dao.AvaliacaoDAO;
 import br.com.controlmore.dao.CategoriaDAO;
+import br.com.controlmore.dao.CompararCategoriasDAO;
 import br.com.controlmore.dao.ContaDAO;
 import br.com.controlmore.dao.EntradaDAO;
 import br.com.controlmore.dao.FiltroDAO;
@@ -37,9 +39,13 @@ import br.com.controlmore.negocio.IStrategy;
 import br.com.controlmore.negocio.SimularMeta;
 import br.com.controlmore.negocio.ValidarData;
 import br.com.controlmore.negocio.VerificarSaldo;
+import br.com.controlmore.negocio.compararCategorias;
+import br.com.controlmore.negocio.ordenarComparacao;
+import br.com.controlmore.vm.AnaliseVM;
 import br.com.controlmore.vm.ResumoVM;
 import br.com.controlmore.vm.aPagarVM;
 import br.com.controlmore.vm.aReceberVM;
+import br.com.controlmore.vm.compararCategoriaVM;
 import br.com.controlmore.vm.upLoadVM;
 
 public class Fachada implements IFachada {
@@ -174,7 +180,6 @@ public class Fachada implements IFachada {
 			List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
 			entidades.add(entidade);
 			resultado.setEntidades(entidades);
-			resultado.setMsg("Salvo com sucesso!");
 		}else{
 			resultado.setMsg(msg);
 		}
@@ -195,7 +200,6 @@ public class Fachada implements IFachada {
 				List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
 				entidades.add(entidade);
 				resultado.setEntidades(entidades);
-				resultado.setMsg("Alterado com sucesso");
 		}else{
 			resultado.setMsg(msg);
 		}
@@ -217,7 +221,6 @@ public class Fachada implements IFachada {
 				//List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
 				//entidades.add(entidade);
 				//resultado.setEntidades(entidades);
-				resultado.setMsg("Excluido com sucesso");
 		}else{
 			resultado.setMsg(msg);			
 		}
@@ -420,6 +423,46 @@ public class Fachada implements IFachada {
 				aPagarVM.setCategoria((Categoria)categorias.get(i)); 
 			}
 		}
+		return resultado;
+	}
+
+
+	@Override
+	public Resultado comparar(EntidadeDominio entidade) {
+		Resultado resultado = new Resultado();
+		Resultado auxR = (Resultado)entidade;
+		compararCategoriaVM compararVM = (compararCategoriaVM) auxR.getModeloVisao();
+		resultado.setModeloVisao(compararVM);
+		String msg = null;
+		
+		//instancia da regra de negorio
+		if(compararVM.getIdCategoria1()!=0 && compararVM.getIdCategoria2()!=0){
+			compararCategorias compararRN = new compararCategorias();
+			msg = compararRN.processar(entidade);
+		}
+		if(msg==null){//Se mensagem for vazia continua 
+			CompararCategoriasDAO cDAO = new CompararCategoriasDAO();
+			compararVM = cDAO.consultar(compararVM);
+			/*ordenarComparacao ordenarRN = new ordenarComparacao();
+			ordenarRN.processar(compararVM);*/
+		}else{//Se for vazia, retorna mensagem
+			resultado.setMsg(msg);
+		}
+		return resultado;
+	}
+
+
+	@Override
+	public Resultado analisar() {
+		Resultado resultado = new Resultado();
+		AnaliseVM analiseVM = new AnaliseVM();
+		resultado.setModeloVisao(analiseVM);
+		
+		// Criar objeto ContaDAO diretamente para realizar consulta
+		AnaliseDAO aDAO = new AnaliseDAO();
+		//Trazer resultados de contas cadastradas
+		analiseVM= aDAO.aPagarVencidas();
+		
 		return resultado;
 	}
 }
